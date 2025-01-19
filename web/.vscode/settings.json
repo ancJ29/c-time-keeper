@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "cSpell.ignorePaths": [
+    "./src/configs/i18n/vi.ts"
+  ],
+  "cSpell.words": [
+    "daygrid",
+    "fullcalendar",
+    "mantine",
+    "tabler",
+    "timegrid"
+  ],
+}
