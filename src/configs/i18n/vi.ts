@@ -1,6 +1,6 @@
 export default {
   'TITLE': 'C TIME KEEPER',
-  'WELCOME BACK': 'CHÀO MỪNG TRỞ LẠI',
+  'Welcome back': 'CHÀO MỪNG TRỞ LẠI',
   'Email': 'Email',
   'Your email': 'Email của bạn',
   'Password': 'Mật khẩu',
@@ -45,7 +45,6 @@ export default {
   'Password copied to clipboard': 'Mật khẩu đã được sao chép',
   'Owner': 'Chủ sở hữu',
   'Staff': 'Nhân viên',
-  'Users': 'Người dùng',
   'Start time': 'Thời gian bắt đầu',
   'End time': 'Thời gian kết thúc',
   'Total time': 'Tổng thời gian',
@@ -56,4 +55,5 @@ export default {
   'Salary rule': 'Quy tắc lương',
   'Please check your email': 'Vui lòng kiểm tra email',
   'Invalid user': 'Người dùng không hợp lệ',
+  'Select all': 'Chọn tất cả',
 }

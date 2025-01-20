@@ -1,6 +1,6 @@
 export default {
   'TITLE': 'C TIME KEEPER',
-  'WELCOME BACK': 'WELCOME BACK',
+  'Welcome back': 'Welcome back',
   'Email': 'Email',
   'Your email': 'Your email',
   'Password': 'Password',
@@ -45,7 +45,6 @@ export default {
   'Password copied to clipboard': 'Password copied to clipboard',
   'Owner': 'Owner',
   'Staff': 'Staff',
-  'Users': 'Users',
   'Start time': 'Start time',
   'End time': 'End time',
   'Total time': 'Total time',
@@ -56,4 +55,5 @@ export default {
   'Salary rule': 'Salary rule',
   'Please check your email': 'Please check your email',
   'Invalid user': 'Invalid user',
+  'Select all': 'Select all',
 }

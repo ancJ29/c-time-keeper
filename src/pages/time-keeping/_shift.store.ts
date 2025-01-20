@@ -9,12 +9,14 @@ type State = {
   userById: Record<string, User>
   start: number
   end: number
+  isSelectedAllUsers: boolean
 }
 
 enum ActionType {
   INIT_DATA = 'INIT_DATA',
   CHANGE_DATE = 'CHANGE_DATE',
   SET_SELECTED_USER_IDS = 'SET_SELECTED_USER_IDS',
+  SET_IS_SELECTED_ALL_USERS = 'SET_IS_SELECTED_ALL_USERS',
 }
 
 type Action = {
@@ -24,6 +26,7 @@ type Action = {
   selectedUserIds?: string[]
   start?: number
   end?: number
+  checked?: boolean
 }
 
 const defaultState = {
@@ -33,6 +36,7 @@ const defaultState = {
   userById: {},
   start: Date.now(),
   end: Date.now(),
+  isSelectedAllUsers: true,
 }
 
 const { dispatch, ...store } = createStore<State, Action>(reducer, {
@@ -55,6 +59,9 @@ export default {
   },
   setSelectedUserIds(selectedUserIds: string[]) {
     dispatch({ type: ActionType.SET_SELECTED_USER_IDS, selectedUserIds })
+  },
+  setIsSelectedAllUsers(checked: boolean) {
+    dispatch({ type: ActionType.SET_IS_SELECTED_ALL_USERS, checked })
   },
   getEvent(id: string) {
     const state = store.getSnapshot()
@@ -108,6 +115,19 @@ function reducer(action: Action, state: State): State {
           ...state,
           events,
           selectedUserIds: action.selectedUserIds,
+          isSelectedAllUsers: action.selectedUserIds.length === Object.keys(state.userById).length,
+        }
+      }
+      break
+    case ActionType.SET_IS_SELECTED_ALL_USERS:
+      if (action.checked !== undefined) {
+        const selectedUserIds = action.checked ? Object.keys(state.userById) : []
+        const events = action.checked ? initEvents(selectedUserIds, state.eventsByUserId) : []
+        return {
+          ...state,
+          events,
+          selectedUserIds,
+          isSelectedAllUsers: action.checked,
         }
       }
       break

@@ -5,7 +5,7 @@ import { MantineWidth, OptionProps } from '@/types'
 import { Anchor, Avatar, Button, Flex, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 
-const w: MantineWidth = { base: '100%', sm: 350 }
+const w: MantineWidth = { base: '100%', sm: 400 }
 
 type ProfileFormProps = {
   form: UseFormReturnType<User>
@@ -23,19 +23,13 @@ export default function ProfileForm({
   const t = useTranslation()
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Flex
-        gap={30}
-        align={{ base: 'center', sm: 'start' }}
-        justify="center"
-        h="100%"
-        direction={{ base: 'column', sm: 'row' }}
-      >
+      <Flex gap={30} align="center" justify="center" h="100%" direction="column">
         <Avatar
           src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png"
           size={120}
           radius="md"
         />
-        <Stack gap={10} align="center" w={w}>
+        <Stack gap={12} align="center" w={w}>
           <TextInput
             w={w}
             data-autofocus
@@ -59,7 +53,7 @@ export default function ProfileForm({
             options={salaryRuleOptions}
             {...form.getInputProps('salaryRuleId')}
           />
-          <Button type="submit" mt={15}>
+          <Button type="submit" mt={10}>
             {t('Save')}
           </Button>
           <Anchor ta="center" href="/update-password">
