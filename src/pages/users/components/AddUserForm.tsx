@@ -26,7 +26,6 @@ const initialValues: AddUserRequest = {
   email: '',
   password: '',
   roleId: '',
-  salaryRuleId: '',
 }
 
 type AddUserFormProps = {
