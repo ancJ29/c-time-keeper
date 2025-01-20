@@ -15,6 +15,7 @@ export const getUsersSchema = _typeBuilder({
       roleId: stringSchema,
       bankName: nullishStringSchema,
       bankAccount: nullishStringSchema,
+      salaryRuleId: stringSchema,
     }),
   ),
 })
