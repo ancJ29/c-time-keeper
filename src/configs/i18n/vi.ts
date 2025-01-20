@@ -53,6 +53,7 @@ export default {
   'minute(s)': 'phút',
   'Date': 'Ngày',
   'Venue': 'Địa điểm',
+  'Salary rule': 'Quy tắc lương',
   'Please check your email': 'Vui lòng kiểm tra email',
   'Invalid user': 'Người dùng không hợp lệ',
 }

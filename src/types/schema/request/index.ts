@@ -16,6 +16,7 @@ export enum RequestAction {
   GET_SHIFTS = 'GET_SHIFTS',
   GET_VENUES = 'GET_VENUES',
   GET_SALARY = 'GET_SALARY',
+  GET_SALARY_RULES = 'GET_SALARY_RULES',
 }
 
 export type DataRequest<A extends RequestAction, P, R> = {

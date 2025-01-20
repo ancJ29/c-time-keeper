@@ -53,6 +53,7 @@ export default {
   'minute(s)': 'minute(s)',
   'Date': 'Date',
   'Venue': 'Venue',
+  'Salary rule': 'Salary rule',
   'Please check your email': 'Please check your email',
   'Invalid user': 'Invalid user',
 }

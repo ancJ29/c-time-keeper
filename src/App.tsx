@@ -8,7 +8,8 @@ import { Suspense, useEffect, useState, useSyncExternalStore } from 'react'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import useMount from '@/hooks/useMount'
+import useSalaryRuleStore from '@/stores/salaryRule.store'
+import useMount from './hooks/useMount'
 import loadingStore from '@/services/request/store/loading'
 import LoadingOverlay from '@/components/common/LoadingOverlay'
 
@@ -19,6 +20,7 @@ export default function App() {
   const { loadToken, token, getMe } = useAuthStore()
   const { load: loadRoles } = useRoleStore()
   const { load: loadVenues } = useVenueStore()
+  const { load: loadSalaryRule } = useSalaryRuleStore()
   const [loading, setLoading] = useState(true)
 
   useMount(loadToken)
@@ -26,7 +28,7 @@ export default function App() {
   useEffect(() => {
     const loadData = async () => {
       if (token) {
-        await Promise.all([getMe(), loadRoles(), loadVenues()])
+        await Promise.all([getMe(), loadRoles(), loadVenues(), loadSalaryRule()])
       }
       setLoading(false)
     }

@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const numberSchema = z.number()
+export const nullishNumberSchema = numberSchema.nullish()
 export const stringSchema = z.string()
 export const optionalStringSchema = stringSchema.optional()
 export const nullishStringSchema = stringSchema.nullish()
