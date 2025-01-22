@@ -9,7 +9,8 @@ import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import useSalaryRuleStore from '@/stores/salaryRule.store'
-import useMount from './hooks/useMount'
+import useMetadataStore from '@/stores/metadata'
+import useMount from '@/hooks/useMount'
 import loadingStore from '@/services/request/store/loading'
 import LoadingOverlay from '@/components/common/LoadingOverlay'
 
@@ -21,12 +22,14 @@ export default function App() {
   const { load: loadRoles } = useRoleStore()
   const { load: loadVenues } = useVenueStore()
   const { load: loadSalaryRule } = useSalaryRuleStore()
+  const { checkVersion } = useMetadataStore()
   const [loading, setLoading] = useState(true)
 
   useMount(loadToken)
 
   useEffect(() => {
     const loadData = async () => {
+      await checkVersion()
       if (token) {
         await Promise.all([getMe(), loadRoles(), loadVenues(), loadSalaryRule()])
       }

@@ -1,6 +1,7 @@
 export * from './auth'
 export * from './user'
 export * from './client'
+export * from './metadata'
 export * from './role'
 export * from './salary-rule'
 export * from './shift'

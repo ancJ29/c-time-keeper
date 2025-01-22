@@ -12,6 +12,7 @@ import {
 import { getVenuesSchema } from './venue'
 import { getSalarySchema } from './report'
 import { getSalaryRulesSchema } from './salary-rule'
+import { getVersionSchema } from './metadata'
 
 export * from './auth'
 export * from './user'
@@ -21,6 +22,7 @@ export * from './shift'
 export * from './venue'
 export * from './report'
 export * from './salary-rule'
+export * from './metadata'
 
 export const requestSchema = z.union([
   loginSchema.request,
@@ -39,6 +41,7 @@ export const requestSchema = z.union([
   getVenuesSchema.request,
   getSalarySchema.request,
   getSalaryRulesSchema.request,
+  getVersionSchema.request,
 ])
 
 export const responseSchema = z.union([
@@ -58,4 +61,5 @@ export const responseSchema = z.union([
   getVenuesSchema.response,
   getSalarySchema.response,
   getSalaryRulesSchema.response,
+  getVersionSchema.response,
 ])
