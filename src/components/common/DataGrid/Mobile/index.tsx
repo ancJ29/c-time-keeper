@@ -1,16 +1,13 @@
 import { DataGridColumnProps, DataGridProps, GenericObject } from '@/types'
-import { GenericObjectWithModificationInformation, limitOptions } from '../_configs'
+import { limitOptions } from '../_configs'
 import { Card, Flex, MantineStyleProp, Pagination, Text } from '@mantine/core'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 import Select from '@/components/common/Select'
 import EmptyBox from '../EmptyBox'
-import { formatTime } from '@/utils'
-import useTranslation from '@/hooks/useTranslation'
 
-export default function Mobile<T extends GenericObjectWithModificationInformation>({
+export default function Mobile<T extends GenericObject>({
   limit: _limit = 0,
   page: _page = 1,
-  hasUpdateColumn = true,
   isPaginated = false,
   columns,
   data,
@@ -18,7 +15,6 @@ export default function Mobile<T extends GenericObjectWithModificationInformatio
   onChangePage,
   onRowClick,
 }: DataGridProps<T>) {
-  const t = useTranslation()
   const [rows, setRows] = useState<T[]>(data || [])
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(_limit || 10)
@@ -39,12 +35,10 @@ export default function Mobile<T extends GenericObjectWithModificationInformatio
       columns.filter((el) => !el.hidden),
       {
         noResultText,
-        hasUpdateColumn,
         onRowClick,
       },
-      t,
     )
-  }, [rows, isPaginated, columns, noResultText, hasUpdateColumn, onRowClick, t, limit, page])
+  }, [rows, isPaginated, columns, noResultText, onRowClick, limit, page])
 
   useEffect(() => {
     setRows(data || [])
@@ -128,19 +122,16 @@ function PaginationBar({
   )
 }
 
-function _contentBuilder<T extends GenericObjectWithModificationInformation>(
+function _contentBuilder<T extends GenericObject>(
   rows: T[],
   columns: DataGridColumnProps[],
   {
     noResultText,
-    hasUpdateColumn = true,
     onRowClick,
   }: {
     noResultText?: string
-    hasUpdateColumn?: boolean
     onRowClick?: (row: T) => void
   } = {},
-  t: (key: string) => string,
 ) {
   if (!rows.length) {
     return <EmptyBox noResultText={noResultText} />
@@ -162,9 +153,6 @@ function _contentBuilder<T extends GenericObjectWithModificationInformation>(
             {columns.map((column, idx) => (
               <RowContent key={idx} column={column} row={row} />
             ))}
-            {hasUpdateColumn && (
-              <DataRow title={t('Last updated')} content={formatTime(row.updatedAt)} />
-            )}
           </Flex>
         </Card>
       ))}
