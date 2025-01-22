@@ -1,19 +1,21 @@
 import { Flex } from '@mantine/core'
-import UserTable from './UserTable'
 import { User } from '@/services/domain'
 import AddButton from '@/components/c-time-keeper/AddButton'
+import DataGrid from '@/components/common/DataGrid'
+import { DataGridColumnProps } from '@/types'
 
 type UserUIProps = {
-  users: User[]
+  data: User[]
   onAddUser: () => void
   onEditUser: (user: User) => void
+  dataGridConfigs: DataGridColumnProps[]
 }
 
-export default function UserUI({ users, onAddUser, onEditUser }: UserUIProps) {
+export default function UserUI({ data, onAddUser, onEditUser, dataGridConfigs }: UserUIProps) {
   return (
     <Flex pos="relative">
-      <UserTable users={users} onRowClick={onEditUser} />
       <AddButton onClick={onAddUser} />
+      <DataGrid hasOrderColumn onRowClick={onEditUser} columns={dataGridConfigs} data={data} />
     </Flex>
   )
 }

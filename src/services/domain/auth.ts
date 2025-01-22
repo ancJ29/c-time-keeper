@@ -6,7 +6,7 @@ import {
   loginSchema,
   RequestAction,
   resetPasswordSchema,
-} from '@/types/schema'
+} from '@/types'
 
 type LoginRequest = z.infer<typeof loginSchema.request>['payload']
 export async function login(payload: LoginRequest) {

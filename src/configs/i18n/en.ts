@@ -56,4 +56,7 @@ export default {
   'Please check your email': 'Please check your email',
   'Invalid user': 'Invalid user',
   'Select all': 'Select all',
+  'No results found. Please try another search.': 'No results found. Please try another search.',
+  'Last updated': 'Last updated',
+  'Item per page': 'Item per page',
 }

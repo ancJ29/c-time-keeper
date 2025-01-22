@@ -14,16 +14,20 @@ import { modals } from '@mantine/modals'
 import useTranslation from '@/hooks/useTranslation'
 import EditUserForm from './components/EditUserForm'
 import useRoleStore from '@/stores/role.store'
+import useSalaryRuleStore from '@/stores/salaryRule.store'
 import { showNotification } from '@/configs/notifications'
+import { configs } from './_configs'
 
 export default function Users() {
   const t = useTranslation()
   const { roles } = useRoleStore()
-  const [users, setUsers] = useState<User[]>([])
+  const { salaryRules } = useSalaryRuleStore()
+  const [data, setData] = useState<User[]>([])
+  const dataGridConfigs = useMemo(() => configs(t, roles, salaryRules), [roles, salaryRules, t])
 
   const getData = async () => {
     const res = await getAllUsers()
-    res && setUsers(res)
+    res && setData(res)
   }
   useMount(getData)
 
@@ -34,6 +38,15 @@ export default function Users() {
         value: el.id,
       })),
     [roles, t],
+  )
+
+  const salaryRuleOptions = useMemo(
+    () =>
+      Array.from(salaryRules.values()).map((el) => ({
+        label: el.name,
+        value: el.id,
+      })),
+    [salaryRules],
   )
 
   const handleConfirmAddUser = useCallback(
@@ -59,11 +72,12 @@ export default function Users() {
             reOpen={handleAddUser}
             onConfirm={handleConfirmAddUser}
             roleOptions={roleOptions}
+            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmAddUser, roleOptions, t],
+    [handleConfirmAddUser, roleOptions, salaryRuleOptions, t],
   )
 
   const handleConfirmUpdateUser = useCallback(
@@ -90,12 +104,20 @@ export default function Users() {
             reOpen={handleEditUser}
             onConfirm={handleConfirmUpdateUser}
             roleOptions={roleOptions}
+            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmUpdateUser, roleOptions, t],
+    [handleConfirmUpdateUser, roleOptions, salaryRuleOptions, t],
   )
 
-  return <UserUI users={users} onAddUser={handleAddUser} onEditUser={handleEditUser} />
+  return (
+    <UserUI
+      data={data}
+      onAddUser={handleAddUser}
+      onEditUser={handleEditUser}
+      dataGridConfigs={dataGridConfigs}
+    />
+  )
 }

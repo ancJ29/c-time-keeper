@@ -1,4 +1,4 @@
-import { getShiftsSchema, RequestAction } from '@/types/schema'
+import { getShiftsSchema, RequestAction } from '@/types'
 import { z } from 'zod'
 import { loadAll } from '../data-loader'
 

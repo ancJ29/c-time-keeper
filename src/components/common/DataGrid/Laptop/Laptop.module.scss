@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  background-color: var(--mantine-color-primary-6);
+  font-weight: 600;
+  color: white;
+  padding: 0 0.7rem;
+  user-select: none;
+  align-items: center;
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+}
+
+.body {
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #cccfd0;
+  border-top: none;
+}
+
+.row {
+  padding: 0px 0.6rem;
+  align-items: center;
+  cursor: pointer;
+
+  &:last-child {
+    border-radius: 0 0 6px 6px;
+  }
+
+  &:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+
+  &:hover {
+    background: var(--hover-background-color);
+  }
+}
+
+.cell {
+  padding: 8px 4px;
+}

@@ -81,7 +81,7 @@ export const theme: MantineThemeOverride = createTheme({
 // https://mantine.dev/styles/css-variables/#css-variables-resolver
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
-    '--hover-background-color': theme.colors.primary[1],
+    '--hover-background-color': theme.colors.primary[0],
   },
   light: {},
   dark: {},

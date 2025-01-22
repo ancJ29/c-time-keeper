@@ -21,9 +21,16 @@ type EditUserFormProps = {
   reOpen: (user: UpdateUserRequest) => void
   onConfirm: (user: UpdateUserRequest) => void
   roleOptions: OptionProps[]
+  salaryRuleOptions: OptionProps[]
 }
 
-export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: EditUserFormProps) {
+export default function EditUserForm({
+  user,
+  reOpen,
+  onConfirm,
+  roleOptions,
+  salaryRuleOptions,
+}: EditUserFormProps) {
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
     initialValues: user || initialValues,
@@ -68,6 +75,13 @@ export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: E
           withAsterisk
           {...form.getInputProps('roleId')}
         />
+        <Select
+          w={w}
+          withAsterisk
+          label={t('Salary rule')}
+          options={salaryRuleOptions}
+          {...form.getInputProps('salaryRuleId')}
+        />
         <Button type="submit" mt={10}>
           {t('Update')}
         </Button>
@@ -82,5 +96,7 @@ function _validate(t: (s: string) => string) {
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
     name: (value: string) => (value === '' ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
+    salaryRuleId: (value: string | null) =>
+      value === '' || !value ? t('Field is required') : null,
   }
 }

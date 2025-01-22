@@ -1,4 +1,4 @@
-import { addUserSchema, getUsersSchema, RequestAction, updateUserSchema } from '@/types/schema'
+import { addUserSchema, getUsersSchema, RequestAction, updateUserSchema } from '@/types'
 import { z } from 'zod'
 import { loadAll } from '../data-loader'
 import callApi from '../api'

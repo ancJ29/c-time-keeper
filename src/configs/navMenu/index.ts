@@ -1,5 +1,5 @@
 import { MenuItem } from '@/types'
-import { ClientRoles } from '@/types/schema'
+import { ClientRoles } from '@/types'
 import { IconCalendar, IconDashboard, IconServer, IconUserCircle } from '@tabler/icons-react'
 
 export const navMenu: MenuItem[] = [

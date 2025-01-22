@@ -1,5 +1,5 @@
 import { getMe, User } from '@/services/domain'
-import { HandlerContext } from '@/types/schema'
+import { HandlerContext } from '@/types'
 import { ONE_DAY } from '@/utils'
 import { jwtDecode } from 'jwt-decode'
 import { create } from 'zustand'

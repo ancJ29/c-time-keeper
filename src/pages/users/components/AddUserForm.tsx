@@ -34,6 +34,7 @@ type AddUserFormProps = {
   reOpen: (values: AddUserRequest) => void
   onConfirm: (values: AddUserRequest) => void
   roleOptions: OptionProps[]
+  salaryRuleOptions: OptionProps[]
 }
 
 export default function AddUserForm({
@@ -41,6 +42,7 @@ export default function AddUserForm({
   reOpen,
   onConfirm,
   roleOptions,
+  salaryRuleOptions,
 }: AddUserFormProps) {
   const t = useTranslation()
   const form = useForm<AddUserRequest>({
@@ -96,6 +98,13 @@ export default function AddUserForm({
           withAsterisk
           {...form.getInputProps('roleId')}
         />
+        <Select
+          w={w}
+          withAsterisk
+          label={t('Salary rule')}
+          options={salaryRuleOptions}
+          {...form.getInputProps('salaryRuleId')}
+        />
         <Box w={w}>
           <Flex w={w} align="end" justify="between" gap={5}>
             <PasswordInput
@@ -131,5 +140,7 @@ function _validate(t: (s: string) => string) {
     name: (value: string) => (value === '' ? t('Field is required') : null),
     password: (value: string) => (value === '' ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
+    salaryRuleId: (value: string | null) =>
+      value === '' || !value ? t('Field is required') : null,
   }
 }

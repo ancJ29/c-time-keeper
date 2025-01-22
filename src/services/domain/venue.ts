@@ -1,4 +1,4 @@
-import { getVenuesSchema, RequestAction } from '@/types/schema'
+import { getVenuesSchema, RequestAction } from '@/types'
 import { z } from 'zod'
 import { loadAll } from '../data-loader'
 

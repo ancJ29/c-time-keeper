@@ -1,4 +1,4 @@
-import { DataRequest, RequestAction } from '@/types/schema'
+import { DataRequest, RequestAction } from '@/types'
 import request from '../request'
 import logger from '../logger'
 

@@ -20,10 +20,6 @@ export default function Navbar({ opened, toggle }: NavbarProps) {
   const buildTime = new Date().getTime()
   const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
 
-  const gotoProfilePage = () => {
-    navigate('/profile')
-  }
-
   const onLogout = () => {
     removeToken()
     navigate('/login')
@@ -34,7 +30,7 @@ export default function Navbar({ opened, toggle }: NavbarProps) {
       key: 'profile',
       label: 'Profile',
       icon: IconUserCircle,
-      onClick: gotoProfilePage,
+      url: '/profile',
       hiddenFrom: 'xs',
     },
     {

@@ -56,4 +56,7 @@ export default {
   'Please check your email': 'Vui lòng kiểm tra email',
   'Invalid user': 'Người dùng không hợp lệ',
   'Select all': 'Chọn tất cả',
+  'No results found. Please try another search.': 'Không tìm thấy kết quả. Vui lòng thử lại.',
+  'Last updated': 'Cập nhật',
+  'Item per page': 'Số dòng',
 }

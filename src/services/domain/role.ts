@@ -1,4 +1,4 @@
-import { RequestAction, getRolesSchema } from '@/types/schema'
+import { RequestAction, getRolesSchema } from '@/types'
 import { z } from 'zod'
 import { loadAll } from '../data-loader'
 
