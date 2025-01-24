@@ -25,14 +25,7 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
   const t = useTranslation()
   return (
     <SimpleGrid cols={{ base: 1, md: 2 }}>
-      <BackgroundImage visibleFrom="md" h="100vh" src="/imgs/auth-background.jpg">
-        <Anchor href="/login">
-          <Flex align="center" gap={4} p={12} fw="bold">
-            <IconArrowLeft size={20} stroke={2.5} />
-            {t('Back to login')}
-          </Flex>
-        </Anchor>
-      </BackgroundImage>
+      <BackgroundImage visibleFrom="md" h="100vh" src="/imgs/auth-background.jpg" />
       <Stack align="center" justify="center" h="100vh">
         <Text fz={32} fw={900} c="primary" tt="uppercase">
           {t('Reset password')}
@@ -52,6 +45,12 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
             </Button>
           </Stack>
         </form>
+        <Anchor href="/login" w={w}>
+          <Flex align="center" gap={4}>
+            <IconArrowLeft size={16} />
+            {t('Back to login')}
+          </Flex>
+        </Anchor>
       </Stack>
     </SimpleGrid>
   )
