@@ -36,6 +36,10 @@
 
 .fc .fc-button {
   border-radius: 6px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 1px 6px;
+  }
 }
 
 .fc-daygrid-event {
@@ -45,4 +49,22 @@
 .fc-h-event {
   padding-left: 6px;
   padding-right: 6px;
+}
+
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  @media only screen and (max-width: 768px) {
+    margin-left: 0.5em;
+  }
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 1em;
+  }
+}
+
+.fc .fc-toolbar-title {
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 }

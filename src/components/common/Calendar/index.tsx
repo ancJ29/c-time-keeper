@@ -1,13 +1,14 @@
-import './fullcalendar.scss'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import listPlugin from '@fullcalendar/list'
-import FullCalendar from '@fullcalendar/react'
-import classes from './Calendar.module.scss'
+import { Language } from '@/configs/i18n'
+import useWindowResize from '@/hooks/useWindowResize'
 import { DatesSetArg, EventClickArg, EventInput } from '@fullcalendar/core'
 import enLocale from '@fullcalendar/core/locales/en-au'
 import viLocale from '@fullcalendar/core/locales/vi'
-import { Language } from '@/configs/i18n'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import listPlugin from '@fullcalendar/list'
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import classes from './Calendar.module.scss'
+import './fullcalendar.scss'
 
 type CalendarProps = {
   events: EventInput[]
@@ -16,6 +17,8 @@ type CalendarProps = {
 }
 
 export default function Calendar({ events, onEventClick, onDateSet }: CalendarProps) {
+  const isMobile = useWindowResize()
+
   return (
     <div className={classes.calendar}>
       <FullCalendar
@@ -28,7 +31,7 @@ export default function Calendar({ events, onEventClick, onDateSet }: CalendarPr
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,listWeek',
         }}
-        height="90vh"
+        height={isMobile ? undefined : '90vh'}
         initialView="dayGridMonth"
         fixedWeekCount={false}
         editable={true}

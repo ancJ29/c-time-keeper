@@ -1,10 +1,10 @@
 import Calendar from '@/components/common/Calendar'
-import store from '../_shift.store'
-import { useSyncExternalStore } from 'react'
-import { DatesSetArg, EventClickArg } from '@fullcalendar/core'
-import Sidebar from './Sidebar'
-import { Flex } from '@mantine/core'
 import { convertEventPropsToFCEvent } from '@/configs/calendar'
+import { DatesSetArg, EventClickArg } from '@fullcalendar/core'
+import { Flex } from '@mantine/core'
+import { useSyncExternalStore } from 'react'
+import store from '../_shift.store'
+import Sidebar from './Sidebar'
 
 type TimeKeepingUIProps = {
   onEventClick: (clickInfo: EventClickArg) => void
@@ -15,7 +15,7 @@ export default function TimeKeepingUI({ onEventClick, onDateSet }: TimeKeepingUI
   const { events } = useSyncExternalStore(store.subscribe, store.getSnapshot)
 
   return (
-    <Flex gap={10}>
+    <Flex gap={10} direction={{ base: 'column', md: 'row' }}>
       <Sidebar />
       <Calendar
         events={events.map(convertEventPropsToFCEvent)}

@@ -12,4 +12,9 @@
     "tabler",
     "timegrid"
   ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": "explicit",
+    "source.removeUnusedImports": "explicit"
+  },
 }
