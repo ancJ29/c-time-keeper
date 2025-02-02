@@ -1,3 +1,4 @@
+import { Language } from '@/configs/i18n'
 import { getMe, User } from '@/services/domain'
 import { HandlerContext } from '@/types'
 import { ONE_DAY } from '@/utils'
@@ -62,7 +63,7 @@ function _decode(token: string) {
 function clearStorage() {
   const remember = localStorage.__REMEMBER__ === 'true'
   const version = localStorage.__VERSION__
-  const language = localStorage.__LANGUAGE__
+  const language = localStorage.__LANGUAGE__ || Language.EN
   localStorage.clear()
   sessionStorage.clear()
   localStorage.__REMEMBER__ = remember
