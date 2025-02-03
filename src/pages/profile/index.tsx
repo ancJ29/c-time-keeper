@@ -1,3 +1,5 @@
+import { showNotification } from '@/configs/notifications'
+import useTranslation from '@/hooks/useTranslation'
 import { updateUser, User } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
@@ -5,8 +7,6 @@ import useSalaryRuleStore from '@/stores/salaryRule.store'
 import { useForm } from '@mantine/form'
 import { useCallback, useMemo } from 'react'
 import ProfileForm from './components/ProfileForm'
-import useTranslation from '@/hooks/useTranslation'
-import { showNotification } from '@/configs/notifications'
 
 export default function Profile() {
   const t = useTranslation()

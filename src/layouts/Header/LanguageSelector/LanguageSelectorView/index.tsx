@@ -1,7 +1,7 @@
-import { ActionIcon, Flex, Popover, Text } from '@mantine/core'
-import classes from './LanguageSelectorView.module.scss'
-import FlagIcon from '../FlagIcon'
 import { languageOptions } from '@/configs/i18n'
+import { ActionIcon, Flex, Popover, Text } from '@mantine/core'
+import FlagIcon from '../FlagIcon'
+import classes from './LanguageSelectorView.module.scss'
 
 type LanguageSelectorViewProps = {
   opened: boolean

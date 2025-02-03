@@ -1,13 +1,13 @@
-import { DataGridColumnProps, DataGridProps, GenericObject } from '@/types'
-import { limitOptions } from '../_configs'
-import { Box, Flex, Pagination, Stack, Text, UnstyledButton } from '@mantine/core'
-import useTranslation from '@/hooks/useTranslation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
 import Select from '@/components/common/Select'
-import EmptyBox from '../EmptyBox'
-import classes from './Laptop.module.scss'
+import useTranslation from '@/hooks/useTranslation'
+import { DataGridColumnProps, DataGridProps, GenericObject } from '@/types'
+import { Box, Flex, Pagination, Stack, Text, UnstyledButton } from '@mantine/core'
 import { IconArrowDown, IconArrowUp, IconSelector } from '@tabler/icons-react'
 import clsx from 'clsx'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { limitOptions } from '../_configs'
+import EmptyBox from '../EmptyBox'
+import classes from './Laptop.module.scss'
 
 export default function Laptop<T extends GenericObject>({
   limit: _limit = 0,

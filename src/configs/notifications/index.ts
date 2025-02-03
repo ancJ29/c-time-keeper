@@ -1,4 +1,4 @@
-import { notifications, NotificationData } from '@mantine/notifications'
+import { NotificationData, notifications } from '@mantine/notifications'
 
 interface NotificationProps extends Omit<NotificationData, 'message'> {
   t?: (key: string) => string

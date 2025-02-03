@@ -1,8 +1,8 @@
+import useTranslation from '@/hooks/useTranslation'
+import { MantineWidth } from '@/types'
+import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { FormProps } from '..'
-import useTranslation from '@/hooks/useTranslation'
-import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { MantineWidth } from '@/types'
 
 const w: MantineWidth = { base: '80vw', sm: 350 }
 

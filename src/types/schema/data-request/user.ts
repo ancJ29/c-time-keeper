@@ -1,7 +1,7 @@
 import { z } from 'zod'
+import { booleanSchema, getSchema, listResponse, nullishStringSchema, stringSchema } from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
-import { booleanSchema, getSchema, listResponse, nullishStringSchema, stringSchema } from '../base'
 
 export const getUsersSchema = _typeBuilder({
   authOnly: true,

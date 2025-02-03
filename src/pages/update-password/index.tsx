@@ -1,10 +1,10 @@
-import { useForm } from '@mantine/form'
-import UpdatePasswordForm from './components/UpdatePasswordForm'
-import useTranslation from '@/hooks/useTranslation'
-import { useCallback } from 'react'
-import { changePassword } from '@/services/domain'
 import { showNotification } from '@/configs/notifications'
+import useTranslation from '@/hooks/useTranslation'
+import { changePassword } from '@/services/domain'
+import { useForm } from '@mantine/form'
+import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import UpdatePasswordForm from './components/UpdatePasswordForm'
 
 export type FormProps = {
   email: string

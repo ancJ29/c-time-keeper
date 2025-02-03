@@ -1,7 +1,7 @@
 import { z } from 'zod'
+import { booleanSchema, getSchema, listResponse, stringSchema } from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
-import { booleanSchema, getSchema, listResponse, stringSchema } from '../base'
 
 export const getClientsSchema = _typeBuilder({
   guestOnly: true,

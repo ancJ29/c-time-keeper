@@ -1,6 +1,6 @@
 import { Language } from '@/configs/i18n'
-import LanguageSelectorView from './LanguageSelectorView'
 import { useState } from 'react'
+import LanguageSelectorView from './LanguageSelectorView'
 
 export default function LanguageSelector() {
   const [language] = useState(localStorage.__LANGUAGE__ || Language.EN)

@@ -1,7 +1,7 @@
 import useTranslation from '@/hooks/useTranslation'
+import { Checkbox } from '@mantine/core'
 import { useCallback, useSyncExternalStore } from 'react'
 import store from '../_shift.store'
-import { Checkbox } from '@mantine/core'
 
 export default function SelectAllCheckbox() {
   const { isSelectedAllUsers } = useSyncExternalStore(store.subscribe, store.getSnapshot)

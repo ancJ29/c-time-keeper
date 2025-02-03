@@ -1,8 +1,8 @@
-import { Flex } from '@mantine/core'
-import { User } from '@/services/domain'
 import AddButton from '@/components/c-time-keeper/AddButton'
 import DataGrid from '@/components/common/DataGrid'
+import { User } from '@/services/domain'
 import { DataGridColumnProps } from '@/types'
+import { Flex } from '@mantine/core'
 
 type UserUIProps = {
   data: User[]

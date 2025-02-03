@@ -1,8 +1,8 @@
+import Select from '@/components/common/Select'
 import { DataGridColumnProps, DataGridProps, GenericObject } from '@/types'
-import { limitOptions } from '../_configs'
 import { Card, Flex, MantineStyleProp, Pagination, Text } from '@mantine/core'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
-import Select from '@/components/common/Select'
+import { limitOptions } from '../_configs'
 import EmptyBox from '../EmptyBox'
 
 export default function Mobile<T extends GenericObject>({

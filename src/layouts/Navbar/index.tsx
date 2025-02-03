@@ -1,12 +1,12 @@
 import { navMenu } from '@/configs/navMenu'
-import { ScrollArea, Stack } from '@mantine/core'
-import NavbarItem from './NavbarItem'
-import NavbarFooter from './NavbarFooter'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
-import { useNavigate } from 'react-router-dom'
-import { IconDoorExit, IconUserCircle } from '@tabler/icons-react'
 import { MenuItem } from '@/types'
+import { ScrollArea, Stack } from '@mantine/core'
+import { IconDoorExit, IconUserCircle } from '@tabler/icons-react'
+import { useNavigate } from 'react-router-dom'
+import NavbarFooter from './NavbarFooter'
+import NavbarItem from './NavbarItem'
 
 type NavbarProps = {
   opened: boolean

@@ -1,5 +1,3 @@
-import { z } from 'zod'
-import callApi from '../api'
 import {
   changePasswordSchema,
   getMeSchema,
@@ -7,6 +5,8 @@ import {
   RequestAction,
   resetPasswordSchema,
 } from '@/types'
+import { z } from 'zod'
+import callApi from '../api'
 
 type LoginRequest = z.infer<typeof loginSchema.request>['payload']
 export async function login(payload: LoginRequest) {

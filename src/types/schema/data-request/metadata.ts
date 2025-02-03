@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { _typeBuilder } from './type-builder'
-import { RequestAction } from '../request'
 import { optionalStringSchema } from '../base'
+import { RequestAction } from '../request'
+import { _typeBuilder } from './type-builder'
 
 export const getVersionSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_VERSION),

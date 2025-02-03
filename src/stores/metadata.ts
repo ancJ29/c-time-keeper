@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import useAuthStore from '@/stores/auth.store'
 import { getVersion } from '@/services/domain'
+import useAuthStore from '@/stores/auth.store'
+import { create } from 'zustand'
 
 type MetaDataStore = {
   checkVersion: () => Promise<void>

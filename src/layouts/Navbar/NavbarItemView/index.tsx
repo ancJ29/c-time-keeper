@@ -1,8 +1,8 @@
+import useTranslation from '@/hooks/useTranslation'
 import { MenuItem } from '@/types'
 import { Collapse, Flex, Text, UnstyledButton } from '@mantine/core'
-import NavbarItem from '../NavbarItem'
-import useTranslation from '@/hooks/useTranslation'
 import { IconChevronRight } from '@tabler/icons-react'
+import NavbarItem from '../NavbarItem'
 
 type NavbarItemViewProps = {
   menuItem: MenuItem

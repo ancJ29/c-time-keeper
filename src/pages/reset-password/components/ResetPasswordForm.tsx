@@ -1,6 +1,5 @@
-import { UseFormReturnType } from '@mantine/form'
-import { FormProps } from '..'
 import useTranslation from '@/hooks/useTranslation'
+import { MantineWidth } from '@/types'
 import {
   Anchor,
   BackgroundImage,
@@ -11,8 +10,9 @@ import {
   Text,
   TextInput,
 } from '@mantine/core'
-import { MantineWidth } from '@/types'
+import { UseFormReturnType } from '@mantine/form'
 import { IconArrowLeft } from '@tabler/icons-react'
+import { FormProps } from '..'
 
 const w: MantineWidth = { base: '90vw', sm: 400 }
 
@@ -23,6 +23,7 @@ type ResetPasswordFormProps = {
 
 export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormProps) {
   const t = useTranslation()
+
   return (
     <SimpleGrid cols={{ base: 1, md: 2 }}>
       <BackgroundImage visibleFrom="md" h="100vh" src="/imgs/auth-background.jpg" />

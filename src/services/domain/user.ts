@@ -1,7 +1,7 @@
 import { addUserSchema, getUsersSchema, RequestAction, updateUserSchema } from '@/types'
 import { z } from 'zod'
-import { loadAll } from '../data-loader'
 import callApi from '../api'
+import { loadAll } from '../data-loader'
 
 export type User = z.infer<typeof getUsersSchema.response>['data'][0]
 export async function getAllUsers() {

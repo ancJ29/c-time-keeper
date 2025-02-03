@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { _typeBuilder } from './type-builder'
+import { getSchema, listResponse, nullishNumberSchema, numberSchema, stringSchema } from '../base'
 import { RequestAction } from '../request'
-import { getSchema, listResponse, numberSchema, nullishNumberSchema, stringSchema } from '../base'
+import { _typeBuilder } from './type-builder'
 
 export const getSalaryRulesSchema = _typeBuilder({
   authOnly: true,

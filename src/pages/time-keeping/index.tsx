@@ -1,10 +1,10 @@
-import store from './_shift.store'
-import { useCallback, useSyncExternalStore } from 'react'
-import { DatesSetArg, EventClickArg } from '@fullcalendar/core'
-import TimeKeepingUI from './components/TimeKeepingUI'
-import EventInformation from './components/EventInformation'
-import { modals } from '@mantine/modals'
 import useMount from '@/hooks/useMount'
+import { DatesSetArg, EventClickArg } from '@fullcalendar/core'
+import { modals } from '@mantine/modals'
+import { useCallback, useSyncExternalStore } from 'react'
+import store from './_shift.store'
+import EventInformation from './components/EventInformation'
+import TimeKeepingUI from './components/TimeKeepingUI'
 
 export default function TimeKeeping() {
   const { userById } = useSyncExternalStore(store.subscribe, store.getSnapshot)

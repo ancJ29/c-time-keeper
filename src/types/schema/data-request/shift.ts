@@ -1,7 +1,7 @@
 import { z } from 'zod'
+import { booleanSchema, getSchema, listResponse, numberSchema, stringSchema } from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
-import { booleanSchema, getSchema, listResponse, numberSchema, stringSchema } from '../base'
 
 export const checkInBySystemSchema = _typeBuilder({
   action: z.literal(RequestAction.CHECK_IN_BY_SYSTEM),

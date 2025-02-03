@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { _typeBuilder } from './type-builder'
-import { RequestAction } from '../request'
 import { getSchema, listResponse, stringSchema } from '../base'
+import { RequestAction } from '../request'
+import { _typeBuilder } from './type-builder'
 
 export const getVenuesSchema = _typeBuilder({
   authOnly: true,

@@ -1,11 +1,11 @@
-import { Navigate, useNavigate } from 'react-router-dom'
-import ResetPasswordForm from './components/ResetPasswordForm'
+import { showNotification } from '@/configs/notifications'
+import useTranslation from '@/hooks/useTranslation'
+import { resetPassword } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
-import useTranslation from '@/hooks/useTranslation'
 import { useCallback } from 'react'
-import { resetPassword } from '@/services/domain'
-import { showNotification } from '@/configs/notifications'
+import { Navigate, useNavigate } from 'react-router-dom'
+import ResetPasswordForm from './components/ResetPasswordForm'
 
 export type FormProps = {
   email: string

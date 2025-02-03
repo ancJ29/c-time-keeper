@@ -1,8 +1,8 @@
 import { EventProps } from '@/configs/calendar'
 import useTranslation from '@/hooks/useTranslation'
+import useVenueStore from '@/stores/venue.store'
 import { diffHours, diffMinutes, formatTime } from '@/utils'
 import { Stack, Text } from '@mantine/core'
-import useVenueStore from '@/stores/venue.store'
 
 type EventInformationProps = {
   event?: EventProps
@@ -17,6 +17,7 @@ export default function EventInformation({ event }: EventInformationProps) {
   }
 
   const { start, end, venueId } = event
+
   return (
     <Stack gap={2}>
       <PropertyDisplay title={t('Date')} content={formatTime(start, 'DD/MM/YYYY')} />

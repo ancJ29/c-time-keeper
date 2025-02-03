@@ -1,5 +1,5 @@
-import { TextAlign } from '..'
 import { MantineStyleProp } from '@mantine/core'
+import { TextAlign } from '..'
 
 export type DataGridProps<T> = {
   limit?: number

@@ -1,6 +1,6 @@
 import { DataRequest, RequestAction } from '@/types'
-import request from '../request'
 import logger from '../logger'
+import request from '../request'
 
 type CallApiProps<T extends RequestAction, U, R> = {
   action: T

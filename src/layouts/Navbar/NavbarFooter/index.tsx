@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
-import { AppShell, Stack, Text } from '@mantine/core'
 import { MenuItem } from '@/types'
+import { AppShell, Stack, Text } from '@mantine/core'
 import { version } from '../../../../package.json'
 import NavbarItem from '../NavbarItem'
 

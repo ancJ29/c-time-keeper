@@ -1,3 +1,6 @@
+import { showNotification } from '@/configs/notifications'
+import useMount from '@/hooks/useMount'
+import useTranslation from '@/hooks/useTranslation'
 import {
   addUser,
   AddUserRequest,
@@ -6,17 +9,14 @@ import {
   UpdateUserRequest,
   User,
 } from '@/services/domain'
-import { useCallback, useMemo, useState } from 'react'
-import useMount from '@/hooks/useMount'
-import UserUI from './components/UserUI'
-import AddUserForm from './components/AddUserForm'
-import { modals } from '@mantine/modals'
-import useTranslation from '@/hooks/useTranslation'
-import EditUserForm from './components/EditUserForm'
 import useRoleStore from '@/stores/role.store'
 import useSalaryRuleStore from '@/stores/salaryRule.store'
-import { showNotification } from '@/configs/notifications'
+import { modals } from '@mantine/modals'
+import { useCallback, useMemo, useState } from 'react'
 import { configs } from './_configs'
+import AddUserForm from './components/AddUserForm'
+import EditUserForm from './components/EditUserForm'
+import UserUI from './components/UserUI'
 
 export default function Users() {
   const t = useTranslation()

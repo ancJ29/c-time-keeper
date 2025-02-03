@@ -1,3 +1,3 @@
-export * from './time'
-export * from './string'
 export * from './store'
+export * from './string'
+export * from './time'
