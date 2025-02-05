@@ -25,7 +25,7 @@ function _t(
   if (dictionary[key]) {
     return _convert(dictionary[key], ...args)
   } else {
-    return 'xxx'
+    return key
   }
 }
 
