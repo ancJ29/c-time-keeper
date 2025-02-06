@@ -24,6 +24,8 @@ export default function NavbarItem({
 
   useEffect(() => {
     setActive(location.pathname)
+    setOpened(isBold(menuItem, location.pathname))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname])
 
   const onClick = useCallback(() => {
@@ -43,12 +45,16 @@ export default function NavbarItem({
     setOpened(!opened)
   }, [menuItem, navbarOpened, navigate, opened, toggleNavbar])
 
-  const isActive = useCallback((item: MenuItem, activeUrl: string): boolean => {
+  const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
+    return activeUrl === item.url
+  }, [])
+
+  const isBold = useCallback((item: MenuItem, activeUrl: string): boolean => {
     if (activeUrl === item.url) {
       return true
     }
     if (item.subs) {
-      return item.subs.some((sub: MenuItem) => isActive(sub, activeUrl))
+      return item.subs.some((sub: MenuItem) => isBold(sub, activeUrl))
     }
     return false
   }, [])
@@ -57,7 +63,8 @@ export default function NavbarItem({
     <NavbarItemView
       menuItem={menuItem}
       opened={opened}
-      active={isActive(menuItem, active)}
+      isHighlighted={isHighlighted(menuItem, active)}
+      isBold={isBold(menuItem, active)}
       onClick={onClick}
       ml={ml}
       level={level}

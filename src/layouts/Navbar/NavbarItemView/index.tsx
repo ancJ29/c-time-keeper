@@ -7,7 +7,8 @@ import NavbarItem from '../NavbarItem'
 type NavbarItemViewProps = {
   menuItem: MenuItem
   opened: boolean
-  active?: boolean
+  isHighlighted?: boolean
+  isBold?: boolean
   ml?: number
   onClick: () => void
   level?: number
@@ -18,7 +19,8 @@ type NavbarItemViewProps = {
 export default function NavbarItemView({
   menuItem,
   opened,
-  active = false,
+  isHighlighted = false,
+  isBold = false,
   ml = 0,
   onClick,
   level = 0,
@@ -31,16 +33,18 @@ export default function NavbarItemView({
       <UnstyledButton
         onClick={onClick}
         py={10}
-        ml={`${ml}rem`}
-        bg={active ? `primary.${4 - level}` : 'transparent'}
-        w={`calc(100% - ${ml}rem)`}
+        pl={`${ml}rem`}
+        bg={isHighlighted || (!navbarOpened && isBold) ? 'primary.3' : 'transparent'}
+        w="-webkit-fill-available"
         hiddenFrom={menuItem.hiddenFrom}
+        mx={navbarOpened ? 4 : 0}
+        style={{ borderRadius: navbarOpened ? '4px' : '0' }}
       >
         <Flex justify="space-between" align="center" px={12}>
           <Flex gap={8} align="end">
             <menuItem.icon size={24} stroke={1.5} />
             {navbarOpened && (
-              <Text fz={14} fw={400}>
+              <Text fz={14} fw={isBold ? 600 : 400} mb={1}>
                 {t(menuItem.label)}
               </Text>
             )}
@@ -48,10 +52,11 @@ export default function NavbarItemView({
           {menuItem.subs && navbarOpened && (
             <IconChevronRight
               size={16}
-              stroke={1.5}
+              stroke={2}
               style={{
                 transform: opened ? 'rotate(90deg)' : 'none',
                 transition: 'transform 200ms ease',
+                marginTop: '1px',
               }}
             />
           )}
