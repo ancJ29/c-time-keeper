@@ -1,13 +1,13 @@
 .header {
   display: flex;
-  background-color: var(--mantine-color-primary-6);
   font-weight: 600;
-  color: white;
   padding: 0 0.7rem;
   user-select: none;
   align-items: center;
   width: 100%;
   border-radius: 6px 6px 0 0;
+  background-color: var(--mantine-color-primary-5);
+  color: white;
 }
 
 .body {
@@ -36,4 +36,8 @@
 
 .cell {
   padding: 8px 4px;
+}
+
+.headerCell {
+  padding: 4px 4px;
 }

@@ -1,4 +1,5 @@
 import { showNotification } from '@/configs/notifications'
+import useFilterData from '@/hooks/useFilterData'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
@@ -22,14 +23,22 @@ export default function Users() {
   const t = useTranslation()
   const { roles } = useRoleStore()
   const { salaryRules } = useSalaryRuleStore()
-  const [data, setData] = useState<User[]>([])
+  const [users, setUsers] = useState<User[]>([])
   const dataGridConfigs = useMemo(() => configs(t, roles, salaryRules), [roles, salaryRules, t])
 
   const getData = async () => {
     const res = await getAllUsers()
-    res && setData(res)
+    res && setUsers(res)
   }
   useMount(getData)
+
+  const dataLoader = useCallback(() => {
+    return users
+  }, [users])
+
+  const { data, page, setPage } = useFilterData<User>({
+    dataLoader,
+  })
 
   const roleOptions = useMemo(
     () =>
@@ -114,7 +123,10 @@ export default function Users() {
 
   return (
     <UserUI
+      key={roles.size}
       data={data}
+      page={page}
+      setPage={setPage}
       onAddUser={handleAddUser}
       onEditUser={handleEditUser}
       dataGridConfigs={dataGridConfigs}

@@ -6,7 +6,7 @@ import { limitOptions } from '../_configs'
 import EmptyBox from '../EmptyBox'
 
 export default function Mobile<T extends GenericObject>({
-  limit: _limit = 0,
+  limit: _limit = 5,
   page: _page = 1,
   isPaginated = false,
   columns,
@@ -17,7 +17,7 @@ export default function Mobile<T extends GenericObject>({
 }: DataGridProps<T>) {
   const [rows, setRows] = useState<T[]>(data || [])
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(_limit || 10)
+  const [limit, setLimit] = useState(_limit)
   const lastPage = useMemo(
     () => (isPaginated ? Math.ceil(rows.length / limit) : 0),
     [limit, rows.length, isPaginated],

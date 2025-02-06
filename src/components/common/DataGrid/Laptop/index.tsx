@@ -10,7 +10,7 @@ import EmptyBox from '../EmptyBox'
 import classes from './Laptop.module.scss'
 
 export default function Laptop<T extends GenericObject>({
-  limit: _limit = 0,
+  limit: _limit = 10,
   page: _page = 1,
   className,
   noResultText,
@@ -25,7 +25,7 @@ export default function Laptop<T extends GenericObject>({
   const [configs, setConfig] = useState(columns)
   const [rows, setRows] = useState<T[]>(data || [])
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(_limit || 10)
+  const [limit, setLimit] = useState(_limit)
   const lastPage = useMemo(
     () => (isPaginated ? Math.ceil(rows.length / limit) : 0),
     [limit, rows.length, isPaginated],
@@ -275,7 +275,7 @@ function HeaderItem({
   const Icon = column.sortable ? sortIcon(column.sorting || false) : 'div'
   return (
     <Box
-      className={clsx(classes.cell, column.headerClassName || column.className)}
+      className={clsx(classes.headerCell, column.headerClassName || column.className)}
       w={column.width}
       style={column.headerStyle || column.style}
       hidden={column.hidden}
