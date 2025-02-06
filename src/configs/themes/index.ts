@@ -14,7 +14,7 @@ export const theme: MantineThemeOverride = createTheme({
     InputWrapper: Input.Wrapper.extend({
       styles: {
         label: {
-          fontSize: '1rem',
+          fontSize: '14px',
           fontWeight: '500',
         },
       },

@@ -1,21 +1,17 @@
 import useTranslation from '@/hooks/useTranslation'
-import { MantineWidth } from '@/types'
 import {
   Anchor,
   Button,
   Checkbox,
   Group,
-  Image,
+  Paper,
   PasswordInput,
-  SimpleGrid,
   Stack,
   Text,
   TextInput,
 } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { FormProps } from '..'
-
-const w: MantineWidth = { base: '90vw', sm: 400 }
 
 type LoginFormProps = {
   form: UseFormReturnType<FormProps>
@@ -24,28 +20,32 @@ type LoginFormProps = {
 
 export default function LoginForm({ form, onSubmit }: LoginFormProps) {
   const t = useTranslation()
+
   return (
-    <SimpleGrid cols={{ base: 1, md: 2 }}>
-      <Image visibleFrom="md" h="100vh" src="/imgs/auth-background.jpg" />
-      <Stack align="center" justify="center" h="100vh">
-        <Text fz={32} fw={900} c="primary" tt="uppercase">
-          {t('Welcome back')}
-        </Text>
+    <Stack bg="quaternary.0" h="100vh" align="center" justify="center" gap={10}>
+      <Text fz={32} fw={900} c="primary" tt="uppercase">
+        {t('Welcome back')}
+      </Text>
+      <Paper
+        shadow="xl"
+        radius="md"
+        withBorder
+        p={{ base: 'lg', sm: 'xl' }}
+        w={{ base: '92vw', sm: '500' }}
+      >
         <form onSubmit={form.onSubmit(onSubmit)}>
-          <Stack gap={20}>
+          <Stack gap={15}>
             <TextInput
               data-autofocus
               withAsterisk
               label={t('Email')}
               placeholder={t('Your email')}
-              w={w}
               {...form.getInputProps('email')}
             />
             <PasswordInput
               label={t('Password')}
               placeholder={t('Your password')}
               withAsterisk
-              w={w}
               {...form.getInputProps('password')}
             />
             <Group justify="space-between" mt={5}>
@@ -63,7 +63,7 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
             </Button>
           </Stack>
         </form>
-      </Stack>
-    </SimpleGrid>
+      </Paper>
+    </Stack>
   )
 }

@@ -1,20 +1,8 @@
 import useTranslation from '@/hooks/useTranslation'
-import { MantineWidth } from '@/types'
-import {
-  Anchor,
-  BackgroundImage,
-  Button,
-  Flex,
-  SimpleGrid,
-  Stack,
-  Text,
-  TextInput,
-} from '@mantine/core'
+import { Anchor, Button, Flex, Paper, Stack, Text, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { IconArrowLeft } from '@tabler/icons-react'
 import { FormProps } from '..'
-
-const w: MantineWidth = { base: '90vw', sm: 400 }
 
 type ResetPasswordFormProps = {
   form: UseFormReturnType<FormProps>
@@ -25,34 +13,40 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
   const t = useTranslation()
 
   return (
-    <SimpleGrid cols={{ base: 1, md: 2 }}>
-      <BackgroundImage visibleFrom="md" h="100vh" src="/imgs/auth-background.jpg" />
-      <Stack align="center" justify="center" h="100vh">
-        <Text fz={32} fw={900} c="primary" tt="uppercase">
-          {t('Reset password')}
-        </Text>
+    <Stack bg="quaternary.0" h="100vh" align="center" justify="center" gap={10}>
+      <Text fz={32} fw={900} c="primary" tt="uppercase">
+        {t('Reset password')}
+      </Text>
+      <Paper
+        shadow="xl"
+        radius="md"
+        withBorder
+        p={{ base: 'lg', sm: 'xl' }}
+        w={{ base: '92vw', sm: '500' }}
+      >
         <form onSubmit={form.onSubmit(onSubmit)}>
-          <Stack gap={20}>
+          <Stack gap={15}>
             <TextInput
               data-autofocus
               withAsterisk
               label={t('Email')}
               placeholder={t('Your email')}
-              w={w}
               {...form.getInputProps('email')}
             />
             <Button fullWidth type="submit" mt={10}>
               {t('Send password reset email')}
             </Button>
+            <Anchor href="/login">
+              <Flex align="center" gap={4} justify="center">
+                <IconArrowLeft size={16} />
+                <Text c="primary" mb={1.5}>
+                  {t('Back to login')}
+                </Text>
+              </Flex>
+            </Anchor>
           </Stack>
         </form>
-        <Anchor href="/login" w={w}>
-          <Flex align="center" gap={4}>
-            <IconArrowLeft size={16} />
-            {t('Back to login')}
-          </Flex>
-        </Anchor>
-      </Stack>
-    </SimpleGrid>
+      </Paper>
+    </Stack>
   )
 }
