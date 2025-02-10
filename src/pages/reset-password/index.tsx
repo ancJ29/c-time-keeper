@@ -28,12 +28,15 @@ export default function ResetPassword() {
     async (values: FormProps) => {
       resetPassword(values).then((res) => {
         const success = res?.success
-        showNotification({
-          t,
-          success,
-          message: success ? t('Check your email') : t('Invalid user'),
-        })
-        success && setTimeout(() => navigate('/login'), 2000)
+        if (success) {
+          setTimeout(() => navigate(`/reset-password/check-email?email=${values.email}`), 1000)
+        } else {
+          showNotification({
+            t,
+            success,
+            message: t('Invalid user'),
+          })
+        }
       })
     },
     [navigate, t],

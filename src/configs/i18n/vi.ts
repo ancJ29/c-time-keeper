@@ -57,9 +57,10 @@ export default {
   'Item per page': 'Số dòng',
   'Enter your email to reset password': 'Vui lòng nhập email đặt lại mật khẩu',
   'Continue': 'Tiếp tục',
-  'Skip for now': 'Bỏ qua lúc này',
-  'Please click the link sent to your email': 'Vui lòng nhấp vào liên kết được gửi đến email',
-  'to reset your password. Thank you': 'để thiết lập lại mật khẩu của bạn. Cảm ơn bạn',
+  'Sign in again': 'Đăng nhập lại',
+  'Please check your email': 'Vui lòng kiểm tra email',
+  'to retrieve your new password. Thank you': 'để lấy mật khẩu mới của bạn. Cảm ơn bạn',
   'Resend': 'Gửi lại',
   'Didn’t receive an email?': 'Không nhận được email?',
+  'No email provided': 'Không có email được cung cấp',
 }

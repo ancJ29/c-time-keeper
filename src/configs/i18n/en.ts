@@ -57,9 +57,10 @@ export default {
   'Item per page': 'Item per page',
   'Enter your email to reset password': 'Enter your email to reset password',
   'Continue': 'Continue',
-  'Skip for now': 'Skip for now',
-  'Please click the link sent to your email': 'Please click the link sent to your email',
-  'to reset your password. Thank you': 'to reset your password. Thank you',
+  'Sign in again': 'Sign in again',
+  'Please check your email': 'Please check your email',
+  'to retrieve your new password. Thank you': 'to retrieve your new password. Thank you',
   'Resend': 'Resend',
   'Didn’t receive an email?': 'Didn’t receive an email?',
+  'No email provided': 'No email provided',
 }

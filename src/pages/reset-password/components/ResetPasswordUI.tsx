@@ -6,7 +6,7 @@ export default function ResetPasswordUI({ ...props }: ResetPasswordFormProps) {
   const t = useTranslation()
 
   return (
-    <Paper shadow="xl" radius={12} p="xl" w={{ base: '95vw', sm: '360' }}>
+    <Paper shadow="xl" radius={12} px="xl" py={40} w={{ base: '95vw', sm: '360' }}>
       <Text fz={20} fw={500} ta="center">
         {t('Your email')}
       </Text>
