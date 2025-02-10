@@ -1,4 +1,6 @@
 import {
+  Button,
+  Checkbox,
   createTheme,
   CSSVariablesResolver,
   Input,
@@ -15,8 +17,13 @@ export const theme: MantineThemeOverride = createTheme({
       styles: {
         label: {
           fontSize: '14px',
-          fontWeight: '500',
+          fontWeight: '400',
         },
+      },
+    }),
+    Input: Input.extend({
+      styles: {
+        input: { borderRadius: '6px' },
       },
     }),
     Modal: Modal.extend({
@@ -25,19 +32,30 @@ export const theme: MantineThemeOverride = createTheme({
         content: { borderRadius: 'var(--mantine-radius-md)' },
       },
     }),
+    Checkbox: Checkbox.extend({
+      styles: {
+        label: { paddingInlineStart: '6px' },
+        icon: { width: '50%' },
+      },
+    }),
+    Button: Button.extend({
+      styles: {
+        root: { borderRadius: '6px' },
+      },
+    }),
   },
   colors: {
     primary: [
-      '#e1f8ff',
-      '#cbedff',
-      '#9ad7ff',
-      '#64c1ff',
-      '#3aaefe',
-      '#20a2fe',
-      '#099cff',
-      '#0088e4',
-      '#0079cd',
-      '#0068b6',
+      '#e2f5ff',
+      '#cbe6ff',
+      '#99caff',
+      '#62acff',
+      '#3693ff',
+      '#1883ff',
+      '#007bff',
+      '#0069e5',
+      '#005dce',
+      '#0050b7',
     ],
     secondary: [
       '#fff8e1',

@@ -5,7 +5,7 @@ import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import ResetPasswordForm from './components/ResetPasswordForm'
+import ResetPasswordUI from './components/ResetPasswordUI'
 
 export type FormProps = {
   email: string
@@ -31,7 +31,7 @@ export default function ResetPassword() {
         showNotification({
           t,
           success,
-          message: success ? t('Please check your email') : t('Invalid user'),
+          message: success ? t('Check your email') : t('Invalid user'),
         })
         success && setTimeout(() => navigate('/login'), 2000)
       })
@@ -43,7 +43,7 @@ export default function ResetPassword() {
     return <Navigate to="/dashboard" />
   }
 
-  return <ResetPasswordForm form={form} onSubmit={submit} />
+  return <ResetPasswordUI form={form} onSubmit={submit} />
 }
 
 function _validate(t: (s: string) => string) {

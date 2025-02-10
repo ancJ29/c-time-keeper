@@ -8,7 +8,7 @@ import useVenueStore from '@/stores/venue.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import LoginForm from './components/LoginForm'
+import LoginUI from './components/LoginUI'
 
 export type FormProps = {
   email: string
@@ -57,7 +57,7 @@ export default function Login() {
     return <Navigate to="/dashboard" />
   }
 
-  return <LoginForm form={form} onSubmit={submit} />
+  return <LoginUI form={form} onSubmit={submit} />
 }
 
 function _validate(t: (s: string) => string) {

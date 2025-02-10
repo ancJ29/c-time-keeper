@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-export const publicPaths = ['/login', '/reset-password']
+export const publicPaths = ['/login', '/reset-password', '/reset-password/check-email']
 
 type RouteConfig = {
   path: string
@@ -9,15 +9,23 @@ type RouteConfig = {
 }
 
 const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper'))
+const AuthServiceWrapper = lazy(() => import('@/layouts/AuthServiceWrapper'))
 
 const routeConfigs: RouteConfig[] = [
   {
     path: '/login',
     element: lazy(() => import('@/pages/login')),
+    wrapper: AuthServiceWrapper,
   },
   {
     path: '/reset-password',
     element: lazy(() => import('@/pages/reset-password')),
+    wrapper: AuthServiceWrapper,
+  },
+  {
+    path: '/reset-password/check-email',
+    element: lazy(() => import('@/pages/check-email')),
+    wrapper: AuthServiceWrapper,
   },
   {
     path: '/dashboard',
