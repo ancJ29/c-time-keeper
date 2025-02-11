@@ -56,7 +56,7 @@ export default function ProfileForm({
           <Button type="submit" mt={10}>
             {t('Save')}
           </Button>
-          <Anchor ta="center" href="/update-password">
+          <Anchor ta="center" href="/change-password">
             {t('Update password')}
           </Anchor>
         </Stack>

@@ -48,8 +48,8 @@ const routeConfigs: RouteConfig[] = [
     wrapper: ServiceWrapper,
   },
   {
-    path: '/update-password',
-    element: lazy(() => import('@/pages/update-password')),
+    path: '/change-password',
+    element: lazy(() => import('@/pages/change-password')),
     wrapper: ServiceWrapper,
   },
   {

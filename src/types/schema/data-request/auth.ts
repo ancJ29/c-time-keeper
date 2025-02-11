@@ -32,7 +32,6 @@ export const changePasswordSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.CHANGE_PASSWORD),
   payload: z.object({
-    email: stringSchema,
     currentPassword: stringSchema,
     newPassword: stringSchema,
   }),

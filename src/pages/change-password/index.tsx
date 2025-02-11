@@ -1,11 +1,10 @@
 import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { changePassword } from '@/services/domain'
-import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UpdatePasswordForm from './components/UpdatePasswordForm'
+import ChangePasswordForm from './components/ChangePasswordForm'
 
 export type FormProps = {
   currentPassword: string
@@ -19,10 +18,9 @@ const initialValues: FormProps = {
   confirmPassword: '',
 }
 
-export default function UpdatePassword() {
+export default function ChangPassword() {
   const t = useTranslation()
   const navigate = useNavigate()
-  const { user } = useAuthStore()
   const form = useForm<FormProps>({
     initialValues: initialValues,
     validate: _validate(t),
@@ -30,19 +28,16 @@ export default function UpdatePassword() {
 
   const submit = useCallback(
     (values: FormProps) => {
-      changePassword({
-        email: user?.email || '',
-        ...values,
-      }).then((res) => {
+      changePassword(values).then((res) => {
         const success = res?.success
         showNotification({ t, success })
         success && setTimeout(() => navigate('/profile'), 1000)
       })
     },
-    [navigate, t, user?.email],
+    [navigate, t],
   )
 
-  return <UpdatePasswordForm form={form} onSubmit={submit} />
+  return <ChangePasswordForm form={form} onSubmit={submit} />
 }
 
 function _validate(t: (s: string) => string) {

@@ -11,7 +11,7 @@ type UpdatePasswordFormProps = {
   onSubmit: (values: FormProps) => void
 }
 
-export default function UpdatePasswordForm({ form, onSubmit }: UpdatePasswordFormProps) {
+export default function ChangePasswordForm({ form, onSubmit }: UpdatePasswordFormProps) {
   const t = useTranslation()
   return (
     <Stack align="center" justify="center" gap={10}>
