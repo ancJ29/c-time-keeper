@@ -63,4 +63,5 @@ export default {
   'Resend': 'Gửi lại',
   'Didn’t receive an email?': 'Không nhận được email?',
   'No email provided': 'Không có email được cung cấp',
+  'Change password': 'Đổi mật khẩu',
 }

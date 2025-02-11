@@ -63,4 +63,5 @@ export default {
   'Resend': 'Resend',
   'Didn’t receive an email?': 'Didn’t receive an email?',
   'No email provided': 'No email provided',
+  'Change password': 'Change password',
 }

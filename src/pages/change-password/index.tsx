@@ -4,7 +4,7 @@ import { changePassword } from '@/services/domain'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ChangePasswordForm from './components/ChangePasswordForm'
+import ChangePasswordUI from './components/ChangePasswordUI'
 
 export type FormProps = {
   currentPassword: string
@@ -37,7 +37,7 @@ export default function ChangPassword() {
     [navigate, t],
   )
 
-  return <ChangePasswordForm form={form} onSubmit={submit} />
+  return <ChangePasswordUI form={form} onSubmit={submit} />
 }
 
 function _validate(t: (s: string) => string) {
