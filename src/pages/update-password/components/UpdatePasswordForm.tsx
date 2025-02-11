@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { MantineWidth } from '@/types'
-import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { Button, PasswordInput, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { FormProps } from '..'
 
@@ -17,13 +17,6 @@ export default function UpdatePasswordForm({ form, onSubmit }: UpdatePasswordFor
     <Stack align="center" justify="center" gap={10}>
       <form onSubmit={form.onSubmit(onSubmit)}>
         <Stack gap={15}>
-          <TextInput
-            withAsterisk
-            label={t('Email')}
-            placeholder={t('Your email')}
-            w={w}
-            {...form.getInputProps('email')}
-          />
           <PasswordInput
             label={t('Password')}
             placeholder={t('Your password')}
