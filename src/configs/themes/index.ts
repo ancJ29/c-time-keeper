@@ -7,41 +7,34 @@ import {
   MantineThemeOverride,
   Modal,
 } from '@mantine/core'
+import classes from './themes.module.scss'
 
 export const theme: MantineThemeOverride = createTheme({
   primaryColor: 'primary',
   defaultRadius: 'sm',
   fontFamily: 'IBM Plex Sans,-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif',
+  fontSizes: { md: '14px' },
   components: {
     InputWrapper: Input.Wrapper.extend({
-      styles: {
-        label: {
-          fontSize: '14px',
-          fontWeight: '400',
-        },
-      },
+      classNames: { label: classes.inputLabel },
     }),
     Input: Input.extend({
-      styles: {
-        input: { borderRadius: '6px' },
-      },
+      classNames: { input: classes.root },
     }),
     Modal: Modal.extend({
-      styles: {
-        title: { fontWeight: 'bold', textTransform: 'uppercase' },
-        content: { borderRadius: 'var(--mantine-radius-md)' },
+      classNames: {
+        title: classes.title,
+        content: classes.content,
       },
     }),
     Checkbox: Checkbox.extend({
-      styles: {
-        label: { paddingInlineStart: '6px' },
-        icon: { width: '50%' },
+      classNames: {
+        label: classes.checkboxLabel,
+        icon: classes.checkboxIcon,
       },
     }),
     Button: Button.extend({
-      styles: {
-        root: { borderRadius: '6px' },
-      },
+      classNames: { root: classes.root },
     }),
   },
   colors: {

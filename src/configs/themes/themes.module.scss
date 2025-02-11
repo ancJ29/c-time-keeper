@@ -1,0 +1,25 @@
+.inputLabel {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.root {
+  border-radius: 6px;
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.content {
+  border-radius: var(--mantine-radius-md)
+}
+
+.checkboxLabel {
+  padding-inline-start: 6px;
+}
+
+.checkboxIcon {
+  width: 50%;
+}
