@@ -14,10 +14,10 @@ import useRoleStore from '@/stores/role.store'
 import useSalaryRuleStore from '@/stores/salaryRule.store'
 import { modals } from '@mantine/modals'
 import { useCallback, useMemo, useState } from 'react'
-import { configs } from './_configs'
+import { configs, defaultCondition, filter, FilterType } from './_configs'
 import AddUserForm from './components/AddUserForm'
 import EditUserForm from './components/EditUserForm'
-import UserUI from './components/UserUI'
+import UserView from './components/UserView'
 
 export default function Users() {
   const t = useTranslation()
@@ -36,8 +36,22 @@ export default function Users() {
     return users
   }, [users])
 
-  const { data, page, setPage } = useFilterData<User>({
+  const {
+    data,
+    page,
+    setPage,
+    condition,
+    keyword,
+    names,
+    reload,
+    updateCondition,
+    setCondition,
+    filtered,
+    reset,
+  } = useFilterData<User, FilterType>({
     dataLoader,
+    filter,
+    defaultCondition,
   })
 
   const roleOptions = useMemo(
@@ -122,7 +136,7 @@ export default function Users() {
   )
 
   return (
-    <UserUI
+    <UserView
       key={roles.size}
       data={data}
       page={page}
@@ -130,6 +144,16 @@ export default function Users() {
       onAddUser={handleAddUser}
       onEditUser={handleEditUser}
       dataGridConfigs={dataGridConfigs}
+      condition={condition}
+      keyword={keyword}
+      names={names}
+      reload={reload}
+      updateCondition={updateCondition}
+      setCondition={setCondition}
+      filtered={filtered}
+      reset={reset}
+      roleOptions={roleOptions}
+      salaryRuleOptions={salaryRuleOptions}
     />
   )
 }

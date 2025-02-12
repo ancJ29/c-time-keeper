@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Paper, Text } from '@mantine/core'
 import LoginForm, { LoginFormProps } from './LoginForm'
 
-export default function LoginUI({ ...props }: LoginFormProps) {
+export default function LoginView({ ...props }: LoginFormProps) {
   const t = useTranslation()
 
   return (

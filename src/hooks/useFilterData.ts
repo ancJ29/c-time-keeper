@@ -80,7 +80,7 @@ export default function useFilterData<
   }, [reload, keyword, filter, condition])
 
   const updateCondition = useCallback(
-    (key: string, _default: unknown, value: unknown, keyword = '') => {
+    (key: string, value: unknown, keyword = '') => {
       logger.trace('useFilterData: updateCondition', key, value)
       if (!defaultCondition || key in defaultCondition === false) {
         return
@@ -91,9 +91,9 @@ export default function useFilterData<
       }
       setCondition((prev) => {
         if (!prev) {
-          return { [key]: value ?? _default } as F
+          return { [key]: value } as F
         }
-        return { ...prev, [key]: value || _default } as F
+        return { ...prev, [key]: value } as F
       })
     },
     [defaultCondition, resetKeywordOnFilterChanged],

@@ -6,12 +6,12 @@ import { useSyncExternalStore } from 'react'
 import store from '../_shift.store'
 import Sidebar from './Sidebar'
 
-type TimeKeepingUIProps = {
+type TimeKeepingViewProps = {
   onEventClick: (clickInfo: EventClickArg) => void
   onDateSet: (datesInfo: DatesSetArg) => void
 }
 
-export default function TimeKeepingUI({ onEventClick, onDateSet }: TimeKeepingUIProps) {
+export default function TimeKeepingView({ onEventClick, onDateSet }: TimeKeepingViewProps) {
   const { events } = useSyncExternalStore(store.subscribe, store.getSnapshot)
 
   return (

@@ -4,7 +4,7 @@ import { modals } from '@mantine/modals'
 import { useCallback, useSyncExternalStore } from 'react'
 import store from './_shift.store'
 import EventInformation from './components/EventInformation'
-import TimeKeepingUI from './components/TimeKeepingUI'
+import TimeKeepingView from './components/TimeKeepingView'
 
 export default function TimeKeeping() {
   const { userById } = useSyncExternalStore(store.subscribe, store.getSnapshot)
@@ -30,5 +30,5 @@ export default function TimeKeeping() {
     [userById],
   )
 
-  return <TimeKeepingUI onEventClick={handleEventClick} onDateSet={handleDateSet} />
+  return <TimeKeepingView onEventClick={handleEventClick} onDateSet={handleDateSet} />
 }

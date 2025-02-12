@@ -5,7 +5,7 @@ import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import ResetPasswordUI from './components/ResetPasswordUI'
+import ResetPasswordView from './components/ResetPasswordView'
 
 export type FormProps = {
   email: string
@@ -46,7 +46,7 @@ export default function ResetPassword() {
     return <Navigate to="/dashboard" />
   }
 
-  return <ResetPasswordUI form={form} onSubmit={submit} />
+  return <ResetPasswordView form={form} onSubmit={submit} />
 }
 
 function _validate(t: (s: string) => string) {

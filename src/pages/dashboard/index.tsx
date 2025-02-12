@@ -1,5 +1,5 @@
-import DashboardUI from './components/DashboardUI'
+import DashboardView from './components/DashboardView'
 
 export default function Dashboard() {
-  return <DashboardUI />
+  return <DashboardView />
 }

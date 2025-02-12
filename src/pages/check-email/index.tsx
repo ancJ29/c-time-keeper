@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import CheckEmailUI from './components/CheckEmailUI'
+import CheckEmailView from './components/CheckEmailView'
 
 export default function CheckEmail() {
   const navigate = useNavigate()
@@ -11,5 +11,5 @@ export default function CheckEmail() {
     navigate('/login')
   }, [navigate])
 
-  return <CheckEmailUI email={email} onReturnToLogin={returnToLogin} />
+  return <CheckEmailView email={email} onReturnToLogin={returnToLogin} />
 }

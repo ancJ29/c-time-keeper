@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Paper, Text } from '@mantine/core'
 import ResetPasswordForm, { ResetPasswordFormProps } from './ResetPasswordForm'
 
-export default function ResetPasswordUI({ ...props }: ResetPasswordFormProps) {
+export default function ResetPasswordView({ ...props }: ResetPasswordFormProps) {
   const t = useTranslation()
 
   return (

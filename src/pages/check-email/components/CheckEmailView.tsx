@@ -1,12 +1,12 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Anchor, Button, Image, Paper, Stack, Text } from '@mantine/core'
 
-type CheckEmailUIProps = {
+type CheckEmailViewProps = {
   email: string | null
   onReturnToLogin: () => void
 }
 
-export default function CheckEmailUI({ email, onReturnToLogin }: CheckEmailUIProps) {
+export default function CheckEmailView({ email, onReturnToLogin }: CheckEmailViewProps) {
   const t = useTranslation()
 
   return (

@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Stack, Text } from '@mantine/core'
 import ChangePasswordForm, { ChangePasswordFormProps } from './ChangePasswordForm'
 
-export default function ChangePasswordUI({ ...props }: ChangePasswordFormProps) {
+export default function ChangePasswordView({ ...props }: ChangePasswordFormProps) {
   const t = useTranslation()
 
   return (

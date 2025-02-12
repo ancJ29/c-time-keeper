@@ -1,5 +1,5 @@
 import { Role, SalaryRule, User } from '@/services/domain'
-import { DataGridColumnProps } from '@/types'
+import { DataGridColumnProps, FilterProps, OptionProps } from '@/types'
 
 export const configs = (
   t: (key: string) => string,
@@ -35,4 +35,29 @@ export const configs = (
       },
     },
   ]
+}
+
+export type FilterComponentProps = FilterProps<FilterType> & {
+  roleOptions: OptionProps[]
+  salaryRuleOptions: OptionProps[]
+}
+
+export type FilterType = {
+  roleId: string
+  salaryRuleId: string
+}
+
+export const defaultCondition: FilterType = {
+  roleId: '',
+  salaryRuleId: '',
+}
+
+export function filter(user: User, condition?: FilterType) {
+  if (condition?.roleId && user.roleId !== condition.roleId) {
+    return false
+  }
+  if (condition?.salaryRuleId && user.salaryRuleId !== condition.salaryRuleId) {
+    return false
+  }
+  return true
 }
