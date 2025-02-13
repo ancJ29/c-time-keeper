@@ -1,0 +1,21 @@
+.navbar {
+  margin-left: 6px;
+  z-index: 100;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 0;
+    padding: 0 6px;
+    width: 300px;
+    border-right: 1px solid var(--border-color);
+  }
+}
+
+.paper {
+  height: 96.25vh;
+  overflow: auto;
+
+  @media only screen and (max-width: 768px) {
+    height: fit-content;
+    min-height: 91.25dvh;
+  }
+}

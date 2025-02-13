@@ -2,9 +2,9 @@ import useTranslation from '@/hooks/useTranslation'
 import { MenuItem } from '@/types'
 import { Collapse, Flex, Text, UnstyledButton } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
-import NavbarItem from '../NavbarItem'
+import Item from '../Item'
 
-type NavbarItemViewProps = {
+type ItemViewProps = {
   menuItem: MenuItem
   opened: boolean
   isHighlighted?: boolean
@@ -13,10 +13,10 @@ type NavbarItemViewProps = {
   onClick: () => void
   level?: number
   navbarOpened: boolean
-  toggleNavbar: () => void
+  closeNavbar: () => void
 }
 
-export default function NavbarItemView({
+export default function ItemView({
   menuItem,
   opened,
   isHighlighted = false,
@@ -25,8 +25,8 @@ export default function NavbarItemView({
   onClick,
   level = 0,
   navbarOpened,
-  toggleNavbar,
-}: NavbarItemViewProps) {
+  closeNavbar,
+}: ItemViewProps) {
   const t = useTranslation()
   return (
     <>
@@ -34,22 +34,19 @@ export default function NavbarItemView({
         onClick={onClick}
         py={10}
         pl={`${ml}rem`}
-        bg={isHighlighted || (!navbarOpened && isBold) ? 'primary.3' : 'transparent'}
+        bg={isHighlighted || (!opened && isBold) ? 'primary.1' : 'transparent'}
         w="-webkit-fill-available"
         hiddenFrom={menuItem.hiddenFrom}
-        mx={navbarOpened ? 4 : 0}
-        style={{ borderRadius: navbarOpened ? '4px' : '0' }}
+        style={{ borderRadius: '4px' }}
       >
         <Flex justify="space-between" align="center" px={12}>
           <Flex gap={8} align="end">
             <menuItem.icon size={24} stroke={1.5} />
-            {navbarOpened && (
-              <Text fz={14} fw={isBold ? 600 : 400} mb={1}>
-                {t(menuItem.label)}
-              </Text>
-            )}
+            <Text fz={14} fw={isBold ? 600 : 400}>
+              {t(menuItem.label)}
+            </Text>
           </Flex>
-          {menuItem.subs && navbarOpened && (
+          {menuItem.subs && (
             <IconChevronRight
               size={16}
               stroke={2}
@@ -62,15 +59,15 @@ export default function NavbarItemView({
           )}
         </Flex>
       </UnstyledButton>
-      {menuItem.subs && navbarOpened && (
+      {menuItem.subs && (
         <Collapse in={opened}>
           {menuItem.subs.map((subMenuItem) => (
-            <NavbarItem
+            <Item
               key={subMenuItem.key}
               menuItem={subMenuItem}
               navbarOpened={navbarOpened}
               level={level + 1}
-              toggleNavbar={toggleNavbar}
+              closeNavbar={closeNavbar}
             />
           ))}
         </Collapse>

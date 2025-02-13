@@ -5,15 +5,16 @@ import { MenuItem } from '@/types'
 import { ScrollArea, Stack } from '@mantine/core'
 import { IconDoorExit, IconUserCircle } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
-import NavbarFooter from './NavbarFooter'
-import NavbarItem from './NavbarItem'
+import Footer from './Footer'
+import Header from './Header'
+import Item from './Item'
 
 type NavbarProps = {
   opened: boolean
-  toggle: () => void
+  close: () => void
 }
 
-export default function Navbar({ opened, toggle }: NavbarProps) {
+export default function Navbar({ opened, close }: NavbarProps) {
   const navigate = useNavigate()
   const { removeToken, user } = useAuthStore()
   const { roles } = useRoleStore()
@@ -31,7 +32,6 @@ export default function Navbar({ opened, toggle }: NavbarProps) {
       label: 'Profile',
       icon: IconUserCircle,
       url: '/profile',
-      hiddenFrom: 'xs',
     },
     {
       key: 'logout',
@@ -43,19 +43,25 @@ export default function Navbar({ opened, toggle }: NavbarProps) {
 
   return (
     <>
-      <ScrollArea h="100%">
+      <Header closeNavbar={close} />
+      <ScrollArea h="100%" pt={10}>
         <Stack gap={0}>
           {filterMenu.map((menuItem) => (
-            <NavbarItem
+            <Item
               key={menuItem.key}
               menuItem={menuItem}
               navbarOpened={opened}
-              toggleNavbar={toggle}
+              closeNavbar={close}
             />
           ))}
         </Stack>
       </ScrollArea>
-      <NavbarFooter footerMenu={footerMenu} buildTime={buildTime} opened={opened} toggle={toggle} />
+      <Footer
+        footerMenu={footerMenu}
+        buildTime={buildTime}
+        navbarOpened={opened}
+        closeNavbar={close}
+      />
     </>
   )
 }

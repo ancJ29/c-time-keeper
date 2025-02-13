@@ -1,30 +1,32 @@
-import { AppShell } from '@mantine/core'
+import { AppShell, Burger, Paper, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import Header from '../Header'
 import Navbar from '../Navbar'
-import ScrollToTopButton from '../ScrollToTopButton'
+import classes from './ServiceWrapper.module.scss'
 
 type ServiceWrapperProps = {
   children: React.ReactNode
 }
 
 export default function ServiceWrapper({ children }: ServiceWrapperProps) {
-  const [opened, { toggle }] = useDisclosure(false)
+  const [opened, { toggle, close }] = useDisclosure(false)
 
   return (
     <AppShell
-      header={{ height: 52 }}
-      navbar={{ width: opened ? 300 : 50, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      padding="sm"
+      navbar={{ width: 240, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      withBorder={false}
+      padding="md"
     >
-      <AppShell.Header>
-        <Header opened={opened} toggle={toggle} />
-      </AppShell.Header>
-      <AppShell.Navbar>
-        <Navbar opened={opened} toggle={toggle} />
+      <AppShell.Navbar className={classes.navbar}>
+        <Navbar opened={opened} close={close} />
       </AppShell.Navbar>
-      <AppShell.Main>{children}</AppShell.Main>
-      <ScrollToTopButton />
+      <AppShell.Main>
+        <Stack gap={10}>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Paper className={classes.paper} radius="lg" withBorder p="md" onClick={close}>
+            {children}
+          </Paper>
+        </Stack>
+      </AppShell.Main>
     </AppShell>
   )
 }

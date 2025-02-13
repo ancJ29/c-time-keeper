@@ -1,4 +1,5 @@
 import {
+  AppShell,
   Button,
   Checkbox,
   createTheme,
@@ -35,6 +36,11 @@ export const theme: MantineThemeOverride = createTheme({
     }),
     Button: Button.extend({
       classNames: { root: classes.root },
+    }),
+    AppShell: AppShell.extend({
+      classNames: {
+        navbar: classes.navbar,
+      },
     }),
   },
   colors: {
@@ -93,6 +99,7 @@ export const theme: MantineThemeOverride = createTheme({
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
     '--hover-background-color': theme.colors.primary[0],
+    '--border-color': theme.colors.quaternary[2],
   },
   light: {},
   dark: {},

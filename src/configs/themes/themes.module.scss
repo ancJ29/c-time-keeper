@@ -23,3 +23,11 @@
 .checkboxIcon {
   width: 50%;
 }
+
+.navbar {
+  background-color: var(--mantine-color-quaternary-0);
+
+  @media only screen and (max-width: 768px) {
+    background-color: white;
+  }
+}

@@ -1,21 +1,16 @@
 import { MenuItem } from '@/types'
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import NavbarItemView from '../NavbarItemView'
+import ItemView from '../ItemView'
 
-type NavbarItemProps = {
+type ItemProps = {
   menuItem: MenuItem
   navbarOpened: boolean
-  toggleNavbar: () => void
+  closeNavbar: () => void
   level?: number
 }
 
-export default function NavbarItem({
-  menuItem,
-  navbarOpened,
-  toggleNavbar,
-  level = 0,
-}: NavbarItemProps) {
+export default function Item({ menuItem, level = 0, navbarOpened, closeNavbar }: ItemProps) {
   const location = useLocation()
   const navigate = useNavigate()
   const [opened, setOpened] = useState(false)
@@ -33,17 +28,13 @@ export default function NavbarItem({
       menuItem.onClick()
       return
     }
-    if (!navbarOpened) {
-      toggleNavbar()
-      return
-    }
     if (!menuItem.subs) {
       navigate(menuItem.url || '')
-      toggleNavbar()
+      closeNavbar()
       return
     }
     setOpened(!opened)
-  }, [menuItem, navbarOpened, navigate, opened, toggleNavbar])
+  }, [closeNavbar, menuItem, navigate, opened])
 
   const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
     return activeUrl === item.url
@@ -60,7 +51,7 @@ export default function NavbarItem({
   }, [])
 
   return (
-    <NavbarItemView
+    <ItemView
       menuItem={menuItem}
       opened={opened}
       isHighlighted={isHighlighted(menuItem, active)}
@@ -69,7 +60,7 @@ export default function NavbarItem({
       ml={ml}
       level={level}
       navbarOpened={navbarOpened}
-      toggleNavbar={toggleNavbar}
+      closeNavbar={closeNavbar}
     />
   )
 }

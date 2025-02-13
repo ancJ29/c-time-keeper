@@ -7,8 +7,8 @@ type AuthServiceWrapperProps = {
 
 export default function AuthServiceWrapper({ children }: AuthServiceWrapperProps) {
   return (
-    <BackgroundImage src="/imgs/auth/background.png" h="100vh">
-      <Stack h="100vh" align="center" justify="center">
+    <BackgroundImage src="/imgs/auth/background.png" h="100dvh">
+      <Stack h="100dvh" align="center" justify="center">
         {children}
       </Stack>
     </BackgroundImage>
