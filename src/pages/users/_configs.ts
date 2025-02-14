@@ -43,13 +43,13 @@ export type FilterComponentProps = FilterProps<FilterType> & {
 }
 
 export type FilterType = {
-  roleId: string
-  salaryRuleId: string
+  roleId: string | null
+  salaryRuleId: string | null
 }
 
 export const defaultCondition: FilterType = {
-  roleId: '',
-  salaryRuleId: '',
+  roleId: null,
+  salaryRuleId: null,
 }
 
 export function filter(user: User, condition?: FilterType) {

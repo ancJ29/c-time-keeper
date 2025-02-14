@@ -41,7 +41,7 @@ export default function ItemView({
       >
         <Flex justify="space-between" align="center" px={12}>
           <Flex gap={8} align="end">
-            <menuItem.icon size={24} stroke={1.5} />
+            <menuItem.icon size={24} stroke={isBold ? 1.75 : 1.5} />
             <Text fz={14} fw={isBold ? 600 : 400}>
               {t(menuItem.label)}
             </Text>
