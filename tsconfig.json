@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -29,6 +29,7 @@
     "src/vite-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "vite.config.mjs"
   ],
   "exclude": ["node_modules"]
 }
