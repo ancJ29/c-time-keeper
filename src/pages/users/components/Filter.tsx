@@ -6,7 +6,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { MantineWidth } from '@/types'
 import { FilterComponentProps } from '../_configs'
 
-const w: MantineWidth = { base: '100%', sm: '20vw' }
+const w: MantineWidth = { base: '100%', sm: '15vw' }
 
 export default function Filter({
   condition,
