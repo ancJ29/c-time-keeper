@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { MenuItem } from '@/types'
 import { Collapse, Flex, Text, UnstyledButton } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
-import Item from '../Item'
+import Item from '..'
 
 type ItemViewProps = {
   menuItem: MenuItem

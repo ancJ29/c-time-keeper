@@ -66,4 +66,6 @@ export default {
   'Change password': 'Đổi mật khẩu',
   'Filter': 'Bộ lọc',
   'Clear': 'Xóa',
+  'Language': 'Ngôn ngữ',
+  'Settings': 'Cài đặt',
 }

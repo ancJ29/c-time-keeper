@@ -1,9 +1,10 @@
+import { Language } from '@/configs/i18n'
 import { navMenu } from '@/configs/navMenu'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
 import { MenuItem } from '@/types'
 import { ScrollArea, Stack } from '@mantine/core'
-import { IconDoorExit, IconUserCircle } from '@tabler/icons-react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
@@ -19,26 +20,25 @@ export default function Navbar({ opened, close }: NavbarProps) {
   const { removeToken, user } = useAuthStore()
   const { roles } = useRoleStore()
   const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
+  const [language] = useState(localStorage.__LANGUAGE__ || Language.EN)
+
+  const handleChangeLanguage = (value: string) => {
+    if (value === language) {
+      return
+    }
+    localStorage.__LANGUAGE__ = value || Language.EN
+    window.location.reload()
+  }
 
   const onLogout = () => {
     removeToken()
     navigate('/login')
   }
 
-  const footerMenu: MenuItem[] = [
-    {
-      key: 'profile',
-      label: 'Profile',
-      icon: IconUserCircle,
-      url: '/profile',
-    },
-    {
-      key: 'logout',
-      label: 'Logout',
-      icon: IconDoorExit,
-      onClick: onLogout,
-    },
-  ]
+  const goToProfilePage = () => {
+    close()
+    navigate('/profile')
+  }
 
   return (
     <>
@@ -55,7 +55,12 @@ export default function Navbar({ opened, close }: NavbarProps) {
           ))}
         </Stack>
       </ScrollArea>
-      <Footer footerMenu={footerMenu} navbarOpened={opened} closeNavbar={close} />
+      <Footer
+        language={language}
+        onLogout={onLogout}
+        onGoToProfilePage={goToProfilePage}
+        onChangeLanguage={handleChangeLanguage}
+      />
     </>
   )
 }

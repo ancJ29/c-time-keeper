@@ -1,7 +1,7 @@
 import { MenuItem } from '@/types'
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import ItemView from '../ItemView'
+import ItemView from './ItemView'
 
 type ItemProps = {
   menuItem: MenuItem

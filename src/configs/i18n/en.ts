@@ -66,4 +66,6 @@ export default {
   'Change password': 'Change password',
   'Filter': 'Filter',
   'Clear': 'Clear',
+  'Language': 'Language',
+  'Settings': 'Settings',
 }

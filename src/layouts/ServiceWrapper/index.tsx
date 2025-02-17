@@ -1,6 +1,7 @@
-import { AppShell, Burger, Paper, Stack } from '@mantine/core'
+import { AppShell } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import Navbar from '../Navbar'
+import ContentLayout from './ContentLayout'
+import Navbar from './Navbar'
 import classes from './ServiceWrapper.module.scss'
 
 type ServiceWrapperProps = {
@@ -20,12 +21,9 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
         <Navbar opened={opened} close={close} />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Stack gap={10}>
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Paper className={classes.paper} radius="lg" withBorder p="md" onClick={close}>
-            {children}
-          </Paper>
-        </Stack>
+        <ContentLayout opened={opened} toggle={toggle} close={close}>
+          {children}
+        </ContentLayout>
       </AppShell.Main>
     </AppShell>
   )

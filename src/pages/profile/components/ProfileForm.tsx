@@ -1,8 +1,9 @@
+import Avatar from '@/components/common/Avatar'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { MantineWidth, OptionProps } from '@/types'
-import { Anchor, Avatar, Button, Flex, Stack, TextInput } from '@mantine/core'
+import { Anchor, Button, Flex, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 
 const w: MantineWidth = { base: '100%', sm: 400 }
@@ -21,14 +22,11 @@ export default function ProfileForm({
   salaryRuleOptions,
 }: ProfileFormProps) {
   const t = useTranslation()
+
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Flex gap={30} align="center" justify="center" h="100%" direction="column">
-        <Avatar
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png"
-          size={120}
-          radius="md"
-        />
+      <Flex gap={15} align="center" justify="center" h="100%" direction="column">
+        <Avatar size={120} />
         <Stack gap={12} align="center" w={w}>
           <TextInput
             w={w}
