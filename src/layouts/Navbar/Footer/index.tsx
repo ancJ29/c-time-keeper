@@ -1,18 +1,16 @@
 import useTranslation from '@/hooks/useTranslation'
 import { MenuItem } from '@/types'
 import { AppShell, Stack, Text } from '@mantine/core'
-import { version } from '../../../../package.json'
 import Item from '../Item'
 import classes from './Footer.module.scss'
 
 type FooterProps = {
   footerMenu: MenuItem[]
-  buildTime: number
   navbarOpened: boolean
   closeNavbar: () => void
 }
 
-export default function Footer({ footerMenu, buildTime, navbarOpened, closeNavbar }: FooterProps) {
+export default function Footer({ footerMenu, navbarOpened, closeNavbar }: FooterProps) {
   const t = useTranslation()
 
   return (
@@ -28,7 +26,7 @@ export default function Footer({ footerMenu, buildTime, navbarOpened, closeNavba
         ))}
       </Stack>
       <Text fz={10} c="dimmed" ta="right" pr={8} pb={5}>
-        {`${t('Version')}: ${version} (${buildTime})`}
+        {`${t('Version')}: ${import.meta.env.VITE_APP_VERSION} (${import.meta.env.VITE_APP_BUILD})`}
       </Text>
     </AppShell.Section>
   )

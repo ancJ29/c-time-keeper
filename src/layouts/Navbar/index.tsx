@@ -18,7 +18,6 @@ export default function Navbar({ opened, close }: NavbarProps) {
   const navigate = useNavigate()
   const { removeToken, user } = useAuthStore()
   const { roles } = useRoleStore()
-  const buildTime = new Date().getTime()
   const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
 
   const onLogout = () => {
@@ -56,12 +55,7 @@ export default function Navbar({ opened, close }: NavbarProps) {
           ))}
         </Stack>
       </ScrollArea>
-      <Footer
-        footerMenu={footerMenu}
-        buildTime={buildTime}
-        navbarOpened={opened}
-        closeNavbar={close}
-      />
+      <Footer footerMenu={footerMenu} navbarOpened={opened} closeNavbar={close} />
     </>
   )
 }
