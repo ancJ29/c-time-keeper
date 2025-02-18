@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode'
 import { create } from 'zustand'
 
 type AuthStore = {
-  user?: User
+  user: User | null
   token: string | null
   loadToken: () => void
   setToken: (token: string, remember?: boolean) => void
@@ -15,6 +15,7 @@ type AuthStore = {
 }
 
 export default create<AuthStore>((set, get) => ({
+  user: null,
   token: null,
   loadToken: () => {
     if (!localStorage.__LAST_LOGIN__) {
@@ -46,7 +47,7 @@ export default create<AuthStore>((set, get) => ({
     }
   },
   removeToken: () => {
-    set(() => ({ userId: null, token: null }))
+    set(() => ({ userId: null, token: null, user: null }))
     clearStorage()
   },
   getMe: async () => {
