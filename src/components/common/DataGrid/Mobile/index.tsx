@@ -142,7 +142,7 @@ function _contentBuilder<T extends GenericObject>(
       {rows.map((row, idx) => (
         <Card
           key={idx}
-          shadow="lg"
+          shadow="md"
           withBorder
           onClick={onRowClick?.bind(null, row)}
           px={0}
