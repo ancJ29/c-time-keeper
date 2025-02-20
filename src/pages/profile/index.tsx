@@ -14,7 +14,7 @@ export default function Profile() {
   const { roles } = useRoleStore()
   const { salaryRules } = useSalaryRuleStore()
   const form = useForm<User>({
-    initialValues: user,
+    initialValues: user || undefined,
     validate: _validate(t),
   })
 
