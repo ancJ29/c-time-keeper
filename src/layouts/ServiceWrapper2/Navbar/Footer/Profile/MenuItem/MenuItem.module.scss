@@ -1,0 +1,22 @@
+.container {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: var(--hover-background-color);
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}

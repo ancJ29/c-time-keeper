@@ -8,29 +8,14 @@ import { create } from 'zustand'
 type AuthStore = {
   user: User | null
   token: string | null
-  loadToken: () => void
   setToken: (token: string, remember?: boolean) => void
   removeToken: () => void
   getMe: () => Promise<void>
 }
 
-export default create<AuthStore>((set, get) => ({
+export default create<AuthStore>((set) => ({
   user: null,
-  token: null,
-  loadToken: () => {
-    if (!localStorage.__LAST_LOGIN__) {
-      return
-    }
-    const today = Math.floor(Date.now() / ONE_DAY)
-    const lastLogin = parseInt(localStorage.__LAST_LOGIN__ || '0')
-    const loginDate = Math.floor(lastLogin / ONE_DAY)
-    if (today !== loginDate) {
-      clearStorage()
-    } else {
-      const token = localStorage.__TOKEN__ || sessionStorage.__TOKEN__
-      get().setToken(token || '')
-    }
-  },
+  token: loadToken(),
   setToken: (token: string, remember?: boolean) => {
     if (token) {
       if (!_decode(token)) {
@@ -55,6 +40,22 @@ export default create<AuthStore>((set, get) => ({
     set(() => ({ user }))
   },
 }))
+
+function loadToken() {
+  if (!localStorage.__LAST_LOGIN__) {
+    return null
+  }
+  const today = Math.floor(Date.now() / ONE_DAY)
+  const lastLogin = parseInt(localStorage.__LAST_LOGIN__ || '0')
+  const loginDate = Math.floor(lastLogin / ONE_DAY)
+  if (today !== loginDate) {
+    clearStorage()
+    return null
+  } else {
+    const token = localStorage.__TOKEN__ || sessionStorage.__TOKEN__
+    return token
+  }
+}
 
 function _decode(token: string) {
   const data = jwtDecode(token) as HandlerContext

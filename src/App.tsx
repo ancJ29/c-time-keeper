@@ -1,6 +1,5 @@
 import LoadingOverlay from '@/components/common/LoadingOverlay'
 import { resolver, theme } from '@/configs/themes'
-import useMount from '@/hooks/useMount'
 import authRoutes from '@/routes/auth.route'
 import guestRoutes from '@/routes/guest.route'
 import loadingStore from '@/services/request/store/loading'
@@ -17,37 +16,17 @@ import { useRoutes } from 'react-router-dom'
 
 export default function App() {
   const loadingGlobal = useSyncExternalStore(loadingStore.subscribe, loadingStore.getSnapshot)
-  const { loadToken, token, getMe, user } = useAuthStore()
-  const { load: loadRoles } = useRoleStore()
-  const { load: loadVenues } = useVenueStore()
-  const { load: loadSalaryRule } = useSalaryRuleStore()
-  const { checkVersion } = useMetadataStore()
+  const { token, user } = useAuthStore()
   const [loading, setLoading] = useState(true)
 
-  useMount(loadToken)
-
   useEffect(() => {
-    const loadData = async () => {
-      await checkVersion()
-      if (token) {
-        await Promise.all([getMe(), loadRoles(), loadVenues(), loadSalaryRule()])
-      }
-      setTimeout(() => setLoading(false), 200)
-    }
-    loadData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadData(token).then(() => {
+      setLoading(false)
+    })
   }, [token])
 
   const routes = useMemo(() => {
-    if (loading) {
-      return [
-        {
-          path: '/*',
-          element: <LoadingOverlay />,
-        },
-      ]
-    }
-    return user ? authRoutes : guestRoutes
+    return _buildRoutes(loading, !!user)
   }, [user, loading])
 
   return (
@@ -59,4 +38,28 @@ export default function App() {
       </ModalsProvider>
     </MantineProvider>
   )
+}
+
+function _buildRoutes(loading: boolean, login: boolean) {
+  if (loading) {
+    return [
+      {
+        path: '/*',
+        element: <LoadingOverlay />,
+      },
+    ]
+  }
+  return login ? authRoutes : guestRoutes
+}
+
+async function loadData(token: string | null) {
+  await useMetadataStore.getState().checkVersion()
+  if (token) {
+    await Promise.all([
+      useAuthStore.getState().getMe(),
+      useRoleStore.getState().load(),
+      useVenueStore.getState().load(),
+      useSalaryRuleStore.getState().load(),
+    ])
+  }
 }

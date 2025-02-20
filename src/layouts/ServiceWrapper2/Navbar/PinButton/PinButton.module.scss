@@ -1,0 +1,38 @@
+.container {
+  position: absolute;
+  top: 17px;
+  right: -14px;
+  border-radius: 6px;
+  background-color: white;
+  transition: background-color 200ms ease-in-out;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+@keyframes rotateNavbar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes rotateNavbarReverse {
+  0% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.rotated {
+  animation: rotateNavbar 280ms ease-in-out forwards;
+}
+
+.unRotated {
+  animation: rotateNavbarReverse 280ms ease-in-out forwards;
+}

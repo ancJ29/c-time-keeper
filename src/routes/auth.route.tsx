@@ -2,7 +2,7 @@ import { RouteConfig } from '@/types'
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper'))
+const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper2'))
 
 const routeConfigs: RouteConfig[] = [
   {
