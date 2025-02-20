@@ -7,7 +7,7 @@ type AddButtonProps = {
 
 export default function AddButton({ onClick, ...props }: AddButtonProps) {
   return (
-    <Affix position={{ bottom: 24, right: 24 }} {...props}>
+    <Affix position={{ bottom: 16, right: 16 }} {...props}>
       <ActionIcon variant="filled" radius="xl" size={40} onClick={() => onClick()}>
         <IconPlus size={26} color="white" />
       </ActionIcon>
