@@ -36,7 +36,6 @@
 
 .fc .fc-button {
   border-radius: 6px;
-  padding: 1px 6px;
 
   @media only screen and (max-width: 768px) {
     padding: 1px 6px;
@@ -75,4 +74,21 @@
 .fc-timeline-event {
   border-radius: 6px;
   font-weight: bold;
+  height: 30px;
+}
+
+.fc-datagrid-cell-frame {
+  height: 30px !important;
+}
+
+.fc-timeline-lane-frame {
+  height: 30px !important;
+}
+
+.fc .fc-datagrid-cell-cushion {
+  padding: 6px;
+}
+
+.fc .fc-datagrid-header .fc-datagrid-cell-frame {
+  height: 34px !important;
 }
