@@ -41,17 +41,17 @@ export default function Calendar({ events, resources, onEventClick, onDateSet }:
         dayMaxEvents={true}
         eventClick={onEventClick}
         datesSet={onDateSet}
-        views={{
-          dayGridMonth: {
-            titleFormat: { year: 'numeric', month: '2-digit' },
-            eventTimeFormat: { hour: '2-digit', minute: '2-digit', hour12: false },
-          },
-          listWeek: {
-            titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
-            eventTimeFormat: { hour: '2-digit', minute: '2-digit', hour12: false },
-            listDaySideFormat: { day: '2-digit', year: 'numeric', month: '2-digit' },
-          },
-        }}
+        // views={{
+        //   dayGridMonth: {
+        //     titleFormat: { year: 'numeric', month: '2-digit' },
+        //     eventTimeFormat: { hour: '2-digit', minute: '2-digit', hour12: false },
+        //   },
+        //   listWeek: {
+        //     titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
+        //     eventTimeFormat: { hour: '2-digit', minute: '2-digit', hour12: false },
+        //     listDaySideFormat: { day: '2-digit', year: 'numeric', month: '2-digit' },
+        //   },
+        // }}
         slotLabelFormat={{
           hour: '2-digit',
           minute: '2-digit',

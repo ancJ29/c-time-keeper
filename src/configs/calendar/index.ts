@@ -20,9 +20,8 @@ export const convertShiftToFCEvent = (shift: Shift, index: number): EventInput =
   title: `${formatTime(shift.start, 'HH:mm')} - ${formatTime(shift.end, 'HH:mm')}`,
   start: new Date(shift.start).toISOString(),
   end: new Date(shift.end).toISOString(),
-  backgroundColor: 'transparent',
+  backgroundColor: backgroundColors[index % backgroundColors.length],
   borderColor: backgroundColors[index % backgroundColors.length],
-  textColor: backgroundColors[index % backgroundColors.length],
 })
 
 export const convertUserToFCResource = (user: User): ResourceInput => ({
