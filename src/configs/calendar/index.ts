@@ -1,36 +1,31 @@
-import { EventApi, EventInput } from '@fullcalendar/core'
+import { Shift, User } from '@/services/domain'
+import { formatTime } from '@/utils'
+import { EventInput } from '@fullcalendar/core'
+import { ResourceInput } from '@fullcalendar/resource'
 
-export type EventProps = {
-  id: string
-  venueId: string
-  userName: string
-  start: Date
-  end: Date
-  allDay: boolean
-  backgroundColor?: string
-  borderColor?: string
-  textColor?: string
-}
+const backgroundColors = [
+  '#FF4500',
+  '#D2691E',
+  '#8A2BE2',
+  '#1E90FF',
+  '#228B22',
+  '#B8860B',
+  '#E63946',
+  '#6A5ACD',
+]
 
-export const convertFCEventToEventProps = (event: EventApi): EventProps => ({
-  id: event.id,
-  userName: event.title,
-  venueId: '',
-  start: event.start || new Date(),
-  end: event.end || new Date(),
-  allDay: event.allDay || false,
-  backgroundColor: event.backgroundColor,
-  borderColor: event.borderColor,
-  textColor: event.textColor,
+export const convertShiftToFCEvent = (shift: Shift, index: number): EventInput => ({
+  id: `${shift.userId}-${shift.id}`,
+  resourceId: shift.userId,
+  title: `${formatTime(shift.start, 'HH:mm')} - ${formatTime(shift.end, 'HH:mm')}`,
+  start: new Date(shift.start).toISOString(),
+  end: new Date(shift.end).toISOString(),
+  backgroundColor: 'transparent',
+  borderColor: backgroundColors[index % backgroundColors.length],
+  textColor: backgroundColors[index % backgroundColors.length],
 })
 
-export const convertEventPropsToFCEvent = (event: EventProps): EventInput => ({
-  id: event.id,
-  title: event.userName,
-  start: event.start.toISOString(),
-  end: event.end?.toISOString(),
-  allDay: event.allDay,
-  backgroundColor: event.backgroundColor,
-  borderColor: event.borderColor,
-  textColor: event.textColor,
+export const convertUserToFCResource = (user: User): ResourceInput => ({
+  id: user.id,
+  title: user.name,
 })

@@ -1,3 +1,5 @@
 .container {
+  white-space: nowrap;
+  overflow: hidden;
   border-top: 1px solid var(--border-color);
 }

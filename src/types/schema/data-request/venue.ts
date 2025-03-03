@@ -15,3 +15,17 @@ export const getVenuesSchema = _typeBuilder({
     }),
   ),
 })
+
+export const getVenuesByAdminSchema = _typeBuilder({
+  authOnly: true,
+  action: z.literal(RequestAction.GET_VENUES_BY_ADMIN),
+  payload: getSchema,
+  response: listResponse(
+    z.object({
+      id: stringSchema,
+      name: stringSchema,
+      address: stringSchema,
+      clientId: stringSchema,
+    }),
+  ),
+})

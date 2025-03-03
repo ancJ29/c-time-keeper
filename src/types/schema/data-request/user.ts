@@ -20,6 +20,23 @@ export const getUsersSchema = _typeBuilder({
   ),
 })
 
+export const getUsersByAdminSchema = _typeBuilder({
+  action: z.literal(RequestAction.GET_USERS_BY_ADMIN),
+  payload: getSchema,
+  response: listResponse(
+    z.object({
+      id: stringSchema,
+      name: stringSchema,
+      email: stringSchema,
+      roleId: stringSchema,
+      bankName: nullishStringSchema,
+      bankAccount: nullishStringSchema,
+      salaryRuleId: stringSchema,
+      clientId: stringSchema,
+    }),
+  ),
+})
+
 export const updateUserSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.UPDATE_USER),

@@ -2,16 +2,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 80px;
+  width: 70px;
   transition: width 280ms ease-in-out;
-  border-right: 1px solid var(--border-color);
   height: 100dvh;
   z-index: 100;
-  background-color: white;
-  padding: 16px 19px 0 19px;
+  padding: 12px 12px 0 12px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  border-right: 1px solid var(--border-color);
+  background-color: white;
 }
 
 .expanded {

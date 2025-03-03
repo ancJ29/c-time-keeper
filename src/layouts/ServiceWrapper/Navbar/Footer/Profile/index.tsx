@@ -1,51 +1,56 @@
-import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
-import useWindowResize from '@/hooks/useWindowResize'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
-import { IconSettings } from '@tabler/icons-react'
-import { useState } from 'react'
-import LanguageSelector from '../LanguageSelector'
-import MenuItem from '../MenuItem'
-import UserInformation from '../UserInformation'
+import { IconSettings, IconUser } from '@tabler/icons-react'
+import { useCallback, useState } from 'react'
+import LanguageSelector from './LanguageSelector'
+import MenuItem from './MenuItem'
+import UserInformation from './UserInformation'
 
 type ProfileProps = {
+  navbarOpened: boolean
   language: string
-  onGoToProfilePage: () => void
   onChangeLanguage: (language: string) => void
   onLogout: () => void
+  onGoToProfilePage: () => void
 }
 
 export default function Profile({
+  navbarOpened,
   language,
-  onGoToProfilePage,
   onChangeLanguage,
   onLogout,
+  onGoToProfilePage,
 }: ProfileProps) {
   const t = useTranslation()
-  const isMobile = useWindowResize()
   const [opened, setOpened] = useState(false)
 
-  const handleCloseMenu = () => {
+  const handleCloseMenu = useCallback(() => {
     setOpened(false)
-  }
+  }, [])
 
   return (
     <Menu
-      width={isMobile ? 200 : 250}
-      position={isMobile ? 'top' : 'right-end'}
+      width={250}
+      position="top-start"
       radius={10}
       shadow="md"
       offset={8}
       opened={opened}
       onChange={setOpened}
+      zIndex={1500}
     >
       <Menu.Target>
-        <UnstyledButton style={{ display: 'flex' }}>
-          <Avatar size={24} />
+        <UnstyledButton>
+          <UserInformation navbarOpened={navbarOpened} />
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown p={10}>
-        <UserInformation onClick={onGoToProfilePage} onCloseMenu={handleCloseMenu} />
+        <MenuItem
+          leftIcon={<IconUser size={20} strokeWidth={1.5} />}
+          label={t('Profile')}
+          onCloseMenu={handleCloseMenu}
+          onClick={onGoToProfilePage}
+        />
 
         <Menu.Divider p={5} />
 

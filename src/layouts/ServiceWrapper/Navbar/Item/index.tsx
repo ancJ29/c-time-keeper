@@ -1,3 +1,4 @@
+import useWindowResize from '@/hooks/useWindowResize'
 import { MenuItem } from '@/types'
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -5,14 +6,22 @@ import ItemView from './ItemView'
 
 type ItemProps = {
   menuItem: MenuItem
+  level?: number
   navbarOpened: boolean
   closeNavbar: () => void
-  level?: number
+  openNavbar: () => void
 }
 
-export default function Item({ menuItem, level = 0, navbarOpened, closeNavbar }: ItemProps) {
+export default function Item({
+  menuItem,
+  level = 0,
+  navbarOpened,
+  closeNavbar,
+  openNavbar,
+}: ItemProps) {
   const location = useLocation()
   const navigate = useNavigate()
+  const isMobile = useWindowResize()
   const [opened, setOpened] = useState(false)
   const [active, setActive] = useState(location.pathname)
   const ml = level * 1
@@ -30,11 +39,12 @@ export default function Item({ menuItem, level = 0, navbarOpened, closeNavbar }:
     }
     if (!menuItem.subs) {
       navigate(menuItem.url || '')
-      closeNavbar()
+      isMobile && closeNavbar()
       return
     }
     setOpened(!opened)
-  }, [closeNavbar, menuItem, navigate, opened])
+    openNavbar()
+  }, [closeNavbar, isMobile, menuItem, navigate, opened, openNavbar])
 
   const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
     return activeUrl === item.url
@@ -61,6 +71,7 @@ export default function Item({ menuItem, level = 0, navbarOpened, closeNavbar }:
       level={level}
       navbarOpened={navbarOpened}
       closeNavbar={closeNavbar}
+      openNavbar={openNavbar}
     />
   )
 }

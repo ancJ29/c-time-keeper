@@ -34,7 +34,7 @@ export async function loadAll<T extends RequestAction, U, R>({
       },
       token,
     )
-    const parsedData = res.data as ListResponse<R>
+    const parsedData = res?.data as ListResponse<R>
     data.push(...parsedData.data)
 
     hasMore = parsedData.hasMore ?? false

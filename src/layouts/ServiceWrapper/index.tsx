@@ -1,30 +1,78 @@
-import { AppShell } from '@mantine/core'
+import { Language } from '@/configs/i18n'
+import { navMenu } from '@/configs/navMenu'
+import useWindowResize from '@/hooks/useWindowResize'
+import useAuthStore from '@/stores/auth.store'
+import useRoleStore from '@/stores/role.store'
+import { MenuItem } from '@/types'
+import { Box } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ContentLayout from './ContentLayout'
 import Navbar from './Navbar'
-import classes from './ServiceWrapper.module.scss'
 
 type ServiceWrapperProps = {
   children: React.ReactNode
 }
 
 export default function ServiceWrapper({ children }: ServiceWrapperProps) {
-  const [opened, { toggle, close }] = useDisclosure(false)
+  const isMobile = useWindowResize()
+  const navigate = useNavigate()
+  const { removeToken, user } = useAuthStore()
+  const [navbarOpened, { toggle: toggleNavbar, close: closeNavbar, open: openNavbar }] =
+    useDisclosure(!isMobile)
+  const [language] = useState(localStorage.__LANGUAGE__ || Language.EN)
+  const { roles } = useRoleStore()
+  const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
+
+  const handleChangeLanguage = (value: string) => {
+    if (value === language) {
+      return
+    }
+    localStorage.__LANGUAGE__ = value || Language.EN
+    window.location.reload()
+  }
+
+  const logout = useCallback(() => {
+    removeToken()
+    navigate('/login')
+  }, [navigate, removeToken])
+
+  const goToProfilePage = useCallback(() => {
+    close()
+    navigate('/profile')
+  }, [navigate])
+
+  const goToDashboardPage = useCallback(() => {
+    navigate('/dashboard')
+  }, [navigate])
 
   return (
-    <AppShell
-      navbar={{ width: 240, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      withBorder={false}
-      padding="md"
-    >
-      <AppShell.Navbar className={classes.navbar}>
-        <Navbar opened={opened} close={close} />
-      </AppShell.Navbar>
-      <AppShell.Main>
-        <ContentLayout opened={opened} toggle={toggle} close={close}>
-          {children}
-        </ContentLayout>
-      </AppShell.Main>
-    </AppShell>
+    <Box>
+      <Navbar
+        menu={filterMenu}
+        navbarOpened={navbarOpened}
+        language={language}
+        onChangeLanguage={handleChangeLanguage}
+        onLogout={logout}
+        onGoToProfilePage={goToProfilePage}
+        onGoToDashboardPage={goToDashboardPage}
+        toggleNavbar={toggleNavbar}
+        closeNavbar={closeNavbar}
+        openNavbar={openNavbar}
+      />
+      <ContentLayout navbarOpened={navbarOpened} toggleNavbar={toggleNavbar}>
+        {children}
+      </ContentLayout>
+    </Box>
   )
+}
+
+function filterMenuByRole(menu: MenuItem[], role: string): MenuItem[] {
+  return menu
+    .filter((item) => item.roles?.includes(role))
+    .map((item) => ({
+      ...item,
+      subs: item.subs ? filterMenuByRole(item.subs, role) : undefined,
+    }))
 }

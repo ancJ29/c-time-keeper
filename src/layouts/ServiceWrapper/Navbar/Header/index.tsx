@@ -1,37 +1,43 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Flex, Image, Text } from '@mantine/core'
-import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { ActionIcon, Flex, Image, Text } from '@mantine/core'
+import { IconArrowsRightLeft } from '@tabler/icons-react'
+import { CSSProperties } from 'react'
 import classes from './Header.module.scss'
 
 type HeaderProps = {
-  closeNavbar: () => void
+  onClick: () => void
+  navbarOpened: boolean
+  toggleNavbar: () => void
 }
 
-export default function Header({ closeNavbar }: HeaderProps) {
+export default function Header({ onClick, navbarOpened, toggleNavbar }: HeaderProps) {
   const t = useTranslation()
-  const navigate = useNavigate()
-
-  const onClick = useCallback(() => {
-    closeNavbar()
-    navigate('/dashboard')
-  }, [closeNavbar, navigate])
 
   return (
     <Flex
-      justify="start"
+      justify={navbarOpened ? 'space-between' : 'center'}
       align="center"
-      px={10}
-      pt={20}
-      pb={15}
-      gap={10}
       className={classes.container}
-      onClick={onClick}
     >
-      <Image src="favicon.svg" w={40} />
-      <Text fz={20} fw={700}>
-        {t('TITLE')}
-      </Text>
+      {navbarOpened ? (
+        <Flex align="center" gap={5}>
+          <Image src="favicon.svg" w={36} onClick={onClick} />
+          <Text fz={16} fw={700} mt={1}>
+            {t('TITLE')}
+          </Text>
+        </Flex>
+      ) : (
+        <SwitchButton onClick={toggleNavbar} style={{ margin: '4px 0' }} />
+      )}
+      {navbarOpened && <SwitchButton onClick={toggleNavbar} />}
     </Flex>
+  )
+}
+
+function SwitchButton({ onClick, style }: { onClick: () => void; style?: CSSProperties }) {
+  return (
+    <ActionIcon variant="transparent" onClick={onClick} size="md" radius="md" style={style}>
+      <IconArrowsRightLeft size={24} strokeWidth={1.5} color="black" />
+    </ActionIcon>
   )
 }

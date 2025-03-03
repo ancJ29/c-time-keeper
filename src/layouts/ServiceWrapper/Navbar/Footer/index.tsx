@@ -1,38 +1,39 @@
 import useTranslation from '@/hooks/useTranslation'
-import { AppShell, Flex, Text } from '@mantine/core'
+import { Stack, Text } from '@mantine/core'
 import classes from './Footer.module.scss'
-import Logout from './Logout'
 import Profile from './Profile'
 
 type FooterProps = {
+  navbarOpened: boolean
   language: string
+  onChangeLanguage: (language: string) => void
   onLogout: () => void
   onGoToProfilePage: () => void
-  onChangeLanguage: (language: string) => void
 }
 
 export default function Footer({
+  navbarOpened,
   language,
+  onChangeLanguage,
   onLogout,
   onGoToProfilePage,
-  onChangeLanguage,
 }: FooterProps) {
   const t = useTranslation()
 
   return (
-    <AppShell.Section className={classes.container}>
-      <Flex justify="space-between" align="center" py={10} px={8}>
-        <Profile
-          language={language}
-          onGoToProfilePage={onGoToProfilePage}
-          onChangeLanguage={onChangeLanguage}
-          onLogout={onLogout}
-        />
-        <Logout onClick={onLogout} />
-      </Flex>
-      <Text fz={10} c="dimmed" ta="right" pr={8} pb={5}>
-        {`${t('Version')}: ${import.meta.env.VITE_APP_VERSION} (${import.meta.env.VITE_APP_BUILD})`}
-      </Text>
-    </AppShell.Section>
+    <Stack gap={0} className={classes.container}>
+      <Profile
+        navbarOpened={navbarOpened}
+        language={language}
+        onGoToProfilePage={onGoToProfilePage}
+        onChangeLanguage={onChangeLanguage}
+        onLogout={onLogout}
+      />
+      {navbarOpened && (
+        <Text fz={10} c="dimmed" ta="right">
+          {`${t('Version')}: ${import.meta.env.VITE_APP_VERSION} (${import.meta.env.VITE_APP_BUILD})`}
+        </Text>
+      )}
+    </Stack>
   )
 }

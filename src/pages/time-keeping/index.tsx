@@ -3,7 +3,7 @@ import { DatesSetArg, EventClickArg } from '@fullcalendar/core'
 import { modals } from '@mantine/modals'
 import { useCallback, useSyncExternalStore } from 'react'
 import store from './_shift.store'
-import EventInformation from './components/EventInformation'
+import EventInformation from './components/ShiftInformation'
 import TimeKeepingView from './components/TimeKeepingView'
 
 export default function TimeKeeping() {
@@ -14,7 +14,7 @@ export default function TimeKeeping() {
     modals.open({
       title: clickInfo.event.title,
       size: 'xs',
-      children: <EventInformation event={store.getEvent(clickInfo.event.id)} />,
+      children: <EventInformation shift={store.getEvent(clickInfo.event.id)} />,
     })
   }, [])
 

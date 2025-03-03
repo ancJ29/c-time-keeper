@@ -1,5 +1,4 @@
 import {
-  AppShell,
   Button,
   Checkbox,
   createTheme,
@@ -36,11 +35,6 @@ export const theme: MantineThemeOverride = createTheme({
     }),
     Button: Button.extend({
       classNames: { root: classes.root },
-    }),
-    AppShell: AppShell.extend({
-      classNames: {
-        navbar: classes.navbar,
-      },
     }),
   },
   colors: {

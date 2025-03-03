@@ -6,11 +6,9 @@
     "./src/configs/i18n/vi.ts"
   ],
   "cSpell.words": [
-    "daygrid",
     "fullcalendar",
     "mantine",
-    "tabler",
-    "timegrid"
+    "tabler"
   ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",

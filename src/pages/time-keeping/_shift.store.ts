@@ -1,11 +1,13 @@
-import { EventProps } from '@/configs/calendar'
+import { convertShiftToFCEvent, convertUserToFCResource } from '@/configs/calendar'
 import { getAllShifts, getAllUsers, Shift, User } from '@/services/domain'
 import { createStore } from '@/utils'
+import { EventInput } from '@fullcalendar/core'
+import { ResourceInput } from '@fullcalendar/resource'
 
 type State = {
-  eventsByUserId: Record<string, EventProps[]>
-  events: EventProps[]
-  selectedUserIds: string[]
+  shiftsByUserId: Record<string, Shift[]>
+  events: EventInput[]
+  resources: ResourceInput[]
   userById: Record<string, User>
   start: number
   end: number
@@ -30,9 +32,9 @@ type Action = {
 }
 
 const defaultState = {
-  eventsByUserId: {},
+  shiftsByUserId: {},
   events: [],
-  selectedUserIds: [],
+  resources: [],
   userById: {},
   start: Date.now(),
   end: Date.now(),
@@ -57,15 +59,10 @@ export default {
       dispatch({ type: ActionType.CHANGE_DATE, shifts, start, end })
     }
   },
-  setSelectedUserIds(selectedUserIds: string[]) {
-    dispatch({ type: ActionType.SET_SELECTED_USER_IDS, selectedUserIds })
-  },
-  setIsSelectedAllUsers(checked: boolean) {
-    dispatch({ type: ActionType.SET_IS_SELECTED_ALL_USERS, checked })
-  },
   getEvent(id: string) {
     const state = store.getSnapshot()
-    return state.events.find((event) => event.id === id)
+    const [userId, shiftId] = id.split('-')
+    return state.shiftsByUserId[userId]?.find((shift) => shift.id === shiftId)
   },
 }
 
@@ -74,60 +71,30 @@ function reducer(action: Action, state: State): State {
     case ActionType.INIT_DATA:
       if (action.users !== undefined) {
         const userById = Object.fromEntries(action.users.map((user) => [user.id, user]))
+        const resources: ResourceInput[] = action.users.map(convertUserToFCResource)
+
         return {
           ...state,
           userById,
-          selectedUserIds: Object.keys(userById),
+          resources,
         }
       }
       break
     case ActionType.CHANGE_DATE:
       if (action.shifts !== undefined && action.start && action.end) {
-        const eventsByUserId: Record<string, EventProps[]> = {}
+        const shiftsByUserId: Record<string, Shift[]> = {}
         action.shifts.map((shift) => {
-          const events = eventsByUserId[shift.userId] || []
-          eventsByUserId[shift.userId] = [
-            ...events,
-            {
-              id: shift.id,
-              userName: state.userById[shift.userId]?.name || '',
-              venueId: shift.venueId,
-              start: new Date(shift.start),
-              end: new Date(shift.end),
-              allDay: false,
-            },
-          ]
+          const shifts = shiftsByUserId[shift.userId] || []
+          shiftsByUserId[shift.userId] = [...shifts, shift]
         })
-        const events = initEvents(state.selectedUserIds, eventsByUserId)
+        const events = initEvents(Object.keys(shiftsByUserId), shiftsByUserId)
+
         return {
           ...state,
-          eventsByUserId,
+          shiftsByUserId,
           events,
           start: action.start,
           end: action.end,
-        }
-      }
-      break
-    case ActionType.SET_SELECTED_USER_IDS:
-      if (action.selectedUserIds !== undefined) {
-        const events = initEvents(action.selectedUserIds, state.eventsByUserId)
-        return {
-          ...state,
-          events,
-          selectedUserIds: action.selectedUserIds,
-          isSelectedAllUsers: action.selectedUserIds.length === Object.keys(state.userById).length,
-        }
-      }
-      break
-    case ActionType.SET_IS_SELECTED_ALL_USERS:
-      if (action.checked !== undefined) {
-        const selectedUserIds = action.checked ? Object.keys(state.userById) : []
-        const events = action.checked ? initEvents(selectedUserIds, state.eventsByUserId) : []
-        return {
-          ...state,
-          events,
-          selectedUserIds,
-          isSelectedAllUsers: action.checked,
         }
       }
       break
@@ -146,10 +113,12 @@ function adjustDateRange(
   return [adjustedStart, adjustedEnd]
 }
 
-function initEvents(selectedUserIds: string[], eventsByUserId: Record<string, EventProps[]>) {
-  const events: EventProps[] = []
-  selectedUserIds.map((userId) => {
-    events.push(...(eventsByUserId[userId] || []))
-  })
-  return events
+export function initEvents(
+  userIds: string[],
+  shiftByUserId: Record<string, Shift[]>,
+): EventInput[] {
+  let index = 0
+  return userIds.flatMap((userId) =>
+    (shiftByUserId[userId] || []).map((shift) => convertShiftToFCEvent(shift, index++)),
+  )
 }

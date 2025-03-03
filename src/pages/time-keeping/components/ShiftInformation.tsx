@@ -1,22 +1,22 @@
-import { EventProps } from '@/configs/calendar'
 import useTranslation from '@/hooks/useTranslation'
+import { Shift } from '@/services/domain'
 import useVenueStore from '@/stores/venue.store'
 import { diffHours, diffMinutes, formatTime } from '@/utils'
 import { Stack, Text } from '@mantine/core'
 
 type EventInformationProps = {
-  event?: EventProps
+  shift?: Shift
 }
 
-export default function EventInformation({ event }: EventInformationProps) {
+export default function ShiftInformation({ shift }: EventInformationProps) {
   const t = useTranslation()
   const { venues } = useVenueStore()
 
-  if (!event) {
+  if (!shift) {
     return null
   }
 
-  const { start, end, venueId } = event
+  const { start, end, venueId } = shift
 
   return (
     <Stack gap={2}>

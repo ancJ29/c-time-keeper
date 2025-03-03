@@ -1,5 +1,6 @@
 import { GenericObject } from '@/types'
 import axios from 'axios'
+import logger from '../logger'
 import loadingStore from './store/loading'
 
 export default async function request(data: GenericObject, token: string | null) {
@@ -8,8 +9,8 @@ export default async function request(data: GenericObject, token: string | null)
   const baseUrl = import.meta.env.VITE_BASE_URL
   const isDev = import.meta.env.VITE_ENV === 'development'
 
-  const res = await axios
-    .request({
+  try {
+    const res = await axios.request({
       method: 'POST',
       url: `${baseUrl}${isDev ? `?action=${data.action}` : ''}`,
       data,
@@ -17,9 +18,10 @@ export default async function request(data: GenericObject, token: string | null)
         Authorization: token ? `Bearer ${token}` : undefined,
       },
     })
-    .finally(() => {
-      loadingStore.stopLoading()
-    })
-
-  return res
+    return res
+  } catch (error) {
+    logger.error('[api-error]', error)
+  } finally {
+    loadingStore.stopLoading()
+  }
 }

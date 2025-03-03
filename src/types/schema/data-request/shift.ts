@@ -32,7 +32,6 @@ export const checkOutByUserSchema = _typeBuilder({
   payload: z.object({
     clientId: stringSchema,
     userId: stringSchema,
-    venueId: stringSchema,
   }),
   response: z.object({
     success: booleanSchema,

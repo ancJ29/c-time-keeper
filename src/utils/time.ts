@@ -33,22 +33,22 @@ export function formatTime(dateTime?: number | string | Date | null, format = 'D
   return dateTime ? dayjs(dateTime).format(format) : '-'
 }
 
-export function diffHours(start: Date | null, end: Date | null) {
+export function diffHours(start: number | null, end: number | null) {
   if (!start || !end) {
     return 0
   }
-  const diffMilliseconds = end.getTime() - start.getTime()
+  const diffMilliseconds = end - start
   if (diffMilliseconds <= 0) {
     return 0
   }
   return Math.floor(diffMilliseconds / ONE_HOUR)
 }
 
-export function diffMinutes(start: Date | null, end: Date | null) {
+export function diffMinutes(start: number | null, end: number | null) {
   if (!start || !end) {
     return 0
   }
-  const diffMilliseconds = end.getTime() - start.getTime()
+  const diffMilliseconds = end - start
   if (diffMilliseconds <= 0) {
     return 0
   }

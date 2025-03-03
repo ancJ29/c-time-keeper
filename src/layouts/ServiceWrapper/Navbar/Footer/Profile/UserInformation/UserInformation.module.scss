@@ -4,13 +4,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 8px;
   border-radius: 6px;
 
   &:hover {
     background-color: var(--hover-background-color);
   }
+}
+
+.shifted {
+  padding: 8px 0 8px 2px;
 }
 
 .item {

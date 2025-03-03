@@ -11,8 +11,8 @@ import {
   checkOutByUserSchema,
   getShiftsSchema,
 } from './shift'
-import { addUserSchema, getUsersSchema, updateUserSchema } from './user'
-import { getVenuesSchema } from './venue'
+import { addUserSchema, getUsersByAdminSchema, getUsersSchema, updateUserSchema } from './user'
+import { getVenuesByAdminSchema, getVenuesSchema } from './venue'
 
 export * from './auth'
 export * from './client'
@@ -30,6 +30,7 @@ export const requestSchema = z.union([
   changePasswordSchema.request,
   resetPasswordSchema.request,
   getUsersSchema.request,
+  getUsersByAdminSchema.request,
   updateUserSchema.request,
   addUserSchema.request,
   getClientsSchema.request,
@@ -39,6 +40,7 @@ export const requestSchema = z.union([
   checkOutByUserSchema.request,
   getShiftsSchema.request,
   getVenuesSchema.request,
+  getVenuesByAdminSchema.request,
   getSalarySchema.request,
   getSalaryRulesSchema.request,
   getVersionSchema.request,
@@ -50,6 +52,7 @@ export const responseSchema = z.union([
   changePasswordSchema.response,
   resetPasswordSchema.response,
   getUsersSchema.response,
+  getUsersByAdminSchema.response,
   updateUserSchema.response,
   addUserSchema.response,
   getClientsSchema.response,
@@ -59,6 +62,7 @@ export const responseSchema = z.union([
   checkOutByUserSchema.response,
   getShiftsSchema.response,
   getVenuesSchema.response,
+  getVenuesByAdminSchema.response,
   getSalarySchema.response,
   getSalaryRulesSchema.response,
   getVersionSchema.response,
