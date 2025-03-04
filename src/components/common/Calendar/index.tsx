@@ -42,10 +42,35 @@ export default function Calendar({ events, resources, onEventClick, onDateSet }:
         eventClick={onEventClick}
         datesSet={onDateSet}
         resourceAreaWidth="20%"
-        slotLabelFormat={{
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
+        views={{
+          week: {
+            titleFormat: { day: '2-digit', month: '2-digit', year: 'numeric' },
+            // slotLabelFormat: {
+            //   hour: '2-digit',
+            //   minute: '2-digit',
+            //   hour12: false,
+            //   day: '2-digit',
+            //   month: '2-digit',
+            //   year: 'numeric',
+            // },
+          },
+          day: {
+            titleFormat: { day: '2-digit', month: '2-digit', year: 'numeric' },
+            // slotLabelFormat: {
+            //   hour: '2-digit',
+            //   minute: '2-digit',
+            //   hour12: false,
+            // },
+          },
+          month: {
+            titleFormat: { year: 'numeric', month: '2-digit' },
+            slotLabelFormat: {
+              day: '2-digit',
+              month: '2-digit',
+              week: 'narrow',
+              weekday: 'long',
+            },
+          },
         }}
         schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
       />

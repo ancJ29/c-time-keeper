@@ -5,13 +5,12 @@ import { ResourceInput } from '@fullcalendar/resource'
 
 const backgroundColors = [
   '#FF4500',
-  '#D2691E',
   '#8A2BE2',
   '#1E90FF',
+  '#FF69B4',
   '#228B22',
-  '#B8860B',
-  '#E63946',
-  '#6A5ACD',
+  '#FFA500',
+  '#00CED1',
 ]
 
 export const convertShiftToFCEvent = (shift: Shift, index: number): EventInput => ({
