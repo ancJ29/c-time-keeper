@@ -14,6 +14,15 @@ export function endOfDay(timestamp: number) {
   return startOfDay(timestamp) + ONE_DAY - ONE_SECOND
 }
 
+export function startOfWeek(timestamp: number) {
+  const res = timestamp - (timestamp % ONE_WEEK) - 3 * ONE_DAY
+  return res + ONE_WEEK > timestamp ? res : res + ONE_WEEK
+}
+
+export function endOfWeek(timestamp: number) {
+  return endOfDay(startOfWeek(timestamp) + ONE_WEEK - ONE_DAY)
+}
+
 export function startOfMonth(timestamp: number): number {
   const date = new Date(timestamp)
   date.setDate(1)

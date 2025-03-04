@@ -1,0 +1,47 @@
+.container {
+  color: #4b5563;
+}
+
+.userContainer {
+  padding: 7px 0 6px 0;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--hover-background-color);
+  }
+}
+
+.centerItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameItem {
+  padding-left: 20px;
+}
+
+.shiftContainer {
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--hover-background-color);
+  }
+}
+
+.dateItem {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
+}
+
+.shiftCenterItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-color);
+  padding: 15px 0 14px 0;
+}

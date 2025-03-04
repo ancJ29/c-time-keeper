@@ -3,6 +3,7 @@ import {
   Checkbox,
   createTheme,
   CSSVariablesResolver,
+  Grid,
   Input,
   MantineThemeOverride,
   Modal,
@@ -35,6 +36,9 @@ export const theme: MantineThemeOverride = createTheme({
     }),
     Button: Button.extend({
       classNames: { root: classes.root },
+    }),
+    Grid: Grid.extend({
+      classNames: { inner: classes.gridInner },
     }),
   },
   colors: {

@@ -11,3 +11,6 @@ export type OptionProps = {
   value: string | number
   label: string
 }
+
+export type DateValue = Date | null
+export type DatesRangeValue = [DateValue, DateValue]
