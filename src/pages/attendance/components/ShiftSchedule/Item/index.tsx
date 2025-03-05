@@ -1,6 +1,8 @@
 import Avatar from '@/components/common/Avatar'
+import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
+import useVenueStore from '@/stores/venue.store'
 import { formatTime, ONE_HOUR, ONE_MINUTE } from '@/utils'
 import { Box, Collapse, Flex, Grid, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
@@ -48,10 +50,11 @@ function UserInformation({
   onClick: () => void
 }) {
   const { roles } = useRoleStore()
+  const t = useTranslation()
 
   return (
     <Grid className={classes.userContainer} onClick={onClick}>
-      <Grid.Col span={4} className={classes.nameItem}>
+      <Grid.Col span={2.5} className={classes.nameItem}>
         <Flex gap={5} w="fit-content" align="center">
           <IconChevronRight
             size={18}
@@ -65,25 +68,28 @@ function UserInformation({
           <Stack gap={0}>
             <Text fw={600}>{user?.name || ''}</Text>
             <Text c="dimmed" fz={10}>
-              {roles.get(user?.roleId || '')?.name}
+              {t(roles.get(user?.roleId || '')?.name || '')}
             </Text>
           </Stack>
         </Flex>
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.centerItem} />
-      <Grid.Col span={1.6} className={classes.centerItem} />
-      <Grid.Col span={1.6} className={classes.centerItem} />
-      <Grid.Col span={1.6} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.centerItem} />
+      <Grid.Col span={1.4} className={classes.centerItem} />
+      <Grid.Col span={1.4} className={classes.centerItem} />
+      <Grid.Col span={1.4} className={classes.centerItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.centerItem}>
         {total}
       </Grid.Col>
+      <Grid.Col span={2.5} className={classes.centerItem} />
     </Grid>
   )
 }
 
 function ShiftInformation({ shift }: { shift: Shift }) {
+  const { venues } = useVenueStore()
+
   const total = useMemo(() => {
     const totalMilliseconds = shift.end - shift.start
     const hours = Math.floor(totalMilliseconds / ONE_HOUR)
@@ -94,21 +100,27 @@ function ShiftInformation({ shift }: { shift: Shift }) {
 
   return (
     <Grid className={classes.shiftContainer}>
-      <Grid.Col span={4} className={classes.dateItem}>
-        {formatTime(shift.start, 'ddd DD/MM')}
+      <Grid.Col span={2.5} className={classes.dateItem}>
+        <Text w={40} c="#6b7280">
+          {formatTime(shift.start, 'ddd')}
+        </Text>
+        {formatTime(shift.start, 'DD/MM')}
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {formatTime(shift.start, 'HH:mm')}
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {formatTime(shift.end, 'HH:mm')}
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.shiftCenterItem} />
-      <Grid.Col span={1.6} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem} />
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.6} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {total}
+      </Grid.Col>
+      <Grid.Col span={2.5} className={classes.centerItem}>
+        {venues.get(shift.venueId)?.name || '-'}
       </Grid.Col>
     </Grid>
   )

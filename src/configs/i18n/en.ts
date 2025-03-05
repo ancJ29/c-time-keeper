@@ -18,7 +18,7 @@ export default {
   'Dashboard': 'Dashboard',
   'Category management': 'Category management',
   'User management': 'User management',
-  'Time keeping': 'Time keeping',
+  'Attendance': 'Attendance',
   'Version': 'Version',
   'Profile': 'Profile',
   'Save': 'Save',

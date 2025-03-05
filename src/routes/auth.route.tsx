@@ -20,8 +20,8 @@ const routeConfigs: RouteConfig[] = [
     wrapper: ServiceWrapper,
   },
   {
-    path: '/time-keeping',
-    element: lazy(() => import('@/pages/time-keeping')),
+    path: '/attendance',
+    element: lazy(() => import('@/pages/attendance')),
     wrapper: ServiceWrapper,
   },
   {

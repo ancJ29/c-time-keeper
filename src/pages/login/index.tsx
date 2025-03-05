@@ -7,7 +7,7 @@ import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import LoginView from './components/LoginView'
 
 export type FormProps = {
@@ -25,7 +25,7 @@ const initialValues: FormProps = {
 export default function Login() {
   const navigate = useNavigate()
   const t = useTranslation()
-  const { setToken, getMe } = useAuthStore()
+  const { token, setToken, getMe } = useAuthStore()
   const { load: loadRoles } = useRoleStore()
   const { load: loadVenues } = useVenueStore()
   const { load: loadSalaryRule } = useSalaryRuleStore()
@@ -52,6 +52,10 @@ export default function Login() {
     },
     [setToken, form, getMe, loadRoles, loadVenues, loadSalaryRule, navigate],
   )
+
+  if (token) {
+    return <Navigate to="/dashboard" />
+  }
 
   return <LoginView form={form} onSubmit={submit} />
 }

@@ -40,7 +40,6 @@ export default function ItemView({
         pl={`${ml}rem`}
         bg={isHighlighted || (!opened && isBold) ? 'primary.1' : 'transparent'}
         w={navbarOpened ? '-webkit-fill-available' : ''}
-        hiddenFrom={menuItem.hiddenFrom}
         className={classes.container}
       >
         <Flex justify="space-between" align="center" px={10.5}>

@@ -18,7 +18,7 @@ export default {
   'Dashboard': 'Trang chủ',
   'Category management': 'Quản lý danh mục',
   'User management': 'Quản lý người dùng',
-  'Time keeping': 'Chấm công',
+  'Attendance': 'Chấm công',
   'Version': 'Phiên bản',
   'Profile': 'Hồ sơ',
   'Save': 'Lưu',

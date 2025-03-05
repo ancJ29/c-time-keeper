@@ -4,7 +4,6 @@ export type MenuItem = {
   icon: React.ElementType
   url?: string
   onClick?: () => void
-  hiddenFrom?: string
   subs?: MenuItem[]
   roles?: string[]
 }

@@ -25,10 +25,10 @@ export const navMenu: MenuItem[] = [
     ],
   },
   {
-    key: 'time-keeping',
-    label: 'Time keeping',
+    key: 'attendance',
+    label: 'Attendance',
     icon: IconCalendar,
-    url: '/time-keeping',
+    url: '/attendance',
     roles: [ClientRoles.OWNER],
   },
 ]

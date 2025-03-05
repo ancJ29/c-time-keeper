@@ -16,7 +16,10 @@ export type FilterProps = {
 
 export default function Filter({ roleOptions, venueOptions }: FilterProps) {
   const t = useTranslation()
-  const { startDate, endDate } = useSyncExternalStore(store.subscribe, store.getSnapshot)
+  const { startDate, endDate, roleId, venueId, userById, name } = useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot,
+  )
 
   const onChangeDate = useCallback((value: DatesRangeValue) => {
     store.changeDate(value)
@@ -25,26 +28,26 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
   return (
     <FilterWrapper>
       <AutocompleteForFilterData
-        // key={keyword}
+        key={name}
         label={t('Name')}
         w={w}
-        data={[]}
-        // defaultValue={}
-        onReload={() => {}}
+        data={Object.values(userById).map((user) => user.name)}
+        defaultValue={name}
+        onReload={store.changeName}
       />
       <Select
-        // value={condition?.roleId}
+        value={roleId}
         label={t('Role')}
         w={w}
         options={roleOptions}
-        // onChange={(value) => updateCondition('roleId', value)}
+        onChange={store.changeRoleId}
       />
       <Select
-        // value={condition?.roleId}
+        value={venueId}
         label={t('Venue')}
         w={w}
         options={venueOptions}
-        // onChange={(value) => updateCondition('roleId', value)}
+        onChange={store.changeVenueId}
       />
       <DateRangePicker
         label={t('Date')}

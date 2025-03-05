@@ -5,13 +5,13 @@ import Header from './Header'
 import Item from './Item'
 
 export default function ShiftSchedule() {
-  const { shiftsByUserId, userById } = useSyncExternalStore(store.subscribe, store.getSnapshot)
+  const { updates, userById } = useSyncExternalStore(store.subscribe, store.getSnapshot)
 
   return (
     <Stack gap={0}>
       <Header />
-      {Object.keys(shiftsByUserId).map((userId) => (
-        <Item key={userId} user={userById[userId]} shifts={shiftsByUserId[userId]} />
+      {Object.keys(updates).map((userId) => (
+        <Item key={userId} user={userById[userId]} shifts={updates[userId]} />
       ))}
     </Stack>
   )

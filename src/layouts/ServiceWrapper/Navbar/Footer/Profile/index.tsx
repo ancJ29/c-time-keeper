@@ -1,4 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
+import useWindowResize from '@/hooks/useWindowResize'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
 import { IconSettings, IconUser } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
@@ -22,6 +23,7 @@ export default function Profile({
   onGoToProfilePage,
 }: ProfileProps) {
   const t = useTranslation()
+  const isMobile = useWindowResize()
   const [opened, setOpened] = useState(false)
 
   const handleCloseMenu = useCallback(() => {
@@ -30,7 +32,7 @@ export default function Profile({
 
   return (
     <Menu
-      width={250}
+      width={isMobile ? 200 : 250}
       position="top-start"
       radius={10}
       shadow="md"
