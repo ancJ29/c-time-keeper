@@ -114,7 +114,13 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_ROLE_ID:
       if (action.roleId !== undefined) {
-        const updates = _filterShifts(state.currents, action.roleId, state.venueId, state.userById)
+        const updates = _filterShifts(
+          state.currents,
+          action.roleId,
+          state.venueId,
+          state.userById,
+          state.name,
+        )
         return {
           ...state,
           roleId: action.roleId,
@@ -124,7 +130,13 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_VENUE_ID:
       if (action.venueId !== undefined) {
-        const updates = _filterShifts(state.currents, state.roleId, action.venueId, state.userById)
+        const updates = _filterShifts(
+          state.currents,
+          state.roleId,
+          action.venueId,
+          state.userById,
+          state.name,
+        )
         return {
           ...state,
           venueId: action.venueId,

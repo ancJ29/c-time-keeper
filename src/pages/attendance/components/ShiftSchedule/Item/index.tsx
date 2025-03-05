@@ -4,8 +4,7 @@ import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import { formatTime, ONE_HOUR, ONE_MINUTE } from '@/utils'
-import { Box, Collapse, Flex, Grid, Stack, Text } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo } from 'react'
 import classes from './Item.module.scss'
@@ -13,11 +12,10 @@ import classes from './Item.module.scss'
 type ItemProps = {
   user: User
   shifts: Shift[]
+  selectValue: string | null
 }
 
-export default function Item({ user, shifts }: ItemProps) {
-  const [opened, { toggle }] = useDisclosure(false)
-
+export default function Item({ user, shifts, selectValue }: ItemProps) {
   const total = useMemo(() => {
     const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
     const hours = Math.floor(totalMilliseconds / ONE_HOUR)
@@ -27,38 +25,25 @@ export default function Item({ user, shifts }: ItemProps) {
   }, [shifts])
 
   return (
-    <Box className={classes.container}>
-      <UserInformation user={user} total={total} opened={opened} onClick={toggle} />
-      <Collapse
-        in={opened}
-        transitionDuration={200}
-        transitionTimingFunction="linear"
-        className={classes.collapse}
-      >
+    <Accordion.Item value={user.id}>
+      <Accordion.Control>
+        <UserInformation user={user} total={total} opened={selectValue === user.id} />
+      </Accordion.Control>
+      <Accordion.Panel>
         {shifts.map((shift) => (
           <ShiftInformation key={shift.id} shift={shift} />
         ))}
-      </Collapse>
-    </Box>
+      </Accordion.Panel>
+    </Accordion.Item>
   )
 }
 
-function UserInformation({
-  user,
-  total,
-  opened,
-  onClick,
-}: {
-  user: User
-  total: string
-  opened: boolean
-  onClick: () => void
-}) {
+function UserInformation({ user, total, opened }: { user: User; total: string; opened: boolean }) {
   const { roles } = useRoleStore()
   const t = useTranslation()
 
   return (
-    <Grid className={classes.userContainer} onClick={onClick} bg={opened ? '#f5f5f5' : ''}>
+    <Grid>
       <Grid.Col span={2.5} className={classes.nameItem}>
         <Flex gap={5} w="fit-content" align="center">
           <IconChevronRight
