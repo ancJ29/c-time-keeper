@@ -27,9 +27,14 @@ export default function Item({ user, shifts }: ItemProps) {
   }, [shifts])
 
   return (
-    <Box c="#4b5563">
+    <Box className={classes.container}>
       <UserInformation user={user} total={total} opened={opened} onClick={toggle} />
-      <Collapse in={opened} transitionDuration={200} transitionTimingFunction="linear" mb={10}>
+      <Collapse
+        in={opened}
+        transitionDuration={200}
+        transitionTimingFunction="linear"
+        className={classes.collapse}
+      >
         {shifts.map((shift) => (
           <ShiftInformation key={shift.id} shift={shift} />
         ))}
@@ -53,7 +58,7 @@ function UserInformation({
   const t = useTranslation()
 
   return (
-    <Grid className={classes.userContainer} onClick={onClick}>
+    <Grid className={classes.userContainer} onClick={onClick} bg={opened ? '#f5f5f5' : ''}>
       <Grid.Col span={2.5} className={classes.nameItem}>
         <Flex gap={5} w="fit-content" align="center">
           <IconChevronRight
@@ -77,10 +82,10 @@ function UserInformation({
       <Grid.Col span={1.4} className={classes.centerItem} />
       <Grid.Col span={1.4} className={classes.centerItem} />
       <Grid.Col span={1.4} className={classes.centerItem}>
-        {total}
+        {opened ? total : ''}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.centerItem}>
-        {total}
+        {opened ? total : ''}
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.centerItem} />
     </Grid>

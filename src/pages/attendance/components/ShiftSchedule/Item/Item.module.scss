@@ -2,14 +2,15 @@
   color: #4b5563;
 }
 
+.collapse {
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+}
+
 .userContainer {
   padding: 7px 0 6px 0;
   border-bottom: 1px solid var(--border-color);
   cursor: pointer;
-
-  &:hover {
-    background-color: var(--hover-background-color);
-  }
 }
 
 .centerItem {
@@ -25,10 +26,6 @@
 .shiftContainer {
   border-bottom: 1px solid var(--border-color);
   cursor: pointer;
-
-  &:hover {
-    background-color: var(--hover-background-color);
-  }
 }
 
 .dateItem {
