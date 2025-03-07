@@ -1,10 +1,9 @@
 import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { resetPassword } from '@/services/domain'
-import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ResetPasswordView from './components/ResetPasswordView'
 
 export type FormProps = {
@@ -18,7 +17,6 @@ const initialValues: FormProps = {
 export default function ResetPassword() {
   const t = useTranslation()
   const navigate = useNavigate()
-  const { token } = useAuthStore()
   const form = useForm<FormProps>({
     initialValues,
     validate: _validate(t),
@@ -41,10 +39,6 @@ export default function ResetPassword() {
     },
     [navigate, t],
   )
-
-  if (token) {
-    return <Navigate to="/dashboard" />
-  }
 
   return <ResetPasswordView form={form} onSubmit={submit} />
 }
