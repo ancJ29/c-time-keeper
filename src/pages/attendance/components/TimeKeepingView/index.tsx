@@ -1,10 +1,13 @@
+import useWindowResize from '@/hooks/useWindowResize'
 import { Stack } from '@mantine/core'
 import Filter, { FilterProps } from '../Filter'
 import ShiftSchedule from '../ShiftSchedule'
 
 export default function TimeKeepingView({ ...props }: FilterProps) {
+  const isMobile = useWindowResize()
+
   return (
-    <Stack gap={15} pb={40} miw={{ base: 1000, sm: '100%' }}>
+    <Stack gap={isMobile ? 10 : 20} pb={40}>
       <Filter {...props} />
       <ShiftSchedule />
     </Stack>
