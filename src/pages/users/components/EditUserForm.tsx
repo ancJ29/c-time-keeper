@@ -14,6 +14,7 @@ const initialValues: UpdateUserRequest = {
   email: '',
   roleId: '',
   salaryRuleId: '',
+  clientId: '',
 }
 
 type EditUserFormProps = {

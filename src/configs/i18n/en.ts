@@ -68,4 +68,5 @@ export default {
   'Clear': 'Clear',
   'Language': 'Language',
   'Settings': 'Settings',
+  'Monthly salary': 'Monthly salary',
 }

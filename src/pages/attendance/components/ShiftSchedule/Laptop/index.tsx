@@ -1,3 +1,4 @@
+import useUserStore from '@/stores/user.store'
 import { Accordion, Stack } from '@mantine/core'
 import { useState, useSyncExternalStore } from 'react'
 import store from '../../../_shift.store'
@@ -6,7 +7,8 @@ import Item from './Item'
 import classes from './Laptop.module.scss'
 
 export default function Laptop() {
-  const { updates, userById } = useSyncExternalStore(store.subscribe, store.getSnapshot)
+  const { users } = useUserStore()
+  const { updates } = useSyncExternalStore(store.subscribe, store.getSnapshot)
   const [value, setValue] = useState<string | null>(null)
 
   return (
@@ -22,7 +24,12 @@ export default function Laptop() {
         onChange={setValue}
       >
         {Object.keys(updates).map((userId) => (
-          <Item key={userId} user={userById[userId]} shifts={updates[userId]} selectValue={value} />
+          <Item
+            key={userId}
+            user={users.get(userId)}
+            shifts={updates[userId]}
+            selectValue={value}
+          />
         ))}
       </Accordion>
     </Stack>

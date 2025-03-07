@@ -3,14 +3,14 @@ import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatTime, ONE_HOUR, ONE_MINUTE } from '@/utils'
+import { formatDuration, formatTime } from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo } from 'react'
 import classes from './Item.module.scss'
 
 type ItemProps = {
-  user: User
+  user?: User
   shifts: Shift[]
   selectValue: string | null
 }
@@ -18,11 +18,12 @@ type ItemProps = {
 export default function Item({ user, shifts, selectValue }: ItemProps) {
   const total = useMemo(() => {
     const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
-    const hours = Math.floor(totalMilliseconds / ONE_HOUR)
-    const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
-
-    return `${hours}:${minutes.toString().padStart(2, '0')}`
+    return formatDuration(totalMilliseconds)
   }, [shifts])
+
+  if (!user) {
+    return <></>
+  }
 
   return (
     <Accordion.Item value={user.id}>
@@ -82,10 +83,7 @@ function ShiftInformation({ shift }: { shift: Shift }) {
 
   const total = useMemo(() => {
     const totalMilliseconds = shift.end - shift.start
-    const hours = Math.floor(totalMilliseconds / ONE_HOUR)
-    const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
-
-    return `${hours}:${minutes.toString().padStart(2, '0')}`
+    return formatDuration(totalMilliseconds)
   }, [shift])
 
   return (

@@ -64,3 +64,10 @@ export function diffMinutes(start: number | null, end: number | null) {
   const totalMinutes = Math.floor(diffMilliseconds / ONE_MINUTE)
   return totalMinutes % 60
 }
+
+export function formatDuration(totalMilliseconds: number) {
+  const hours = Math.floor(totalMilliseconds / ONE_HOUR)
+  const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
+
+  return `${hours}:${minutes.toString().padStart(2, '0')}`
+}

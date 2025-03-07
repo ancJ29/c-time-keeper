@@ -2,9 +2,6 @@ import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { login } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
-import useRoleStore from '@/stores/role.store'
-import useSalaryRuleStore from '@/stores/salaryRule.store'
-import useVenueStore from '@/stores/venue.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -25,10 +22,7 @@ const initialValues: FormProps = {
 export default function Login() {
   const navigate = useNavigate()
   const t = useTranslation()
-  const { setToken, getMe } = useAuthStore()
-  const { load: loadRoles } = useRoleStore()
-  const { load: loadVenues } = useVenueStore()
-  const { load: loadSalaryRule } = useSalaryRuleStore()
+  const { setToken } = useAuthStore()
 
   const form = useForm<FormProps>({
     initialValues,
@@ -42,7 +36,6 @@ export default function Login() {
       const res = await login(values)
       if (res?.token) {
         setToken(res.token, form.values.remember)
-        await Promise.all([getMe(), loadRoles(), loadVenues(), loadSalaryRule()])
         navigate('/dashboard')
       } else {
         form.setErrors({
@@ -50,7 +43,7 @@ export default function Login() {
         })
       }
     },
-    [setToken, form, getMe, loadRoles, loadVenues, loadSalaryRule, navigate],
+    [setToken, form, navigate],
   )
 
   return <LoginView form={form} onSubmit={submit} />

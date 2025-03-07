@@ -3,7 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatTime, ONE_HOUR, ONE_MINUTE } from '@/utils'
+import { formatDuration, formatTime } from '@/utils'
 import { Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons-react'
@@ -11,23 +11,34 @@ import { ReactNode, useCallback, useMemo } from 'react'
 import classes from './Item.module.scss'
 
 type ItemProps = {
-  user: User
+  user?: User
   shifts: Shift[]
 }
 
 export default function Item({ user, shifts }: ItemProps) {
+  const [opened, { toggle }] = useDisclosure(false)
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation()
+      toggle()
+    },
+    [toggle],
+  )
+
   const total = useMemo(() => {
     const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
-    const hours = Math.floor(totalMilliseconds / ONE_HOUR)
-    const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
-
-    return `${hours}:${minutes.toString().padStart(2, '0')}`
+    return formatDuration(totalMilliseconds)
   }, [shifts])
 
+  if (!user) {
+    return <></>
+  }
+
   return (
-    <Card shadow="md" withBorder p={12} radius={8}>
+    <Card shadow="md" withBorder p={12} radius={8} onClick={handleClick}>
       <UserInformation user={user} total={total} />
-      <Wrapper isShown={shifts.length > 0}>
+      <Wrapper isShown={shifts.length > 0} opened={opened}>
         {shifts.map((shift) => (
           <ShiftInformation key={shift.id} shift={shift} />
         ))}
@@ -68,24 +79,22 @@ function DataRow({ title, content }: { title: string | ReactNode; content: strin
   )
 }
 
-function Wrapper({ children, isShown }: { children: ReactNode; isShown: boolean }) {
-  const [opened, { toggle }] = useDisclosure(false)
-
-  const handleClick = useCallback(
-    (event: React.MouseEvent) => {
-      event.stopPropagation()
-      toggle()
-    },
-    [toggle],
-  )
-
+function Wrapper({
+  children,
+  isShown,
+  opened,
+}: {
+  children: ReactNode
+  isShown: boolean
+  opened: boolean
+}) {
   if (!isShown) {
     return <></>
   }
 
   return (
     <Flex w="100%" direction={opened ? 'column-reverse' : 'column'}>
-      <Group justify="center" w="100%" onClick={handleClick}>
+      <Group justify="center" w="100%">
         <IconChevronDown
           size={18}
           stroke={2}
@@ -108,14 +117,12 @@ function ShiftInformation({ shift }: { shift: Shift }) {
 
   const total = useMemo(() => {
     const totalMilliseconds = shift.end - shift.start
-    const hours = Math.floor(totalMilliseconds / ONE_HOUR)
-    const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
-
-    return `${hours}:${minutes.toString().padStart(2, '0')}`
+    return formatDuration(totalMilliseconds)
   }, [shift])
 
   return (
     <Stack className={classes.shiftContainer}>
+      <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
       <DataRow title={t('Break')} content={''} />

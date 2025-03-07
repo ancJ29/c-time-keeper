@@ -3,6 +3,7 @@ import FilterWrapper from '@/components/c-time-keeper/FilterWrapper'
 import DateRangePicker from '@/components/common/DateRangePicker'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
+import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, MantineWidth, OptionProps } from '@/types'
 import { useCallback, useSyncExternalStore } from 'react'
 import store from '../../_shift.store'
@@ -16,7 +17,8 @@ export type FilterProps = {
 
 export default function Filter({ roleOptions, venueOptions }: FilterProps) {
   const t = useTranslation()
-  const { startDate, endDate, roleId, venueId, userById, name } = useSyncExternalStore(
+  const { users } = useUserStore()
+  const { startDate, endDate, roleId, venueId, name } = useSyncExternalStore(
     store.subscribe,
     store.getSnapshot,
   )
@@ -31,7 +33,7 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
         key={name}
         label={t('Name')}
         w={w}
-        data={Object.values(userById).map((user) => user.name)}
+        data={Object.values(users).map((user) => user.name)}
         defaultValue={name}
         onReload={store.changeName}
       />

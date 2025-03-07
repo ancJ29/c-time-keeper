@@ -25,6 +25,7 @@ export const getMeSchema = _typeBuilder({
     email: stringSchema,
     roleId: stringSchema,
     salaryRuleId: stringSchema,
+    clientId: stringSchema,
   }),
 })
 

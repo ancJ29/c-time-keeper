@@ -68,4 +68,5 @@ export default {
   'Clear': 'Xóa',
   'Language': 'Ngôn ngữ',
   'Settings': 'Cài đặt',
+  'Monthly salary': 'Lương tháng',
 }

@@ -16,6 +16,7 @@ export const getUsersSchema = _typeBuilder({
       bankName: nullishStringSchema,
       bankAccount: nullishStringSchema,
       salaryRuleId: stringSchema,
+      clientId: stringSchema,
     }),
   ),
 })
@@ -48,6 +49,7 @@ export const updateUserSchema = _typeBuilder({
     bankName: nullishStringSchema,
     bankAccount: nullishStringSchema,
     salaryRuleId: stringSchema,
+    clientId: stringSchema,
   }),
   response: z.object({
     success: booleanSchema,

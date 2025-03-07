@@ -7,6 +7,7 @@ import useAuthStore from '@/stores/auth.store'
 import useMetadataStore from '@/stores/metadata'
 import useRoleStore from '@/stores/role.store'
 import useSalaryRuleStore from '@/stores/salaryRule.store'
+import useUserStore from '@/stores/user.store'
 import useVenueStore from '@/stores/venue.store'
 import { MantineProvider } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
@@ -60,6 +61,7 @@ async function loadData(token: string | null) {
       useRoleStore.getState().load(),
       useVenueStore.getState().load(),
       useSalaryRuleStore.getState().load(),
+      useUserStore.getState().load(),
     ])
   }
 }

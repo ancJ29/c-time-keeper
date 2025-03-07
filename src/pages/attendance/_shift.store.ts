@@ -1,11 +1,11 @@
-import { getAllShifts, getAllUsers, Shift, User } from '@/services/domain'
+import { getAllShifts, Shift } from '@/services/domain'
+import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, DateValue } from '@/types'
 import { cloneDeep, createStore, endOfDay, ONE_DAY, startOfDay } from '@/utils'
 
 type State = {
   currents: Record<string, Shift[]>
   updates: Record<string, Shift[]>
-  userById: Record<string, User>
   startDate: DateValue
   endDate: DateValue
   roleId: string | null
@@ -24,7 +24,6 @@ enum ActionType {
 type Action = {
   type: ActionType
   shifts?: Shift[]
-  users?: User[]
   startDate?: DateValue
   endDate?: DateValue
   roleId?: string | null
@@ -35,7 +34,6 @@ type Action = {
 const defaultState = {
   currents: {},
   updates: {},
-  userById: {},
   startDate: new Date(startOfDay(Date.now())),
   endDate: new Date(endOfDay(Date.now())),
   roleId: null,
@@ -51,14 +49,11 @@ export default {
   ...store,
   async initData() {
     const state = store.getSnapshot()
-    const [users, shifts] = await Promise.all([
-      getAllUsers(),
-      getAllShifts({
-        start: state.startDate?.getTime() || 0,
-        end: state.endDate?.getTime() || 0,
-      }),
-    ])
-    dispatch({ type: ActionType.INIT_DATA, users, shifts })
+    const shifts = await getAllShifts({
+      start: state.startDate?.getTime() || 0,
+      end: state.endDate?.getTime() || 0,
+    })
+    dispatch({ type: ActionType.INIT_DATA, shifts })
   },
   async changeDate(value: DatesRangeValue) {
     const startDate = value[0]
@@ -86,12 +81,10 @@ export default {
 function reducer(action: Action, state: State): State {
   switch (action.type) {
     case ActionType.INIT_DATA:
-      if (action.users !== undefined && action.shifts !== undefined) {
-        const userById = Object.fromEntries(action.users.map((user) => [user.id, user]))
+      if (action.shifts !== undefined) {
         const currents = initShiftsByUserId(action.shifts)
         return {
           ...state,
-          userById,
           currents,
           updates: cloneDeep(currents),
         }
@@ -114,13 +107,7 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_ROLE_ID:
       if (action.roleId !== undefined) {
-        const updates = _filterShifts(
-          state.currents,
-          action.roleId,
-          state.venueId,
-          state.userById,
-          state.name,
-        )
+        const updates = _filterShifts(state.currents, action.roleId, state.venueId, state.name)
         return {
           ...state,
           roleId: action.roleId,
@@ -130,13 +117,7 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_VENUE_ID:
       if (action.venueId !== undefined) {
-        const updates = _filterShifts(
-          state.currents,
-          state.roleId,
-          action.venueId,
-          state.userById,
-          state.name,
-        )
+        const updates = _filterShifts(state.currents, state.roleId, action.venueId, state.name)
         return {
           ...state,
           venueId: action.venueId,
@@ -146,13 +127,7 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_NAME:
       {
-        const updates = _filterShifts(
-          state.currents,
-          state.roleId,
-          state.venueId,
-          state.userById,
-          action.name,
-        )
+        const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.name)
         return {
           ...state,
           name: action.name,
@@ -178,14 +153,14 @@ function _filterShifts(
   shiftsByUserId: Record<string, Shift[]>,
   roleId: string | null,
   venueId: string | null,
-  userById: Record<string, User>,
   name?: string,
 ): Record<string, Shift[]> {
+  const { users } = useUserStore.getState()
   let updates = shiftsByUserId
 
   if (roleId !== null) {
     updates = Object.fromEntries(
-      Object.entries(updates).filter(([userId]) => userById[userId]?.roleId === roleId),
+      Object.entries(updates).filter(([userId]) => users.get(userId)?.roleId === roleId),
     )
   }
 
@@ -200,7 +175,7 @@ function _filterShifts(
 
   if (name !== undefined) {
     updates = Object.fromEntries(
-      Object.entries(updates).filter(([userId]) => userById[userId]?.name === name),
+      Object.entries(updates).filter(([userId]) => users.get(userId)?.name === name),
     )
   }
 
