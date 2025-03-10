@@ -1,6 +1,6 @@
 import { Role, Salary, User } from '@/services/domain'
 import { DataGridColumnProps } from '@/types'
-import { formatDuration, ONE_HOUR } from '@/utils'
+import { formatDuration, formatNumber, ONE_HOUR } from '@/utils'
 
 export const configs = (
   t: (key: string) => string,
@@ -44,10 +44,10 @@ export const configs = (
     },
     {
       key: 'totalSalary',
-      header: t('Total salary'),
+      header: `${t('Total salary')} (VND)`,
       width: '20%',
       renderCell: (_, salary: Salary) => {
-        return salary.totalSalary
+        return formatNumber(salary.totalSalary)
       },
     },
   ]

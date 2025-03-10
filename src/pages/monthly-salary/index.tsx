@@ -4,6 +4,7 @@ import { getSalaries, Salary } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
 import useUserStore from '@/stores/user.store'
+import { DateValue } from '@/types'
 import { formatTime } from '@/utils'
 import { useMemo, useState } from 'react'
 import { configs } from './_configs'
@@ -23,11 +24,28 @@ export default function MonthlySalary() {
 
   const dataGridConfigs = useMemo(() => configs(t, users, roles), [roles, t, users])
 
-  const getData = async () => {
-    const salaries = await getSalaries({ key: `${formatTime(date, 'MM-YYYY')}-${user?.clientId}` })
+  const getData = async (_date?: Date) => {
+    const formattedDate = formatTime(_date || date, 'MM-YYYY')
+    const salaries = await getSalaries({ key: `${formattedDate}-${user?.clientId}` })
     salaries && setSalaries(salaries)
   }
   useMount(getData)
 
-  return <MonthlySalaryView key={users.size} data={salaries} dataGridConfigs={dataGridConfigs} />
+  const handleChangeDate = async (date: DateValue) => {
+    if (!date) {
+      return
+    }
+    setDate(date)
+    await getData(date)
+  }
+
+  return (
+    <MonthlySalaryView
+      key={users.size}
+      data={salaries}
+      dataGridConfigs={dataGridConfigs}
+      date={date}
+      onChangeDate={handleChangeDate}
+    />
+  )
 }

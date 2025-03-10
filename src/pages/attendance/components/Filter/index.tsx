@@ -33,7 +33,7 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
         key={name}
         label={t('Name')}
         w={w}
-        data={Array.from(users.values()).map((user) => user.name)}
+        data={Array.from(users.values()).map((el) => el.name)}
         defaultValue={name}
         onReload={store.changeName}
       />

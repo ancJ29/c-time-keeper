@@ -69,4 +69,5 @@ export default {
   'Language': 'Ngôn ngữ',
   'Settings': 'Cài đặt',
   'Monthly salary': 'Lương tháng',
+  'Month': 'Tháng',
 }
