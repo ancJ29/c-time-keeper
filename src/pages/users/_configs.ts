@@ -14,9 +14,14 @@ export const configs = (
       width: '25%',
     },
     {
+      key: 'username',
+      header: t('Username'),
+      width: '20%',
+    },
+    {
       key: 'email',
       header: t('Email'),
-      width: '35%',
+      width: '25%',
     },
     {
       key: 'role',
@@ -29,7 +34,7 @@ export const configs = (
     {
       key: 'salaryRule',
       header: t('Salary rule'),
-      width: '25%',
+      width: '15%',
       renderCell: (_, user: User) => {
         return salaryRules.get(user.salaryRuleId)?.name || ''
       },

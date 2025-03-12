@@ -21,7 +21,7 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
   const { removeToken, user } = useAuthStore()
   const [navbarOpened, { toggle: toggleNavbar, close: closeNavbar, open: openNavbar }] =
     useDisclosure(!isMobile)
-  const [language] = useState(localStorage.__LANGUAGE__ || Language.EN)
+  const [language] = useState(localStorage.__LANGUAGE__ || Language.VI)
   const { roles } = useRoleStore()
   const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
 
@@ -29,7 +29,7 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
     if (value === language) {
       return
     }
-    localStorage.__LANGUAGE__ = value || Language.EN
+    localStorage.__LANGUAGE__ = value || Language.VI
     window.location.reload()
   }
 

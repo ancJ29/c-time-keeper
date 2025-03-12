@@ -11,6 +11,7 @@ export const getUsersSchema = _typeBuilder({
     z.object({
       id: stringSchema,
       name: stringSchema,
+      username: stringSchema,
       email: stringSchema,
       roleId: stringSchema,
       bankName: nullishStringSchema,
@@ -28,6 +29,7 @@ export const getUsersByAdminSchema = _typeBuilder({
     z.object({
       id: stringSchema,
       name: stringSchema,
+      username: stringSchema,
       email: stringSchema,
       roleId: stringSchema,
       bankName: nullishStringSchema,
@@ -44,6 +46,7 @@ export const updateUserSchema = _typeBuilder({
   payload: z.object({
     id: stringSchema,
     name: stringSchema,
+    username: stringSchema,
     email: stringSchema,
     roleId: stringSchema,
     bankName: nullishStringSchema,
@@ -61,6 +64,7 @@ export const addUserSchema = _typeBuilder({
   action: z.literal(RequestAction.ADD_USER),
   payload: z.object({
     name: stringSchema,
+    username: stringSchema,
     email: stringSchema,
     password: stringSchema,
     roleId: stringSchema,

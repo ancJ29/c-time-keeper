@@ -16,9 +16,9 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
       <Stack gap={15}>
         <TextInput
           data-autofocus
-          label={t('Email')}
-          placeholder="email@email.com"
-          {...form.getInputProps('email')}
+          label={t('Username')}
+          placeholder={t('Username')}
+          {...form.getInputProps('username')}
         />
         <PasswordInput
           label={t('Password')}

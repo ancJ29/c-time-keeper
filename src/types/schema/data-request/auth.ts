@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { booleanSchema, stringSchema } from '../base'
+import { booleanSchema, nullishStringSchema, stringSchema } from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -7,7 +7,7 @@ export const loginSchema = _typeBuilder({
   guestOnly: true,
   action: z.literal(RequestAction.LOGIN),
   payload: z.object({
-    email: stringSchema,
+    username: stringSchema,
     password: stringSchema,
   }),
   response: z.object({
@@ -22,7 +22,10 @@ export const getMeSchema = _typeBuilder({
   response: z.object({
     id: stringSchema,
     name: stringSchema,
+    username: stringSchema,
     email: stringSchema,
+    bankName: nullishStringSchema,
+    bankAccount: nullishStringSchema,
     roleId: stringSchema,
     salaryRuleId: stringSchema,
     clientId: stringSchema,

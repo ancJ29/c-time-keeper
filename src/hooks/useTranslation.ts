@@ -1,7 +1,7 @@
 import { Language, languages } from '@/configs/i18n'
 import { useCallback } from 'react'
 
-const current = (localStorage.__LANGUAGE__ || Language.EN) as Language
+const current = (localStorage.__LANGUAGE__ || Language.VI) as Language
 const dictionary = languages[current] || {}
 
 export default function useTranslation(): (key?: string, ...args: (string | number)[]) => string {

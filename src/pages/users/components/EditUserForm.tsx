@@ -11,6 +11,7 @@ const w = '100%'
 const initialValues: UpdateUserRequest = {
   id: '',
   name: '',
+  username: '',
   email: '',
   roleId: '',
   salaryRuleId: '',
@@ -62,13 +63,14 @@ export default function EditUserForm({
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap={10} px={10} align="center">
         <TextInput
-          w={w}
           data-autofocus
-          label={t('Email')}
-          {...form.getInputProps('email')}
+          w={w}
+          label={t('Name')}
+          {...form.getInputProps('name')}
           withAsterisk
         />
-        <TextInput w={w} label={t('Name')} {...form.getInputProps('name')} withAsterisk />
+        <TextInput w={w} label={t('Username')} {...form.getInputProps('username')} withAsterisk />
+        <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} withAsterisk />
         <Select
           w={w}
           label={t('Role')}
@@ -93,9 +95,10 @@ export default function EditUserForm({
 
 function _validate(t: (s: string) => string) {
   return {
+    name: (value: string) => (value === '' ? t('Field is required') : null),
+    username: (value: string) => (value === '' ? t('Field is required') : null),
     email: (value: string) =>
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
-    name: (value: string) => (value === '' ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
     salaryRuleId: (value: string | null) =>
       value === '' || !value ? t('Field is required') : null,

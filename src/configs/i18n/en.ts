@@ -70,4 +70,6 @@ export default {
   'Settings': 'Settings',
   'Monthly salary': 'Monthly salary',
   'Month': 'Month',
+  'Username': 'Username',
+  'Please enter username': 'Please enter username',
 }

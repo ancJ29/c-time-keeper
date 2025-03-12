@@ -24,7 +24,7 @@ export default function Calendar({ events, resources, onEventClick, onDateSet }:
       <FullCalendar
         initialView="resourceTimelineDay"
         locales={[enLocale, viLocale]}
-        locale={(localStorage.__LANGUAGE__ || Language.EN).toLowerCase()}
+        locale={(localStorage.__LANGUAGE__ || Language.VI).toLowerCase()}
         resources={resources}
         events={events}
         plugins={[resourceTimelinePlugin]}

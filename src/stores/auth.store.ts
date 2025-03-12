@@ -65,7 +65,7 @@ function _decode(token: string) {
 function clearStorage() {
   const remember = localStorage.__REMEMBER__ === 'true'
   const version = localStorage.__VERSION__
-  const language = localStorage.__LANGUAGE__ || Language.EN
+  const language = localStorage.__LANGUAGE__ || Language.VI
   localStorage.clear()
   sessionStorage.clear()
   localStorage.__REMEMBER__ = remember

@@ -1,11 +1,5 @@
 import { ClientRoles, MenuItem } from '@/types'
-import {
-  IconCalendar,
-  IconCash,
-  IconDashboard,
-  IconServer,
-  IconUserCircle,
-} from '@tabler/icons-react'
+import { IconCalendar, IconCash, IconDashboard, IconUserCircle } from '@tabler/icons-react'
 
 export const navMenu: MenuItem[] = [
   {
@@ -16,19 +10,11 @@ export const navMenu: MenuItem[] = [
     roles: [ClientRoles.OWNER, ClientRoles.STAFF],
   },
   {
-    key: 'category-management',
-    label: 'Category management',
-    icon: IconServer,
+    key: 'users',
+    label: 'User management',
+    icon: IconUserCircle,
+    url: '/users',
     roles: [ClientRoles.OWNER],
-    subs: [
-      {
-        key: 'users',
-        label: 'User management',
-        icon: IconUserCircle,
-        url: '/users',
-        roles: [ClientRoles.OWNER],
-      },
-    ],
   },
   {
     key: 'attendance',

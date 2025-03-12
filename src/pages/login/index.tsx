@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom'
 import LoginView from './components/LoginView'
 
 export type FormProps = {
-  email: string
+  username: string
   password: string
   remember: boolean
 }
 
 const initialValues: FormProps = {
-  email: '',
+  username: '',
   password: '',
   remember: localStorage.__REMEMBER__ === 'true',
 }
@@ -51,8 +51,7 @@ export default function Login() {
 
 function _validate(t: (s: string) => string) {
   return {
-    email: (value: string) =>
-      value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
+    email: (value: string) => (value === '' ? t('Please enter username') : null),
     password: (value: string) => (value === '' ? t('Please enter password') : null),
   }
 }

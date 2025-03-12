@@ -70,4 +70,6 @@ export default {
   'Settings': 'Cài đặt',
   'Monthly salary': 'Lương tháng',
   'Month': 'Tháng',
+  'Username': 'Tài khoản',
+  'Please enter username': 'Vui lòng nhập tài khoản',
 }
