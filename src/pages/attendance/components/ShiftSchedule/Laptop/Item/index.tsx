@@ -119,7 +119,7 @@ function ShiftInformation({ shift }: { shift: Shift }) {
   return (
     <Grid className={classes.shiftContainer}>
       <Grid.Col span={2.5} className={classes.dateItem}>
-        <Text w={40} c="#6b7280">
+        <Text w={32} c="#6b7280">
           {formatTime(shift.start, 'ddd')}
         </Text>
         {formatTime(shift.start, 'DD/MM')}

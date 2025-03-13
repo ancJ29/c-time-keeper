@@ -123,11 +123,11 @@ function ShiftInformation({ shift }: { shift: Shift }) {
   return (
     <Stack className={classes.shiftContainer}>
       <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
+      <DataRow title={t('Worked')} content={total} />
+      <DataRow title={t('Total')} content={total} />
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
       <DataRow title={t('Break')} content={''} />
-      <DataRow title={t('Worked')} content={total} />
-      <DataRow title={t('Total')} content={total} />
       <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />
     </Stack>
   )

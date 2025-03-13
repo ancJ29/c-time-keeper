@@ -1,10 +1,17 @@
 import { Language, languages } from '@/configs/i18n'
-import { useCallback } from 'react'
+import dayjs from 'dayjs'
+import 'dayjs/locale/en'
+import 'dayjs/locale/vi'
+import { useCallback, useEffect } from 'react'
 
 const current = (localStorage.__LANGUAGE__ || Language.VI) as Language
 const dictionary = languages[current] || {}
 
 export default function useTranslation(): (key?: string, ...args: (string | number)[]) => string {
+  useEffect(() => {
+    dayjs.locale(current)
+  }, [])
+
   const t = useCallback((key?: string, ...args: (string | number)[]) => {
     return key ? _t(dictionary, key, ...args) : ''
   }, [])

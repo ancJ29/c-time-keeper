@@ -10,7 +10,6 @@ export const configs = (
   return [
     {
       key: 'name',
-      sortable: true,
       header: t('Name'),
       width: '25%',
       renderCell: (_, salary: Salary) => {
