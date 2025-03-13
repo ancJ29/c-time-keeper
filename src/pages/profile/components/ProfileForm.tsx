@@ -30,12 +30,13 @@ export default function ProfileForm({
         <Stack gap={12} align="center" w={w}>
           <TextInput
             w={w}
-            data-autofocus
             withAsterisk
-            label={t('Email')}
-            {...form.getInputProps('email')}
+            label={t('Name')}
+            data-autofocus
+            {...form.getInputProps('name')}
           />
-          <TextInput w={w} withAsterisk label={t('Name')} {...form.getInputProps('name')} />
+          <TextInput w={w} withAsterisk label={t('Email')} {...form.getInputProps('email')} />
+          <TextInput w={w} withAsterisk label={t('Username')} {...form.getInputProps('username')} />
           <Select
             w={w}
             withAsterisk

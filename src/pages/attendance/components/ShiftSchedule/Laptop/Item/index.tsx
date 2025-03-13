@@ -6,16 +6,17 @@ import useVenueStore from '@/stores/venue.store'
 import { formatDuration, formatTime, unique } from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import classes from './Item.module.scss'
 
 type ItemProps = {
   user?: User
   shifts: Shift[]
-  selectedValue: string[]
 }
 
-export default function Item({ user, shifts, selectedValue }: ItemProps) {
+export default function Item({ user, shifts }: ItemProps) {
+  const [opened, setOpened] = useState(true)
+
   const total = useMemo(() => {
     const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
     return formatDuration(totalMilliseconds)
@@ -26,21 +27,26 @@ export default function Item({ user, shifts, selectedValue }: ItemProps) {
   }
 
   return (
-    <Accordion.Item value={user.id}>
-      <Accordion.Control>
-        <UserInformation
-          user={user}
-          total={total}
-          opened={selectedValue.includes(user.id)}
-          shifts={shifts}
-        />
-      </Accordion.Control>
-      <Accordion.Panel>
-        {shifts.map((shift) => (
-          <ShiftInformation key={shift.id} shift={shift} />
-        ))}
-      </Accordion.Panel>
-    </Accordion.Item>
+    <Accordion
+      key={user.id}
+      variant="contained"
+      radius={0}
+      chevronPosition="left"
+      transitionDuration={300}
+      classNames={classes}
+      defaultValue={user.id}
+    >
+      <Accordion.Item value={user.id}>
+        <Accordion.Control onClick={() => setOpened(!opened)}>
+          <UserInformation user={user} total={total} opened={opened} shifts={shifts} />
+        </Accordion.Control>
+        <Accordion.Panel>
+          {shifts.map((shift) => (
+            <ShiftInformation key={shift.id} shift={shift} />
+          ))}
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
   )
 }
 

@@ -32,3 +32,24 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.chevron {
+  display: none;
+}
+
+.control {
+  padding-inline: 0;
+}
+
+.label {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.content {
+  padding: 0;
+}
+
+.item {
+  border-top: none;
+}

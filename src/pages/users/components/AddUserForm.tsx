@@ -69,6 +69,7 @@ export default function AddUserForm({
           ...values,
           name: values.name.trim(),
           email: values.email.trim(),
+          username: values.username.trim(),
         })
       },
     })

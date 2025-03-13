@@ -54,6 +54,7 @@ export default function EditUserForm({
           ...values,
           name: values.name.trim(),
           email: values.email.trim(),
+          username: values.username.trim(),
         })
       },
     })

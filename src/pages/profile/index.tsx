@@ -42,6 +42,7 @@ export default function Profile() {
         ...values,
         name: values.name.trim(),
         email: values.email.trim(),
+        username: values.username.trim(),
       }).then((res) => showNotification({ t, success: res?.success }))
     },
     [t],
@@ -59,9 +60,10 @@ export default function Profile() {
 
 function _validate(t: (s: string) => string) {
   return {
+    name: (value: string) => (value === '' ? t('Field is required') : null),
     email: (value: string) =>
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
-    name: (value: string) => (value === '' ? t('Field is required') : null),
+    username: (value: string) => (value === '' ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
     salaryRuleId: (value: string | null) =>
       value === '' || !value ? t('Field is required') : null,
