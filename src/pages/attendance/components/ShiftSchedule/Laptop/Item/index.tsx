@@ -102,7 +102,7 @@ function UserInformation({
         -
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.centerItem}>
-        {_venues}
+        <Text className={classes.venueText}>{_venues}</Text>
       </Grid.Col>
     </Grid>
   )

@@ -26,3 +26,9 @@
   padding: 15px 0 14px 0;
   border-right: 1px solid var(--border-color);
 }
+
+.venueText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
