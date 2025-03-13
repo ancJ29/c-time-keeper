@@ -55,6 +55,7 @@ export const updateUserSchema = _typeBuilder({
     bankAccount: nullishStringSchema,
     roleId: stringSchema,
     salaryRuleId: stringSchema,
+    clientId: stringSchema,
   }),
   response: z.object({
     success: booleanSchema,
