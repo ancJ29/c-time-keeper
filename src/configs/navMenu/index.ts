@@ -25,7 +25,7 @@ export const navMenu: MenuItem[] = [
   },
   {
     key: 'monthly-salary',
-    label: 'Monthly salary',
+    label: 'Monthly salary management',
     icon: IconCash,
     url: '/monthly-salary',
     roles: [ClientRoles.OWNER],

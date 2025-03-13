@@ -72,4 +72,6 @@ export default {
   'Month': 'Month',
   'Username': 'Username',
   'Please enter username': 'Please enter username',
+  'Export excel': 'Export excel',
+  'Sorry, this feature is implemented yet': 'Sorry, this feature is implemented yet',
 }
