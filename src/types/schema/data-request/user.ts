@@ -35,9 +35,12 @@ export const getUsersByAdminSchema = _typeBuilder({
       avatar: nullishStringSchema,
       bankName: nullishStringSchema,
       bankAccount: nullishStringSchema,
-      roleId: stringSchema,
       salaryRuleId: stringSchema,
       clientId: stringSchema,
+      role: z.object({
+        id: stringSchema,
+        name: stringSchema,
+      }),
     }),
   ),
 })

@@ -5,6 +5,7 @@ import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, MantineWidth, OptionProps } from '@/types'
+import { unique } from '@/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 import store from '../../_shift.store'
 
@@ -33,7 +34,7 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
         key={name}
         label={t('Name')}
         w={w}
-        data={Array.from(users.values()).map((el) => el.name)}
+        data={unique(Array.from(users.values()).map((el) => el.name))}
         defaultValue={name}
         onReload={store.changeName}
       />
