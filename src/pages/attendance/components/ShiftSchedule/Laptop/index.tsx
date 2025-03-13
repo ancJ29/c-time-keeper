@@ -9,7 +9,7 @@ import classes from './Laptop.module.scss'
 export default function Laptop() {
   const { users } = useUserStore()
   const { updates } = useSyncExternalStore(store.subscribe, store.getSnapshot)
-  const [value, setValue] = useState<string | null>(null)
+  const [value, setValue] = useState<string[]>(Array.from(users.keys()))
 
   return (
     <Stack gap={0} visibleFrom="sm">
@@ -22,13 +22,14 @@ export default function Laptop() {
         classNames={classes}
         value={value}
         onChange={setValue}
+        multiple
       >
         {Object.keys(updates).map((userId) => (
           <Item
             key={userId}
             user={users.get(userId)}
             shifts={updates[userId]}
-            selectValue={value}
+            selectedValue={value}
           />
         ))}
       </Accordion>

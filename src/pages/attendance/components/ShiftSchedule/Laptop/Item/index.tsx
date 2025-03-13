@@ -3,7 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatDuration, formatTime } from '@/utils'
+import { formatDuration, formatTime, unique } from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo } from 'react'
@@ -12,10 +12,10 @@ import classes from './Item.module.scss'
 type ItemProps = {
   user?: User
   shifts: Shift[]
-  selectValue: string | null
+  selectedValue: string[]
 }
 
-export default function Item({ user, shifts, selectValue }: ItemProps) {
+export default function Item({ user, shifts, selectedValue }: ItemProps) {
   const total = useMemo(() => {
     const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
     return formatDuration(totalMilliseconds)
@@ -28,7 +28,12 @@ export default function Item({ user, shifts, selectValue }: ItemProps) {
   return (
     <Accordion.Item value={user.id}>
       <Accordion.Control>
-        <UserInformation user={user} total={total} opened={selectValue === user.id} />
+        <UserInformation
+          user={user}
+          total={total}
+          opened={selectedValue.includes(user.id)}
+          shifts={shifts}
+        />
       </Accordion.Control>
       <Accordion.Panel>
         {shifts.map((shift) => (
@@ -39,9 +44,26 @@ export default function Item({ user, shifts, selectValue }: ItemProps) {
   )
 }
 
-function UserInformation({ user, total, opened }: { user: User; total: string; opened: boolean }) {
+function UserInformation({
+  user,
+  total,
+  opened,
+  shifts,
+}: {
+  user: User
+  total: string
+  opened: boolean
+  shifts: Shift[]
+}) {
   const { roles } = useRoleStore()
   const t = useTranslation()
+  const { venues } = useVenueStore()
+
+  const _venues = useMemo(() => {
+    return unique(shifts.map((e) => venues.get(e.venueId)?.name))
+      .filter(Boolean)
+      .join(', ')
+  }, [shifts, venues])
 
   return (
     <Grid>
@@ -55,7 +77,7 @@ function UserInformation({ user, total, opened }: { user: User; total: string; o
               transition: 'transform 200ms ease',
             }}
           />
-          <Avatar size={44} />
+          <Avatar size={44} src={user?.avatar} />
           <Stack gap={0}>
             <Text fw={600}>{user?.name || ''}</Text>
             <Text c="dimmed" fz={10}>
@@ -64,16 +86,24 @@ function UserInformation({ user, total, opened }: { user: User; total: string; o
           </Stack>
         </Flex>
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem} />
-      <Grid.Col span={1.4} className={classes.centerItem} />
-      <Grid.Col span={1.4} className={classes.centerItem} />
       <Grid.Col span={1.4} className={classes.centerItem}>
-        {opened ? total : ''}
+        {total}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.centerItem}>
-        {opened ? total : ''}
+        {total}
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.centerItem} />
+      <Grid.Col span={1.4} className={classes.centerItem}>
+        -
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.centerItem}>
+        -
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.centerItem}>
+        -
+      </Grid.Col>
+      <Grid.Col span={2.5} className={classes.centerItem}>
+        {_venues}
+      </Grid.Col>
     </Grid>
   )
 }
@@ -95,17 +125,19 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         {formatTime(shift.start, 'DD/MM')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
+        {total}
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
+        {total}
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {formatTime(shift.start, 'HH:mm')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         {formatTime(shift.end, 'HH:mm')}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem} />
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {total}
-      </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {total}
+        -
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.centerItem}>
         {venues.get(shift.venueId)?.name || '-'}

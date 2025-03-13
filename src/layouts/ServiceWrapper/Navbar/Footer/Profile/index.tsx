@@ -1,7 +1,9 @@
+import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
 import useWindowResize from '@/hooks/useWindowResize'
+import useAuthStore from '@/stores/auth.store'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
-import { IconSettings, IconUser } from '@tabler/icons-react'
+import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
 import LanguageSelector from './LanguageSelector'
 import MenuItem from './MenuItem'
@@ -24,6 +26,7 @@ export default function Profile({
 }: ProfileProps) {
   const t = useTranslation()
   const isMobile = useWindowResize()
+  const { user } = useAuthStore()
   const [opened, setOpened] = useState(false)
 
   const handleCloseMenu = useCallback(() => {
@@ -48,7 +51,8 @@ export default function Profile({
       </Menu.Target>
       <Menu.Dropdown p={10}>
         <MenuItem
-          leftIcon={<IconUser size={20} strokeWidth={1.5} />}
+          // leftIcon={<IconUser size={20} strokeWidth={1.5} />}
+          leftIcon={<Avatar size={20} src={user?.avatar} />}
           label={t('Profile')}
           onCloseMenu={handleCloseMenu}
           onClick={onGoToProfilePage}

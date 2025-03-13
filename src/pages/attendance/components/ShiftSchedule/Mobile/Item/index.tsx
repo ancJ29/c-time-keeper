@@ -54,7 +54,7 @@ function UserInformation({ user, total }: { user: User; total: string }) {
   return (
     <Stack gap={0}>
       <Flex gap={5} w="fit-content" align="center" mb={10}>
-        <Avatar size={44} />
+        <Avatar size={44} src={user?.avatar} />
         <Stack gap={0}>
           <Text fw={600}>{user?.name || ''}</Text>
           <Text c="dimmed" fz={10}>

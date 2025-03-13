@@ -11,6 +11,12 @@ export default function Header() {
         {t('Name')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.centerItem}>
+        {t('Worked')}
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.centerItem}>
+        {t('Total')}
+      </Grid.Col>
+      <Grid.Col span={1.4} className={classes.centerItem}>
         {t('Clock in')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.centerItem}>
@@ -18,12 +24,6 @@ export default function Header() {
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.centerItem}>
         {t('Break')}
-      </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
-        {t('Worked')}
-      </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
-        {t('Total')}
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.centerItem}>
         {t('Venue')}

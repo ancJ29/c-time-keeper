@@ -14,7 +14,7 @@ export default function UserInformation({ navbarOpened }: UserInformationProps) 
   return (
     <Box className={`${classes.container} ${!navbarOpened ? classes.shifted : ''}`}>
       <div className={classes.item}>
-        <Avatar size={40} />
+        <Avatar size={40} src={user?.avatar} />
         {navbarOpened && (
           <Stack gap={0}>
             <Text fw={400}>{user?.name || ''}</Text>

@@ -26,7 +26,7 @@ export default function ProfileForm({
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Flex gap={15} align="center" justify="center" h="100%" direction="column">
-        <Avatar size={120} />
+        <Avatar size={120} src={form.values.avatar} />
         <Stack gap={12} align="center" w={w}>
           <TextInput
             w={w}

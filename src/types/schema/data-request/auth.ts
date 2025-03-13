@@ -24,6 +24,7 @@ export const getMeSchema = _typeBuilder({
     name: stringSchema,
     username: stringSchema,
     email: stringSchema,
+    avatar: nullishStringSchema,
     bankName: nullishStringSchema,
     bankAccount: nullishStringSchema,
     roleId: stringSchema,
