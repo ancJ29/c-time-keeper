@@ -1,3 +1,4 @@
+import useFilterData from '@/hooks/useFilterData'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { getSalaries, Salary } from '@/services/domain'
@@ -34,6 +35,14 @@ export default function MonthlySalary() {
   )
   useMount(getData)
 
+  const dataLoader = useCallback(() => {
+    return salaries
+  }, [salaries])
+
+  const { data, page, setPage } = useFilterData<Salary>({
+    dataLoader,
+  })
+
   const handleChangeDate = useCallback(
     async (date: DateValue) => {
       if (!date) {
@@ -48,10 +57,12 @@ export default function MonthlySalary() {
   return (
     <MonthlySalaryView
       key={users.size}
-      data={salaries}
+      data={data}
       dataGridConfigs={dataGridConfigs}
       date={date}
       onChangeDate={handleChangeDate}
+      page={page}
+      setPage={setPage}
     />
   )
 }

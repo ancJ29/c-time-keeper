@@ -9,6 +9,8 @@ type MonthlySalaryViewProps = {
   data: Salary[]
   date: Date
   onChangeDate: (date: DateValue) => void
+  page: number
+  setPage: (page: number) => void
 }
 
 export default function MonthlySalaryView({
@@ -16,11 +18,20 @@ export default function MonthlySalaryView({
   data,
   date,
   onChangeDate,
+  page,
+  setPage,
 }: MonthlySalaryViewProps) {
   return (
     <Stack gap={10}>
       <Filter date={date} onChangeDate={onChangeDate} />
-      <DataGrid hasOrderColumn isPaginated columns={dataGridConfigs} data={data} />
+      <DataGrid
+        hasOrderColumn
+        isPaginated
+        columns={dataGridConfigs}
+        data={data}
+        page={page}
+        onChangePage={setPage}
+      />
     </Stack>
   )
 }

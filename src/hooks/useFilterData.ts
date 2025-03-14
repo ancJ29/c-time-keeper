@@ -4,7 +4,7 @@ import { unique } from '@/utils'
 import { useCallback, useEffect, useState } from 'react'
 
 export default function useFilterData<
-  T extends { name: string },
+  T extends { name?: string } & Record<string, unknown>,
   F extends GenericObject | void = void,
 >({
   defaultCondition,
@@ -30,7 +30,7 @@ export default function useFilterData<
     if (dataLoader) {
       const data = (await dataLoader()) || []
       setXRecords(data)
-      setNames(unique(data.map((el) => el.name)))
+      setNames(unique(data.map((el) => el.name || '')))
       logger.trace('useFilterData: loaded', data.length || 0)
     }
   }, [dataLoader])
@@ -46,7 +46,7 @@ export default function useFilterData<
       }
       logger.trace('useFilterData: reload', keyword || '<empty>')
       const _filteredData = filter ? xRecords.filter((el) => filter(el, condition)) : xRecords
-      setNames(unique(_filteredData.map((el) => el.name)))
+      setNames(unique(_filteredData.map((el) => el.name || '')))
       const _data = _filteredData.filter((el) => {
         if (!keyword) {
           return true
