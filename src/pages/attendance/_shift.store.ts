@@ -175,7 +175,9 @@ function _filterShifts(
 
   if (name !== undefined) {
     updates = Object.fromEntries(
-      Object.entries(updates).filter(([userId]) => users.get(userId)?.name === name),
+      Object.entries(updates).filter(([userId]) =>
+        users.get(userId)?.name.toLowerCase().includes(name),
+      ),
     )
   }
 
