@@ -74,4 +74,7 @@ export default {
   'Please enter username': 'Vui lòng nhập tài khoản',
   'Export excel': 'Xuất file excel',
   'Sorry, this feature is implemented yet': 'Xin lỗi, chức năng này vẫn chưa được triển khai',
+  'Standard hours': 'Giờ chuẩn',
+  'Overtime hours': 'Giờ làm thêm',
+  'Total salary': 'Tổng lương',
 }

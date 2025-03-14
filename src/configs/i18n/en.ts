@@ -74,4 +74,7 @@ export default {
   'Please enter username': 'Please enter username',
   'Export excel': 'Export excel',
   'Sorry, this feature is implemented yet': 'Sorry, this feature is implemented yet',
+  'Standard hours': 'Standard hours',
+  'Overtime hours': 'Overtime hours',
+  'Total salary': 'Total salary',
 }
