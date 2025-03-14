@@ -19,7 +19,7 @@ export type FilterProps = {
 export default function Filter({ roleOptions, venueOptions }: FilterProps) {
   const t = useTranslation()
   const { users } = useUserStore()
-  const { startDate, endDate, roleId, venueId, name } = useSyncExternalStore(
+  const { startDate, endDate, roleId, venueId, keyword } = useSyncExternalStore(
     store.subscribe,
     store.getSnapshot,
   )
@@ -31,12 +31,12 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
   return (
     <FilterWrapper>
       <AutocompleteForFilterData
-        key={name}
+        key={keyword}
         label={t('Name')}
         w={w}
         data={unique(Array.from(users.values()).map((el) => el.name))}
-        defaultValue={name}
-        onReload={store.changeName}
+        defaultValue={keyword}
+        onReload={store.changeKeyword}
       />
       <Select
         value={roleId}

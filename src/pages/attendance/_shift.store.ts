@@ -10,7 +10,7 @@ type State = {
   endDate: DateValue
   roleId: string | null
   venueId: string | null
-  name?: string
+  keyword?: string
 }
 
 enum ActionType {
@@ -18,7 +18,7 @@ enum ActionType {
   CHANGE_DATE = 'CHANGE_DATE',
   CHANGE_ROLE_ID = 'CHANGE_ROLE_ID',
   CHANGE_VENUE_ID = 'CHANGE_VENUE_ID',
-  CHANGE_NAME = 'CHANGE_NAME',
+  CHANGE_KEYWORD = 'CHANGE_KEYWORD',
 }
 
 type Action = {
@@ -28,7 +28,7 @@ type Action = {
   endDate?: DateValue
   roleId?: string | null
   venueId?: string | null
-  name?: string
+  keyword?: string
 }
 
 const defaultState = {
@@ -38,7 +38,7 @@ const defaultState = {
   endDate: new Date(endOfDay(Date.now())),
   roleId: null,
   venueId: null,
-  name: undefined,
+  keyword: undefined,
 }
 
 const { dispatch, ...store } = createStore<State, Action>(reducer, {
@@ -73,8 +73,8 @@ export default {
   changeVenueId(venueId: string | null) {
     dispatch({ type: ActionType.CHANGE_VENUE_ID, venueId })
   },
-  changeName(name?: string) {
-    dispatch({ type: ActionType.CHANGE_NAME, name })
+  changeKeyword(keyword?: string) {
+    dispatch({ type: ActionType.CHANGE_KEYWORD, keyword })
   },
 }
 
@@ -101,13 +101,13 @@ function reducer(action: Action, state: State): State {
           endDate: action.endDate,
           roleId: null,
           venueId: null,
-          name: undefined,
+          keyword: undefined,
         }
       }
       break
     case ActionType.CHANGE_ROLE_ID:
       if (action.roleId !== undefined) {
-        const updates = _filterShifts(state.currents, action.roleId, state.venueId, state.name)
+        const updates = _filterShifts(state.currents, action.roleId, state.venueId, state.keyword)
         return {
           ...state,
           roleId: action.roleId,
@@ -117,7 +117,7 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_VENUE_ID:
       if (action.venueId !== undefined) {
-        const updates = _filterShifts(state.currents, state.roleId, action.venueId, state.name)
+        const updates = _filterShifts(state.currents, state.roleId, action.venueId, state.keyword)
         return {
           ...state,
           venueId: action.venueId,
@@ -125,12 +125,12 @@ function reducer(action: Action, state: State): State {
         }
       }
       break
-    case ActionType.CHANGE_NAME:
+    case ActionType.CHANGE_KEYWORD:
       {
-        const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.name)
+        const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.keyword)
         return {
           ...state,
-          name: action.name,
+          keyword: action.keyword,
           updates,
         }
       }
@@ -153,7 +153,7 @@ function _filterShifts(
   shiftsByUserId: Record<string, Shift[]>,
   roleId: string | null,
   venueId: string | null,
-  name?: string,
+  keyword?: string,
 ): Record<string, Shift[]> {
   const { users } = useUserStore.getState()
   let updates = shiftsByUserId
@@ -173,10 +173,10 @@ function _filterShifts(
     )
   }
 
-  if (name !== undefined) {
+  if (keyword !== undefined) {
     updates = Object.fromEntries(
       Object.entries(updates).filter(([userId]) =>
-        (users.get(userId)?.name || '').toLowerCase().includes(name),
+        users.get(userId)?.name.toLowerCase().includes(keyword.toLowerCase()),
       ),
     )
   }
