@@ -4,7 +4,7 @@ import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import { formatDuration, formatTime } from '@/utils'
-import { Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
+import { Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons-react'
 import { ReactNode, useCallback, useMemo } from 'react'
@@ -105,7 +105,7 @@ function Wrapper({
         />
       </Group>
       <Collapse transitionDuration={300} transitionTimingFunction="linear" in={opened}>
-        {children}
+        <Box className={classes.container}>{children}</Box>
       </Collapse>
     </Flex>
   )
@@ -125,8 +125,8 @@ function ShiftInformation({ shift }: { shift: Shift }) {
       <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
       <DataRow title={t('Worked')} content={total} />
       <DataRow title={t('Total')} content={total} />
-      <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
-      <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
+      <DataRow title={t('Clock in')} content={formatTime(shift.start, 'hh:mm A')} />
+      <DataRow title={t('Clock out')} content={formatTime(shift.end, 'hh:mm A')} />
       <DataRow title={t('Break')} content={''} />
       <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />
     </Stack>

@@ -1,3 +1,8 @@
+.container {
+  height: 220px;
+  overflow: auto;
+}
+
 .shiftContainer {
   gap: 0;
   border: 1px solid var(--border-color);
