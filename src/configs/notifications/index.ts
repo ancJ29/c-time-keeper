@@ -11,7 +11,7 @@ export function showNotification({ t, success, ...props }: NotificationProps) {
   notifications.show({
     ...props,
     withBorder: true,
-    autoClose: 1000,
+    autoClose: 2000,
     message: props.message || defaultMessage,
     color: _color(success),
   })

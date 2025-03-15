@@ -39,6 +39,11 @@ const routeConfigs: RouteConfig[] = [
     element: lazy(() => import('@/pages/monthly-salary')),
     wrapper: ServiceWrapper,
   },
+  {
+    path: '/work-entry',
+    element: lazy(() => import('@/pages/work-entry')),
+    wrapper: ServiceWrapper,
+  },
 ]
 
 const authRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => {

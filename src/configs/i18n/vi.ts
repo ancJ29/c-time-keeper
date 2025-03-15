@@ -77,4 +77,12 @@ export default {
   'Standard hours': 'Giờ chuẩn',
   'Overtime hours': 'Giờ làm thêm',
   'Total salary': 'Tổng lương',
+  'Check in': 'Bắt đầu ca làm',
+  'Check out': 'Kết thúc ca làm',
+  'Please select user and venue': 'Vui làm chọn nhân viên và địa điểm',
+  'Work Entry': 'Ghi nhận giờ làm',
+  'Checked in successfully': 'Check-in thành công',
+  'Checked out successfully': 'Check-out thành công',
+  'Failed to check in': 'Check-in thất bại',
+  'Failed to check out': 'Check-out thất bại',
 }

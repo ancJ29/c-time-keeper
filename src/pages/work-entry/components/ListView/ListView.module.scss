@@ -1,0 +1,27 @@
+.card {
+  border-radius: 6px;
+  padding: 0;
+}
+
+.box {
+  height: 400px;
+  overflow: auto;
+
+  @media only screen and (max-width: 768px) {
+    height: 200px;
+  }
+}
+
+.item {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px 12px;
+
+  &:hover {
+    background-color: var(--hover-background-color);
+  }
+}
+
+.selected {
+  background-color: var(--hover-background-color);
+}

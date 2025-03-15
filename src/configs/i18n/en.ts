@@ -77,4 +77,12 @@ export default {
   'Standard hours': 'Standard hours',
   'Overtime hours': 'Overtime hours',
   'Total salary': 'Total salary',
+  'Check in': 'Check in',
+  'Check out': 'Check out',
+  'Please select user and venue': 'Please select user and venue',
+  'Work Entry': 'Work Entry',
+  'Checked in successfully': 'Checked in successfully',
+  'Checked out successfully': 'Checked out successfully',
+  'Failed to check in': 'Failed to check in',
+  'Failed to check out': 'Failed to check out',
 }
