@@ -4,9 +4,9 @@ import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import { useMemo } from 'react'
 import store from './_shift.store'
-import TimeKeepingView from './components/TimeKeepingView'
+import TimeSheetView from './components/TimeSheetView'
 
-export default function TimeKeeping() {
+export default function TimeSheet() {
   const t = useTranslation()
   const { roles } = useRoleStore()
   const { venues } = useVenueStore()
@@ -31,5 +31,5 @@ export default function TimeKeeping() {
     [venues, t],
   )
 
-  return <TimeKeepingView roleOptions={roleOptions} venueOptions={venueOptions} />
+  return <TimeSheetView roleOptions={roleOptions} venueOptions={venueOptions} />
 }

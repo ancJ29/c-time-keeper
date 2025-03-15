@@ -18,7 +18,7 @@ export default {
   'Dashboard': 'Tổng quan',
   'Category management': 'Quản lý danh mục',
   'User management': 'Quản lý nhân viên',
-  'Attendance': 'Bảng chấm công',
+  'Timesheet': 'Bảng chấm công',
   'Version': 'Phiên bản',
   'Profile': 'Hồ sơ',
   'Save': 'Lưu',
@@ -85,4 +85,9 @@ export default {
   'Checked out successfully': 'Check-out thành công',
   'Failed to check in': 'Check-in thất bại',
   'Failed to check out': 'Check-out thất bại',
+  'Worked': 'Đã làm',
+  'Total': 'Tổng cộng',
+  'Clock in': 'Giờ vào',
+  'Clock out': 'Giờ ra',
+  'Break': 'Nghỉ',
 }

@@ -18,7 +18,7 @@ export default {
   'Dashboard': 'Dashboard',
   'Category management': 'Category management',
   'User management': 'User management',
-  'Attendance': 'Attendance',
+  'Timesheet': 'Timesheet',
   'Version': 'Version',
   'Profile': 'Profile',
   'Save': 'Save',
@@ -85,4 +85,9 @@ export default {
   'Checked out successfully': 'Checked out successfully',
   'Failed to check in': 'Failed to check in',
   'Failed to check out': 'Failed to check out',
+  'Worked': 'Worked',
+  'Total': 'Total',
+  'Clock in': 'Clock in',
+  'Clock out': 'Clock out',
+  'Break': 'Break',
 }

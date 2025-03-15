@@ -23,10 +23,10 @@ export const navMenu: MenuItem[] = [
     roles: [ClientRoles.OWNER],
   },
   {
-    key: 'attendance',
-    label: 'Attendance',
+    key: 'timesheet',
+    label: 'Timesheet',
     icon: IconCalendar,
-    url: '/attendance',
+    url: '/timesheet',
     roles: [ClientRoles.OWNER],
   },
   {

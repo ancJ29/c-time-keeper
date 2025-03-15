@@ -3,7 +3,7 @@ import { Stack } from '@mantine/core'
 import Filter, { FilterProps } from '../Filter'
 import ShiftSchedule from '../ShiftSchedule'
 
-export default function TimeKeepingView({ ...props }: FilterProps) {
+export default function TimeSheetView({ ...props }: FilterProps) {
   const isMobile = useWindowResize()
 
   return (

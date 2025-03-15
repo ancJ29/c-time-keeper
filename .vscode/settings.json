@@ -9,6 +9,7 @@
     "fullcalendar",
     "mantine",
     "tabler",
+    "timesheet",
     "VITE"
   ],
   "editor.codeActionsOnSave": {
