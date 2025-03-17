@@ -21,6 +21,7 @@ export async function getMe() {
   return await callApi({
     action: RequestAction.GET_ME,
     schema: getMeSchema,
+    log: true,
   })
 }
 

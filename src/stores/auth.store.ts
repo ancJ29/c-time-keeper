@@ -13,7 +13,7 @@ type AuthStore = {
   getMe: () => Promise<void>
 }
 
-export default create<AuthStore>((set) => ({
+export default create<AuthStore>((set, get) => ({
   user: null,
   token: loadToken(),
   setToken: (token: string, remember?: boolean) => {
@@ -37,7 +37,11 @@ export default create<AuthStore>((set) => ({
   },
   getMe: async () => {
     const user = await getMe()
-    set(() => ({ user }))
+    if (user) {
+      set(() => ({ user }))
+    } else {
+      get().removeToken()
+    }
   },
 }))
 

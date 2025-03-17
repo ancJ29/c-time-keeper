@@ -1,4 +1,5 @@
 export * from './array'
+export * from './log'
 export * from './modal'
 export * from './number'
 export * from './store'

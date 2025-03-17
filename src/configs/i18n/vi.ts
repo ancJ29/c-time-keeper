@@ -40,7 +40,7 @@ export default {
   'Are you sure you want to update user?': 'Bạn có chắc chắn muốn cập nhật nhân viên?',
   'Update user': 'Cập nhật nhân viên',
   'Password copied to clipboard': 'Mật khẩu đã được sao chép',
-  'Owner': 'Chủ sở hữu',
+  'Owner': 'Quản lý',
   'Staff': 'Nhân viên',
   'Start time': 'Thời gian bắt đầu',
   'End time': 'Thời gian kết thúc',

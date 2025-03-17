@@ -55,9 +55,12 @@ function _buildRoutes(loading: boolean, login: boolean) {
 
 async function loadData(token: string | null) {
   await useMetadataStore.getState().checkVersion()
-  if (token) {
+  if (!token) {
+    return
+  }
+  await useAuthStore.getState().getMe()
+  if (useAuthStore.getState().token) {
     await Promise.all([
-      useAuthStore.getState().getMe(),
       useRoleStore.getState().load(),
       useVenueStore.getState().load(),
       useSalaryRuleStore.getState().load(),
