@@ -1,3 +1,9 @@
+import WorkEntry from './WorkEntry'
+
 export default function DashboardView() {
-  return <div>Dashboard</div>
+  return (
+    <>
+      <WorkEntry />
+    </>
+  )
 }

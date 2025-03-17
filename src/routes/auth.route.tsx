@@ -42,7 +42,6 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/work-entry',
     element: lazy(() => import('@/pages/work-entry')),
-    wrapper: ServiceWrapper,
   },
 ]
 

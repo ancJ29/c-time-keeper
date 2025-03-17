@@ -8,7 +8,7 @@ type AvatarProps = {
   onClick?: () => void
 }
 
-export default function Avatar({ src, radius = 'xl', size, onClick }: AvatarProps) {
+export default function Avatar({ src, radius = '100', size, onClick }: AvatarProps) {
   if (src) {
     return <Image radius={radius} src={src} h={size} w={size} onClick={onClick} />
   }

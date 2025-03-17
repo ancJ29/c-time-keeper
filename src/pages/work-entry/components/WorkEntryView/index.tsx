@@ -1,55 +1,22 @@
 import useTranslation from '@/hooks/useTranslation'
-import { OptionProps } from '@/types'
-import { Tabs } from '@mantine/core'
-import { UseFormReturnType } from '@mantine/form'
-import { FormProps } from '../..'
-import CheckInView from '../CheckInView'
-import CheckOutView from '../CheckOutView'
+import { Button, Stack } from '@mantine/core'
 
 type WorkEntryViewProps = {
-  form: UseFormReturnType<FormProps>
-  onChangeValue: (field: string, value: string) => void
-  onSubmitCheckIn: (values: FormProps) => void
-  onSubmitCheckOut: (values: FormProps) => void
-  userOptions: OptionProps[]
-  venueOptions: OptionProps[]
+  onCheckIn: () => void
+  onCheckOut: () => void
 }
 
-export default function WorkEntryView({
-  form,
-  onChangeValue,
-  onSubmitCheckIn,
-  onSubmitCheckOut,
-  userOptions,
-  venueOptions,
-}: WorkEntryViewProps) {
+export default function WorkEntryView({ onCheckIn, onCheckOut }: WorkEntryViewProps) {
   const t = useTranslation()
 
   return (
-    <Tabs defaultValue="check-in">
-      <Tabs.List grow>
-        <Tabs.Tab value="check-in">{t('Check in')}</Tabs.Tab>
-        <Tabs.Tab value="check-out">{t('Check out')}</Tabs.Tab>
-      </Tabs.List>
-
-      <Tabs.Panel value="check-in">
-        <CheckInView
-          form={form}
-          onChangeValue={onChangeValue}
-          onSubmit={onSubmitCheckIn}
-          userOptions={userOptions}
-          venueOptions={venueOptions}
-        />
-      </Tabs.Panel>
-
-      <Tabs.Panel value="check-out">
-        <CheckOutView
-          form={form}
-          onChangeValue={onChangeValue}
-          onSubmit={onSubmitCheckOut}
-          userOptions={userOptions}
-        />
-      </Tabs.Panel>
-    </Tabs>
+    <Stack gap={30} h="100dvh" align="center" justify="center">
+      <Button color="#1883ff" h={150} fz={50} w={{ base: '95%', sm: '80%' }} onClick={onCheckIn}>
+        {t('Check in')}
+      </Button>
+      <Button color="#f34141" h={150} fz={50} w={{ base: '95%', sm: '80%' }} onClick={onCheckOut}>
+        {t('Check out')}
+      </Button>
+    </Stack>
   )
 }

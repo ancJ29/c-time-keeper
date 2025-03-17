@@ -3,102 +3,70 @@ import useTranslation from '@/hooks/useTranslation'
 import { checkInByUser, checkOutByUser } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useUserStore from '@/stores/user.store'
-import useVenueStore from '@/stores/venue.store'
-import { useForm } from '@mantine/form'
-import { useCallback, useMemo } from 'react'
+import { modals } from '@mantine/modals'
+import { useCallback, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import WorkEntryForm from './components/WorkEntryForm'
 import WorkEntryView from './components/WorkEntryView'
-
-export type FormProps = {
-  clientId: string
-  userId: string
-  venueId: string
-}
 
 export default function WorkEntry() {
   const t = useTranslation()
+  const [searchParams] = useSearchParams()
+  const venueId = searchParams.get('venueId')
   const { user } = useAuthStore()
-  const { venues } = useVenueStore()
   const { users } = useUserStore()
+  const [isCheckIn, setIsCheckIn] = useState(true)
 
-  const initialValues: FormProps = {
-    clientId: user?.clientId || '',
-    userId: Array.from(users.values())[0]?.id || '',
-    venueId: Array.from(venues.values())[0]?.id || '',
-  }
-
-  const form = useForm<FormProps>({
-    initialValues: initialValues,
-    validate: _validate(t),
-  })
-
-  const userOptions = useMemo(
-    () =>
-      Array.from(users.values()).map((el) => ({
-        label: el.name,
-        value: el.id,
-      })),
-    [users],
-  )
-
-  const venueOptions = useMemo(
-    () =>
-      Array.from(venues.values()).map((el) => ({
-        label: el.name,
-        value: el.id,
-      })),
-    [venues],
-  )
-
-  const handleChangeValue = useCallback(
-    (field: string, value: string) => {
-      form.setFieldValue(field, value)
-    },
-    [form],
-  )
-
-  const submitCheckIn = useCallback(
-    async (values: FormProps) => {
-      checkInByUser(values).then((res) => {
-        const success = res?.success
-        showNotification({
-          t,
-          success,
-          message: success ? t('Checked in successfully') : t('Failed to check in'),
+  const onClick = useCallback(
+    (userId: string) => {
+      modals.closeAll()
+      if (isCheckIn) {
+        checkInByUser({
+          clientId: user?.clientId || '',
+          userId,
+          venueId: venueId || '',
+        }).then((res) => {
+          const success = res?.success
+          showNotification({
+            t,
+            success,
+            message: success ? t('Checked in successfully') : t('Failed to check in'),
+          })
         })
+      } else {
+        checkOutByUser({
+          clientId: user?.clientId || '',
+          userId,
+        }).then((res) => {
+          const success = res?.success
+          showNotification({
+            t,
+            success,
+            message: success ? t('Checked out successfully') : t('Failed to check out'),
+          })
+        })
+      }
+    },
+    [isCheckIn, t, user?.clientId, venueId],
+  )
+
+  const handleCheckInCheckOut = useCallback(
+    (isCheckIn = true) => {
+      setIsCheckIn(isCheckIn)
+      modals.open({
+        title: isCheckIn ? t('Check in') : t('Check out'),
+        centered: true,
+        fullScreen: true,
+        children: <WorkEntryForm onClick={onClick} users={Array.from(users.values())} />,
       })
     },
-    [t],
-  )
-
-  const submitCheckOut = useCallback(
-    async (values: FormProps) => {
-      checkOutByUser(values).then((res) => {
-        const success = res?.success
-        showNotification({
-          t,
-          success,
-          message: success ? t('Checked out successfully') : t('Failed to check out'),
-        })
-      })
-    },
-    [t],
+    [onClick, t, users],
   )
 
   return (
     <WorkEntryView
-      form={form}
-      onChangeValue={handleChangeValue}
-      onSubmitCheckIn={submitCheckIn}
-      onSubmitCheckOut={submitCheckOut}
-      userOptions={userOptions}
-      venueOptions={venueOptions}
+      onCheckIn={handleCheckInCheckOut}
+      onCheckOut={() => handleCheckInCheckOut(false)}
     />
   )
-}
-
-function _validate(t: (s: string) => string) {
-  return {
-    userId: (value: string) => (value === '' ? t('Field is required') : null),
-    venueId: (value: string) => (value === '' ? t('Field is required') : null),
-  }
 }

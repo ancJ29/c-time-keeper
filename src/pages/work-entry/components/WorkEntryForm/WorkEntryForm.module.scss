@@ -1,0 +1,17 @@
+.item {
+  cursor: pointer;
+
+  :hover {
+    background-color: var(--hover-background-color);
+  }
+}
+
+.card {
+  padding: 0px 10px;
+  border-radius: 20px;
+  height: 180px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
