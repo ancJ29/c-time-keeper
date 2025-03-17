@@ -137,10 +137,10 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         {total}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {formatTime(shift.start, 'hh:mm A')}
+        {formatTime(shift.start, 'HH:mm')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {formatTime(shift.end, 'hh:mm A')}
+        {formatTime(shift.end, 'HH:mm')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftCenterItem}>
         -
