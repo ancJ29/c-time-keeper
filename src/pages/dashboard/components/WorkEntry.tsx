@@ -38,7 +38,7 @@ export default function WorkEntry() {
   const onClick = useCallback(() => {
     const submit = (form: FormProps) => {
       modals.closeAll()
-      navigate(`/work-entry?venueId=${form.venueId}&step=1`)
+      navigate(`/work-entry?venueId=${form.venueId}`)
     }
 
     modals.open({
