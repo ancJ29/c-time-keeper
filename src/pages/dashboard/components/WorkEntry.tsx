@@ -76,6 +76,7 @@ function WorkEntryForm({
           withAsterisk
           label={t('Venue')}
           options={venueOptions}
+          allowDeselect={false}
           {...form.getInputProps('venueId')}
         />
         <Button type="submit" mt={10}>
