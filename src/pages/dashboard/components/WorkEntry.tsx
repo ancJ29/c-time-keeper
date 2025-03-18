@@ -54,7 +54,7 @@ export default function WorkEntry() {
 
 function _validate(t: (s: string) => string) {
   return {
-    venueId: (value: string) => (value === '' ? t('Field is required') : null),
+    venueId: (value: string) => (value === '' || !value ? t('Field is required') : null),
   }
 }
 
