@@ -6,7 +6,7 @@ import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
 import useUserStore from '@/stores/user.store'
 import { DateValue } from '@/types'
-import { formatTime } from '@/utils'
+import { exportToMonthlySalaryExcel, formatTime } from '@/utils'
 import { useCallback, useMemo, useState } from 'react'
 import { configs } from './_configs'
 import MonthlySalaryView from './components/MonthlySalaryView'
@@ -54,6 +54,10 @@ export default function MonthlySalary() {
     [getData],
   )
 
+  const handleExportExcel = useCallback(() => {
+    exportToMonthlySalaryExcel(salaries, date, users, roles, t)
+  }, [date, roles, salaries, t, users])
+
   return (
     <MonthlySalaryView
       key={users.size}
@@ -63,6 +67,7 @@ export default function MonthlySalary() {
       onChangeDate={handleChangeDate}
       page={page}
       setPage={setPage}
+      onExportExcel={handleExportExcel}
     />
   )
 }

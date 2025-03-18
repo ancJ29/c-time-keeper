@@ -11,6 +11,7 @@ type MonthlySalaryViewProps = {
   onChangeDate: (date: DateValue) => void
   page: number
   setPage: (page: number) => void
+  onExportExcel: () => void
 }
 
 export default function MonthlySalaryView({
@@ -20,10 +21,11 @@ export default function MonthlySalaryView({
   onChangeDate,
   page,
   setPage,
+  onExportExcel,
 }: MonthlySalaryViewProps) {
   return (
     <Stack gap={10}>
-      <Filter date={date} onChangeDate={onChangeDate} />
+      <Filter date={date} onChangeDate={onChangeDate} onExportExcel={onExportExcel} />
       <DataGrid
         hasOrderColumn
         isPaginated

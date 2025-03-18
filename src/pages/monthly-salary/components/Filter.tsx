@@ -1,23 +1,18 @@
 import FilterWrapper from '@/components/c-time-keeper/FilterWrapper'
 import useTranslation from '@/hooks/useTranslation'
 import { DateValue } from '@/types'
-import { showNotImplementedModal } from '@/utils'
 import { Button } from '@mantine/core'
 import { MonthPickerInput } from '@mantine/dates'
 import { IconDownload } from '@tabler/icons-react'
-import { useCallback } from 'react'
 
 type FilterProps = {
   date: Date
   onChangeDate: (date: DateValue) => void
+  onExportExcel: () => void
 }
 
-export default function Filter({ date, onChangeDate }: FilterProps) {
+export default function Filter({ date, onChangeDate, onExportExcel }: FilterProps) {
   const t = useTranslation()
-
-  const onClick = useCallback(() => {
-    showNotImplementedModal(t)
-  }, [t])
 
   return (
     <FilterWrapper>
@@ -28,7 +23,7 @@ export default function Filter({ date, onChangeDate }: FilterProps) {
         onChange={onChangeDate}
         valueFormat="MM/YYYY"
       />
-      <Button rightSection={<IconDownload size={14} />} onClick={onClick}>
+      <Button rightSection={<IconDownload size={14} />} onClick={onExportExcel}>
         {t('Export excel')}
       </Button>
     </FilterWrapper>
