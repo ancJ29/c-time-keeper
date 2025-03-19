@@ -19,10 +19,13 @@ export default async function callApi<T extends RequestAction, U, R>({
   const token = sessionStorage.__TOKEN__ || localStorage.__TOKEN__
   const res = await request({ action, payload }, token)
   if (log) {
-    debug({
-      action,
-      payload,
-    }, res?.data || '---')
+    debug(
+      {
+        action,
+        payload,
+      },
+      res?.data || '---',
+    )
   }
   const parsed = schema.response.safeParse(res?.data)
   if (parsed.success) {

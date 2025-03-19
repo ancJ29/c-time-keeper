@@ -80,7 +80,7 @@ export default {
   'Check in': 'Check in',
   'Check out': 'Check out',
   'Please select user and venue': 'Please select user and venue',
-  'Work Entry': 'Work Entry',
+  'Work entry': 'Work entry',
   'Checked in successfully': 'Checked in successfully',
   'Checked out successfully': 'Checked out successfully',
   'Failed to check in': 'Failed to check in',
