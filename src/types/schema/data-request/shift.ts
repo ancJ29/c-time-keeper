@@ -55,3 +55,16 @@ export const getShiftsSchema = _typeBuilder({
     }),
   ),
 })
+
+export const updateShiftSchema = _typeBuilder({
+  authOnly: true,
+  action: z.literal(RequestAction.UPDATE_SHIFT),
+  payload: z.object({
+    id: stringSchema,
+    start: numberSchema,
+    end: numberSchema,
+  }),
+  response: z.object({
+    success: booleanSchema,
+  }),
+})

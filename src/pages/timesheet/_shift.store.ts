@@ -1,4 +1,5 @@
-import { getAllShifts, Shift } from '@/services/domain'
+import { showNotification } from '@/configs/notifications'
+import { getAllShifts, Shift, updateShift } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, DateValue } from '@/types'
 import { cloneDeep, createStore, endOfDay, ONE_DAY, startOfDay } from '@/utils'
@@ -11,6 +12,7 @@ type State = {
   roleId: string | null
   venueId: string | null
   keyword?: string
+  updatedShifts: Record<string, Shift>
 }
 
 enum ActionType {
@@ -19,6 +21,8 @@ enum ActionType {
   CHANGE_ROLE_ID = 'CHANGE_ROLE_ID',
   CHANGE_VENUE_ID = 'CHANGE_VENUE_ID',
   CHANGE_KEYWORD = 'CHANGE_KEYWORD',
+  CHANGE_CHECK_IN_TIME = 'CHANGE_CHECK_IN_TIME',
+  CHANGE_CHECK_OUT_TIME = 'CHANGE_CHECK_OUT_TIME',
 }
 
 type Action = {
@@ -29,6 +33,10 @@ type Action = {
   roleId?: string | null
   venueId?: string | null
   keyword?: string
+  checkInTime?: string
+  checkOutTime?: string
+  userId?: string
+  shiftId?: string
 }
 
 const defaultState = {
@@ -39,6 +47,7 @@ const defaultState = {
   roleId: null,
   venueId: null,
   keyword: undefined,
+  updatedShifts: {},
 }
 
 const { dispatch, ...store } = createStore<State, Action>(reducer, {
@@ -75,6 +84,25 @@ export default {
   },
   changeKeyword(keyword?: string) {
     dispatch({ type: ActionType.CHANGE_KEYWORD, keyword })
+  },
+  changeCheckInTime(userId: string, shiftId: string, checkInTime: string) {
+    dispatch({ type: ActionType.CHANGE_CHECK_IN_TIME, userId, shiftId, checkInTime })
+  },
+  changeCheckOutTime(userId: string, shiftId: string, checkOutTime: string) {
+    dispatch({ type: ActionType.CHANGE_CHECK_OUT_TIME, userId, shiftId, checkOutTime })
+  },
+  save(t: (key: string) => string) {
+    const state = store.getSnapshot()
+    const promises = Object.values(state.updatedShifts).map((shift) => updateShift(shift))
+    Promise.all(promises)
+      .then(() => {
+        setTimeout(() => {
+          showNotification({ t, success: true })
+        }, 500)
+      })
+      .catch((error) => {
+        showNotification({ success: false, message: error.message })
+      })
   },
 }
 
@@ -125,12 +153,60 @@ function reducer(action: Action, state: State): State {
         }
       }
       break
-    case ActionType.CHANGE_KEYWORD:
-      {
-        const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.keyword)
+    case ActionType.CHANGE_KEYWORD: {
+      const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.keyword)
+      return {
+        ...state,
+        keyword: action.keyword,
+        updates,
+      }
+    }
+    case ActionType.CHANGE_CHECK_IN_TIME:
+      if (
+        action.userId !== undefined &&
+        action.shiftId !== undefined &&
+        action.checkInTime !== undefined
+      ) {
+        const updates = {
+          ...state.updates,
+          [action.userId]: state.updates[action.userId].map((shift) => {
+            if (shift.id === action.shiftId) {
+              const [hh, mm] = action.checkInTime?.split(':').map(Number) ?? [0, 0]
+              const start = new Date(shift.start)
+              start.setHours(hh, mm, 0, 0)
+              state.updatedShifts[shift.id] = shift
+              return { ...shift, start: start.getTime() }
+            }
+            return shift
+          }),
+        }
         return {
           ...state,
-          keyword: action.keyword,
+          updates,
+        }
+      }
+      break
+    case ActionType.CHANGE_CHECK_OUT_TIME:
+      if (
+        action.userId !== undefined &&
+        action.shiftId !== undefined &&
+        action.checkOutTime !== undefined
+      ) {
+        const updates = {
+          ...state.updates,
+          [action.userId]: state.updates[action.userId].map((shift) => {
+            if (shift.id === action.shiftId) {
+              const [hh, mm] = action.checkOutTime?.split(':').map(Number) ?? [0, 0]
+              const end = new Date(shift.end)
+              end.setHours(hh, mm, 0, 0)
+              state.updatedShifts[shift.id] = shift
+              return { ...shift, end: end.getTime() }
+            }
+            return shift
+          }),
+        }
+        return {
+          ...state,
           updates,
         }
       }

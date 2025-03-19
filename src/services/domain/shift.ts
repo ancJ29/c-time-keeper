@@ -1,4 +1,10 @@
-import { checkInByUserSchema, checkOutByUserSchema, getShiftsSchema, RequestAction } from '@/types'
+import {
+  checkInByUserSchema,
+  checkOutByUserSchema,
+  getShiftsSchema,
+  RequestAction,
+  updateShiftSchema,
+} from '@/types'
 import { z } from 'zod'
 import callApi from '../api'
 import { loadAll } from '../data-loader'
@@ -28,5 +34,14 @@ export async function checkOutByUser(payload: CheckOutByUserRequest) {
     action: RequestAction.CHECK_OUT_BY_USER,
     payload,
     schema: checkOutByUserSchema,
+  })
+}
+
+export type UpdateShiftRequest = z.infer<typeof updateShiftSchema.request>['payload']
+export async function updateShift(payload: UpdateShiftRequest) {
+  return await callApi({
+    action: RequestAction.UPDATE_SHIFT,
+    payload,
+    schema: updateShiftSchema,
   })
 }

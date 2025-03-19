@@ -10,6 +10,7 @@ import {
   checkInByUserSchema,
   checkOutByUserSchema,
   getShiftsSchema,
+  updateShiftSchema,
 } from './shift'
 import { addUserSchema, getUsersByAdminSchema, getUsersSchema, updateUserSchema } from './user'
 import { getVenuesByAdminSchema, getVenuesSchema } from './venue'
@@ -39,6 +40,7 @@ export const requestSchema = z.union([
   checkInByUserSchema.request,
   checkOutByUserSchema.request,
   getShiftsSchema.request,
+  updateShiftSchema.request,
   getVenuesSchema.request,
   getVenuesByAdminSchema.request,
   getSalarySchema.request,
@@ -61,6 +63,7 @@ export const responseSchema = z.union([
   checkInByUserSchema.response,
   checkOutByUserSchema.response,
   getShiftsSchema.response,
+  updateShiftSchema.response,
   getVenuesSchema.response,
   getVenuesByAdminSchema.response,
   getSalarySchema.response,

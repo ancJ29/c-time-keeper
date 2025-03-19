@@ -1,4 +1,4 @@
-.centerItem {
+.infoItem {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,12 +19,20 @@
   border-right: 1px solid var(--border-color);
 }
 
-.shiftCenterItem {
+.shiftItem {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px 0 14px 0;
   border-right: 1px solid var(--border-color);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.timeItem {
+  padding: 0;
 }
 
 .venueText {

@@ -7,6 +7,8 @@ import { formatDuration, formatTime, unique } from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo, useState } from 'react'
+import store from '../../../../_shift.store'
+import TimeSelect from '../TimeSelect'
 import classes from './Item.module.scss'
 
 type ItemProps = {
@@ -92,22 +94,22 @@ function UserInformation({
           </Stack>
         </Flex>
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.infoItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.infoItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.centerItem}>
+      <Grid.Col span={1.4} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.centerItem}>
+      <Grid.Col span={2.5} className={classes.infoItem}>
         <Text className={classes.venueText}>{_venues}</Text>
       </Grid.Col>
     </Grid>
@@ -130,22 +132,28 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         </Text>
         {formatTime(shift.start, 'DD/MM')}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftItem}>
         {total}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {formatTime(shift.start, 'HH:mm')}
+      <Grid.Col span={1.4} className={classes.timeItem}>
+        <TimeSelect
+          value={shift.start}
+          onChangeValue={(value) => store.changeCheckInTime(shift.userId, shift.id, value)}
+        />
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
-        {formatTime(shift.end, 'HH:mm')}
+      <Grid.Col span={1.4} className={classes.timeItem}>
+        <TimeSelect
+          value={shift.end}
+          onChangeValue={(value) => store.changeCheckOutTime(shift.userId, shift.id, value)}
+        />
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftCenterItem}>
+      <Grid.Col span={1.4} className={classes.shiftItem}>
         -
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.centerItem}>
+      <Grid.Col span={2.5} className={classes.shiftItem}>
         {venues.get(shift.venueId)?.name || '-'}
       </Grid.Col>
     </Grid>

@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+}
+
+.textContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0 14px 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.timeInputContainer {
+  border-right: 1px solid var(--border-color);
+  height: 100%;
+  padding: 4px;
+}
+
+.input {
+  background-color: transparent;
+  text-align: center;
+}

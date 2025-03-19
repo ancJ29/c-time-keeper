@@ -90,4 +90,6 @@ export default {
   'Clock in': 'Clock in',
   'Clock out': 'Clock out',
   'Break': 'Break',
+  'Are you sure to save changes?': 'Are you sure to save changes?',
+  'Save changes': 'Save changes',
 }
