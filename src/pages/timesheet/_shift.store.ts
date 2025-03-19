@@ -180,10 +180,7 @@ function reducer(action: Action, state: State): State {
             return shift
           }),
         }
-        return {
-          ...state,
-          updates,
-        }
+        return { ...state, updates }
       }
       break
     case ActionType.CHANGE_CHECK_OUT_TIME:
@@ -205,10 +202,7 @@ function reducer(action: Action, state: State): State {
             return shift
           }),
         }
-        return {
-          ...state,
-          updates,
-        }
+        return { ...state, updates }
       }
       break
   }
@@ -217,6 +211,7 @@ function reducer(action: Action, state: State): State {
 
 function initShiftsByUserId(shifts: Shift[]) {
   const shiftsByUserId: Record<string, Shift[]> = {}
+
   shifts.map((shift) => {
     const shifts = shiftsByUserId[shift.userId] || []
     shiftsByUserId[shift.userId] = [...shifts, shift]

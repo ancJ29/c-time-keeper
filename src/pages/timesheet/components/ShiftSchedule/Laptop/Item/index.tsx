@@ -3,7 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatDuration, formatTime, unique } from '@/utils'
+import { formatDuration, formatTime, ONE_HOUR, unique } from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo, useState } from 'react'
@@ -20,7 +20,14 @@ export default function Item({ user, shifts }: ItemProps) {
   const [opened, setOpened] = useState(true)
 
   const total = useMemo(() => {
-    const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
+    const totalMilliseconds = shifts.reduce((acc, shift) => {
+      let duration = shift.end - shift.start
+      if (shift.end < shift.start) {
+        duration += 24 * ONE_HOUR
+      }
+      return acc + duration
+    }, 0)
+
     return formatDuration(totalMilliseconds)
   }, [shifts])
 
@@ -120,7 +127,12 @@ function ShiftInformation({ shift }: { shift: Shift }) {
   const { venues } = useVenueStore()
 
   const total = useMemo(() => {
-    const totalMilliseconds = shift.end - shift.start
+    let totalMilliseconds = shift.end - shift.start
+
+    if (shift.end < shift.start) {
+      totalMilliseconds += 24 * ONE_HOUR
+    }
+
     return formatDuration(totalMilliseconds)
   }, [shift])
 
