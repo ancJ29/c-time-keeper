@@ -1,8 +1,7 @@
 import { showNotification } from '@/configs/notifications'
+import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
-import { checkInByUser, checkOutByUser } from '@/services/domain'
-import useAuthStore from '@/stores/auth.store'
-import useUserStore from '@/stores/user.store'
+import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/services/domain'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -12,20 +11,21 @@ import WorkEntryView from './components/WorkEntryView'
 export default function WorkEntry() {
   const t = useTranslation()
   const [searchParams] = useSearchParams()
-  const venueId = searchParams.get('venueId')
-  const { user } = useAuthStore()
-  const { users } = useUserStore()
-  const [isCheckIn, setIsCheckIn] = useState(true)
+  const venueId = searchParams.get('venueId') || ''
+  const clientId = searchParams.get('clientId') || ''
+  const [users, setUsers] = useState<User[]>([])
+
+  const getData = useCallback(async () => {
+    const users = await getAllUsersByAdmin({ clientId })
+    setUsers(users)
+  }, [clientId])
+  useMount(getData)
 
   const onClick = useCallback(
-    (userId: string) => {
+    (userId: string, isCheckIn: boolean) => {
       modals.closeAll()
       if (isCheckIn) {
-        checkInByUser({
-          clientId: user?.clientId || '',
-          userId,
-          venueId: venueId || '',
-        }).then((res) => {
+        checkInByUser({ clientId, userId, venueId: venueId || '' }).then((res) => {
           const success = res?.success
           showNotification({
             t,
@@ -34,10 +34,7 @@ export default function WorkEntry() {
           })
         })
       } else {
-        checkOutByUser({
-          clientId: user?.clientId || '',
-          userId,
-        }).then((res) => {
+        checkOutByUser({ clientId, userId }).then((res) => {
           const success = res?.success
           showNotification({
             t,
@@ -47,17 +44,16 @@ export default function WorkEntry() {
         })
       }
     },
-    [isCheckIn, t, user?.clientId, venueId],
+    [clientId, t, venueId],
   )
 
   const handleCheckInCheckOut = useCallback(
     (isCheckIn = true) => {
-      setIsCheckIn(isCheckIn)
       modals.open({
         title: isCheckIn ? t('Check in') : t('Check out'),
         centered: true,
         fullScreen: true,
-        children: <WorkEntryForm onClick={onClick} users={Array.from(users.values())} />,
+        children: <WorkEntryForm onClick={(userId) => onClick(userId, isCheckIn)} users={users} />,
       })
     },
     [onClick, t, users],

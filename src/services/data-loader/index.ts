@@ -12,12 +12,14 @@ type LoadAllProps<T extends RequestAction, U, R> = {
   payload?: U
   schema: DataRequest<T, U, ListResponse<R>>
   take?: number
+  adminKey?: string
 }
 
 export async function loadAll<T extends RequestAction, U, R>({
   action,
   payload = {} as U,
   take = 100,
+  adminKey,
 }: LoadAllProps<T, U, R>): Promise<R[]> {
   const token = sessionStorage.__TOKEN__ || localStorage.__TOKEN__
   let hasMore = true
@@ -33,6 +35,7 @@ export async function loadAll<T extends RequestAction, U, R>({
         },
       },
       token,
+      adminKey,
     )
     const parsedData = res?.data as ListResponse<R>
     data.push(...parsedData.data)

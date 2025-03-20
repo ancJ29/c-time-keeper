@@ -1,4 +1,10 @@
-import { addUserSchema, getUsersSchema, RequestAction, updateUserSchema } from '@/types'
+import {
+  addUserSchema,
+  getUsersByAdminSchema,
+  getUsersSchema,
+  RequestAction,
+  updateUserSchema,
+} from '@/types'
 import { z } from 'zod'
 import callApi from '../api'
 import { loadAll } from '../data-loader'
@@ -26,5 +32,15 @@ export async function addUser(payload: AddUserRequest) {
     action: RequestAction.ADD_USER,
     payload,
     schema: addUserSchema,
+  })
+}
+
+type GetUsersByAdmin = z.infer<typeof getUsersByAdminSchema.request>['payload']
+export async function getAllUsersByAdmin(payload: GetUsersByAdmin) {
+  return await loadAll({
+    action: RequestAction.GET_USERS_BY_ADMIN,
+    payload,
+    schema: getUsersSchema,
+    adminKey: process.env.VITE_ADMIN_KEY,
   })
 }

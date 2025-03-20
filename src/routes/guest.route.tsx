@@ -24,6 +24,10 @@ const routeConfigs: RouteConfig[] = [
     element: lazy(() => import('@/pages/check-email')),
     wrapper: ServiceWrapper,
   },
+  {
+    path: '/work-entry',
+    element: lazy(() => import('@/pages/work-entry')),
+  },
 ]
 
 const guestRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => ({

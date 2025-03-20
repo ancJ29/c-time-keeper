@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import { booleanSchema, getSchema, listResponse, nullishStringSchema, stringSchema } from '../base'
+import {
+  booleanSchema,
+  getSchema,
+  listResponse,
+  nullishStringSchema,
+  optionalStringSchema,
+  stringSchema,
+} from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -25,7 +32,9 @@ export const getUsersSchema = _typeBuilder({
 
 export const getUsersByAdminSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_USERS_BY_ADMIN),
-  payload: getSchema,
+  payload: getSchema.extend({
+    clientId: optionalStringSchema,
+  }),
   response: listResponse(
     z.object({
       id: stringSchema,
