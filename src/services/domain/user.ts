@@ -41,6 +41,6 @@ export async function getAllUsersByAdmin(payload: GetUsersByAdmin) {
     action: RequestAction.GET_USERS_BY_ADMIN,
     payload,
     schema: getUsersSchema,
-    adminKey: process.env.VITE_ADMIN_KEY,
+    adminKey: import.meta.env.VITE_ADMIN_KEY,
   })
 }
