@@ -92,4 +92,5 @@ export default {
   'Break': 'Break',
   'Are you sure to save changes?': 'Are you sure to save changes?',
   'Save changes': 'Save changes',
+  'Retry': 'Retry',
 }

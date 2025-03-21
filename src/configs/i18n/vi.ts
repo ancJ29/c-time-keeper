@@ -92,4 +92,5 @@ export default {
   'Break': 'Nghỉ',
   'Are you sure to save changes?': 'Bạn có chắc chắn muốn cập nhật thông tin?',
   'Save changes': 'Lưu thay đổi',
+  'Retry': 'Thử lại',
 }
