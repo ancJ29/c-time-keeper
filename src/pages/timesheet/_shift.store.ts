@@ -196,8 +196,14 @@ function reducer(action: Action, state: State): State {
               const [hh, mm] = action.checkOutTime?.split(':').map(Number) ?? [0, 0]
               const end = new Date(shift.end)
               end.setHours(hh, mm, 0, 0)
-              state.updatedShifts[shift.id] = shift
-              return { ...shift, end: end.getTime() }
+              if (end.getTime() < shift.start) {
+                end.setDate(end.getDate() + 1)
+              }
+
+              const updatedShift = { ...shift, end: end.getTime() }
+              state.updatedShifts[shift.id] = updatedShift
+
+              return updatedShift
             }
             return shift
           }),
