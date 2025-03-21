@@ -28,8 +28,12 @@ export default function Picture({
       </Text>
 
       <Flex gap={20}>
-        <Button onClick={onRetry}>{t('Retry')}</Button>
-        <Button onClick={onConfirm}>{t('Confirm')}</Button>
+        <Button color="#ffab09" onClick={onRetry}>
+          {t('Retry')}
+        </Button>
+        <Button color="#51b68c" onClick={onConfirm}>
+          {t('Confirm')}
+        </Button>
       </Flex>
     </Stack>
   )
