@@ -5,6 +5,8 @@ import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/servi
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import Camera from './components/Camera'
+import Picture from './components/Picture'
 import WorkEntryForm from './components/WorkEntryForm'
 import WorkEntryView from './components/WorkEntryView'
 
@@ -13,15 +15,15 @@ export default function WorkEntry() {
   const [searchParams] = useSearchParams()
   const venueId = searchParams.get('venueId') || ''
   const clientId = searchParams.get('clientId') || ''
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<Record<string, User>>({})
 
   const getData = useCallback(async () => {
     const users = await getAllUsersByAdmin({ clientId })
-    setUsers(users)
+    setUsers(Object.fromEntries(users.map((user) => [user.id, user])))
   }, [clientId])
   useMount(getData)
 
-  const onClick = useCallback(
+  const handleConfirm = useCallback(
     (userId: string, isCheckIn: boolean) => {
       modals.closeAll()
       if (isCheckIn) {
@@ -47,16 +49,52 @@ export default function WorkEntry() {
     [clientId, t, venueId],
   )
 
+  const handleCapture = useCallback(
+    (userId: string, isCheckIn: boolean, imageSrc: string | null) => {
+      modals.closeAll()
+      modals.open({
+        title: isCheckIn ? t('Check in') : t('Check out'),
+        centered: true,
+        size: 'xl',
+        children: (
+          <Picture
+            userId={userId}
+            users={users}
+            imageSrc={imageSrc}
+            onConfirm={() => handleConfirm(userId, isCheckIn)}
+            onRetry={() => modals.closeAll()}
+          />
+        ),
+      })
+    },
+    [handleConfirm, t, users],
+  )
+
+  const handleChoseUser = useCallback(
+    (userId: string, isCheckIn: boolean) => {
+      modals.closeAll()
+      modals.open({
+        title: isCheckIn ? t('Check in') : t('Check out'),
+        centered: true,
+        size: 'xl',
+        children: <Camera onCapture={(imageSrc) => handleCapture(userId, isCheckIn, imageSrc)} />,
+      })
+    },
+    [handleCapture, t],
+  )
+
   const handleCheckInCheckOut = useCallback(
     (isCheckIn = true) => {
       modals.open({
         title: isCheckIn ? t('Check in') : t('Check out'),
         centered: true,
         fullScreen: true,
-        children: <WorkEntryForm onClick={(userId) => onClick(userId, isCheckIn)} users={users} />,
+        children: (
+          <WorkEntryForm users={users} onClick={(userId) => handleChoseUser(userId, isCheckIn)} />
+        ),
       })
     },
-    [onClick, t, users],
+    [handleChoseUser, t, users],
   )
 
   return (
