@@ -16,7 +16,7 @@ type NavbarProps = {
   toggleNavbar: () => void
   closeNavbar: () => void
   openNavbar: () => void
-  onGoToDashboardPage: () => void
+  onGoToTimesheetPage: () => void
 }
 
 export default function Navbar({
@@ -29,14 +29,14 @@ export default function Navbar({
   toggleNavbar,
   closeNavbar,
   openNavbar,
-  onGoToDashboardPage,
+  onGoToTimesheetPage,
 }: NavbarProps) {
   const isMobile = useWindowResize()
 
   const content = (
     <>
       <Header
-        onClick={onGoToDashboardPage}
+        onClick={onGoToTimesheetPage}
         navbarOpened={navbarOpened}
         toggleNavbar={toggleNavbar}
       />

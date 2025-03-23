@@ -15,7 +15,6 @@ export default {
   'Role': 'Role',
   'Confirm': 'Confirm',
   'Cancel': 'Cancel',
-  'Dashboard': 'Dashboard',
   'Category management': 'Category management',
   'User management': 'User management',
   'Timesheet': 'Timesheet',

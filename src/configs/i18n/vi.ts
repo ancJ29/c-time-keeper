@@ -15,7 +15,6 @@ export default {
   'Role': 'Vai trò',
   'Confirm': 'Xác nhận',
   'Cancel': 'Hủy bỏ',
-  'Dashboard': 'Tổng quan',
   'Category management': 'Quản lý danh mục',
   'User management': 'Quản lý nhân viên',
   'Timesheet': 'Bảng chấm công',

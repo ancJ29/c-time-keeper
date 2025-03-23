@@ -43,8 +43,8 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
     navigate('/profile')
   }, [navigate])
 
-  const goToDashboardPage = useCallback(() => {
-    navigate('/dashboard')
+  const goToTimesheetPage = useCallback(() => {
+    navigate('/timesheet')
   }, [navigate])
 
   return (
@@ -56,7 +56,7 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
         onChangeLanguage={handleChangeLanguage}
         onLogout={logout}
         onGoToProfilePage={goToProfilePage}
-        onGoToDashboardPage={goToDashboardPage}
+        onGoToTimesheetPage={goToTimesheetPage}
         toggleNavbar={toggleNavbar}
         closeNavbar={closeNavbar}
         openNavbar={openNavbar}

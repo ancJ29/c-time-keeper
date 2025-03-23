@@ -36,7 +36,7 @@ export default function Login() {
       const res = await login(values)
       if (res?.token) {
         setToken(res.token, form.values.remember)
-        navigate('/dashboard')
+        navigate('/timesheet')
       } else {
         form.setErrors({
           password: 'Username or password is incorrect',
