@@ -20,7 +20,7 @@ export default {
   startLoading() {
     dispatch({ type: ActionType.INCREASE })
   },
-  stopLoading(delay = 500) {
+  stopLoading(delay = 200) {
     setTimeout(() => dispatch({ type: ActionType.DECREASE }), delay)
   },
   getSnapshot() {

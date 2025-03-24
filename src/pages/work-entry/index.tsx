@@ -1,4 +1,3 @@
-import { showNotification } from '@/configs/notifications'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/services/domain'
@@ -6,9 +5,12 @@ import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Camera from './components/Camera'
+import Message from './components/Message'
 import Picture from './components/Picture'
 import WorkEntryForm from './components/WorkEntryForm'
 import WorkEntryView from './components/WorkEntryView'
+
+const MODAL_CLOSE_DELAY = 2000
 
 export default function WorkEntry() {
   const t = useTranslation()
@@ -24,26 +26,38 @@ export default function WorkEntry() {
   useMount(getData)
 
   const handleConfirm = useCallback(
-    (userId: string, isCheckIn: boolean) => {
+    async (userId: string, isCheckIn: boolean) => {
       modals.closeAll()
       if (isCheckIn) {
-        checkInByUser({ clientId, userId, venueId: venueId || '' }).then((res) => {
-          const success = res?.success
-          showNotification({
-            t,
-            success,
-            message: success ? t('Checked in successfully') : t('Failed to check in'),
-          })
+        const res = await checkInByUser({ clientId, userId, venueId: venueId || '' })
+        const success = res?.success
+        modals.open({
+          withCloseButton: false,
+          centered: true,
+          size: 'lg',
+          children: (
+            <Message
+              success={success}
+              message={success ? t('Checked in successfully') : t('Failed to check in')}
+            />
+          ),
         })
+        setTimeout(() => modals.closeAll(), MODAL_CLOSE_DELAY)
       } else {
-        checkOutByUser({ clientId, userId }).then((res) => {
-          const success = res?.success
-          showNotification({
-            t,
-            success,
-            message: success ? t('Checked out successfully') : t('Failed to check out'),
-          })
+        const res = await checkOutByUser({ clientId, userId })
+        const success = res?.success
+        modals.open({
+          withCloseButton: false,
+          centered: true,
+          size: 'lg',
+          children: (
+            <Message
+              success={success}
+              message={success ? t('Checked out successfully') : t('Failed to check out')}
+            />
+          ),
         })
+        setTimeout(() => modals.closeAll(), MODAL_CLOSE_DELAY)
       }
     },
     [clientId, t, venueId],
