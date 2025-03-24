@@ -6,9 +6,12 @@ type CameraProps = {
   onCapture: (imageSrc: string | null) => void
 }
 
+const COUNTDOWN_TIME = 3
+const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * 1000
+
 export default function Camera({ onCapture }: CameraProps) {
   const webcamRef = useRef<Webcam | null>(null)
-  const [countdown, setCountdown] = useState(5)
+  const [countdown, setCountdown] = useState(COUNTDOWN_TIME)
   const [isCapturing, setIsCapturing] = useState(true)
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function Camera({ onCapture }: CameraProps) {
         const imageSrc = webcamRef.current.getScreenshot()
         onCapture(imageSrc)
       }
-    }, 5500)
+    }, CAPTURE_DELAY)
 
     return () => {
       clearInterval(countdownInterval)
@@ -40,7 +43,8 @@ export default function Camera({ onCapture }: CameraProps) {
       <Webcam ref={webcamRef} screenshotFormat="image/jpeg" className={classes.webcam} />
       {isCapturing && (
         <div className={classes.loadingContainer}>
-          <div className={classes.loading}>{countdown}</div>
+          <div className={classes.spinner}></div>
+          <div className={classes.countdown}>{countdown}</div>
         </div>
       )}
     </div>
