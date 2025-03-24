@@ -4,7 +4,7 @@ import { useState } from 'react'
 import classes from './TimeSelect.module.scss'
 
 type TimeSelectProps = {
-  value: number
+  value?: number | null
   onChangeValue: (value: string) => void
 }
 

@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import { booleanSchema, getSchema, listResponse, numberSchema, stringSchema } from '../base'
+import {
+  booleanSchema,
+  getSchema,
+  listResponse,
+  nullishNumberSchema,
+  numberSchema,
+  stringSchema,
+} from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -51,7 +58,7 @@ export const getShiftsSchema = _typeBuilder({
       userId: stringSchema,
       venueId: stringSchema,
       start: numberSchema,
-      end: numberSchema,
+      end: nullishNumberSchema,
     }),
   ),
 })
@@ -62,7 +69,7 @@ export const updateShiftSchema = _typeBuilder({
   payload: z.object({
     id: stringSchema,
     start: numberSchema,
-    end: numberSchema,
+    end: nullishNumberSchema,
   }),
   response: z.object({
     success: booleanSchema,

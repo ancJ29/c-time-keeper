@@ -172,10 +172,10 @@ function reducer(action: Action, state: State): State {
           [action.userId]: state.updates[action.userId].map((shift) => {
             if (shift.id === action.shiftId) {
               const [hh, mm] = action.checkInTime?.split(':').map(Number) ?? [0, 0]
-              const start = new Date(shift.start)
-              start.setHours(hh, mm, 0, 0)
+              const date = new Date(shift.start)
+              date.setHours(hh, mm, 0, 0)
               state.updatedShifts[shift.id] = shift
-              return { ...shift, start: start.getTime() }
+              return { ...shift, start: date.getTime() }
             }
             return shift
           }),
@@ -194,13 +194,13 @@ function reducer(action: Action, state: State): State {
           [action.userId]: state.updates[action.userId].map((shift) => {
             if (shift.id === action.shiftId) {
               const [hh, mm] = action.checkOutTime?.split(':').map(Number) ?? [0, 0]
-              const end = new Date(shift.end)
-              end.setHours(hh, mm, 0, 0)
-              if (end.getTime() < shift.start) {
-                end.setDate(end.getDate() + 1)
+              const date = new Date(shift.start)
+              date.setHours(hh, mm, 0, 0)
+              if (date.getTime() < shift.start) {
+                date.setDate(date.getDate() + 1)
               }
 
-              const updatedShift = { ...shift, end: end.getTime() }
+              const updatedShift = { ...shift, end: date.getTime() }
               state.updatedShifts[shift.id] = updatedShift
 
               return updatedShift

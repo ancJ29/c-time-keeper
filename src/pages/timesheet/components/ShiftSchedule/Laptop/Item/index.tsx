@@ -20,13 +20,20 @@ export default function Item({ user, shifts }: ItemProps) {
   const [opened, setOpened] = useState(true)
 
   const total = useMemo(() => {
-    const totalMilliseconds = shifts.reduce((acc, shift) => {
-      let duration = shift.end - shift.start
-      if (shift.end < shift.start) {
-        duration += 24 * ONE_HOUR
-      }
-      return acc + duration
-    }, 0)
+    const totalMilliseconds = shifts.some((shift) => shift.end != null)
+      ? shifts.reduce((acc, shift) => {
+          if (shift.end == null) {
+            return acc
+          }
+
+          let duration = shift.end - shift.start
+          if (shift.end < shift.start) {
+            duration += 24 * ONE_HOUR
+          }
+
+          return acc + duration
+        }, 0)
+      : null
 
     return formatDuration(totalMilliseconds)
   }, [shifts])
@@ -66,7 +73,7 @@ function UserInformation({
   shifts,
 }: {
   user: User
-  total: string
+  total?: string
   opened: boolean
   shifts: Shift[]
 }) {
@@ -127,8 +134,11 @@ function ShiftInformation({ shift }: { shift: Shift }) {
   const { venues } = useVenueStore()
 
   const total = useMemo(() => {
-    let totalMilliseconds = shift.end - shift.start
+    if (!shift.end) {
+      return
+    }
 
+    let totalMilliseconds = shift.end - shift.start
     if (shift.end < shift.start) {
       totalMilliseconds += 24 * ONE_HOUR
     }
@@ -145,10 +155,10 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         {formatTime(shift.start, 'DD/MM')}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftItem}>
-        {total}
+        {total ?? '-'}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.shiftItem}>
-        {total}
+        {total ?? '-'}
       </Grid.Col>
       <Grid.Col span={1.4} className={classes.timeItem}>
         <TimeSelect
