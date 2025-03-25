@@ -18,7 +18,7 @@ export const convertShiftToFCEvent = (shift: Shift, index: number): EventInput =
   resourceId: shift.userId,
   title: `${formatTime(shift.start, 'HH:mm')} - ${formatTime(shift.end, 'HH:mm')}`,
   start: new Date(shift.start).toISOString(),
-  end: new Date(shift.end).toISOString(),
+  end: new Date(shift.end || 0).toISOString(),
   backgroundColor: backgroundColors[index % backgroundColors.length],
   borderColor: backgroundColors[index % backgroundColors.length],
 })

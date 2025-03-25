@@ -3,7 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatDuration, formatTime } from '@/utils'
+import { formatDuration, formatTime, ONE_HOUR } from '@/utils'
 import { Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons-react'
@@ -27,7 +27,21 @@ export default function Item({ user, shifts }: ItemProps) {
   )
 
   const total = useMemo(() => {
-    const totalMilliseconds = shifts.reduce((acc, shift) => acc + (shift.end - shift.start), 0)
+    const totalMilliseconds = shifts.some((shift) => shift.end != null)
+      ? shifts.reduce((acc, shift) => {
+          if (shift.end == null) {
+            return acc
+          }
+
+          let duration = shift.end - shift.start
+          if (shift.end < shift.start) {
+            duration += 24 * ONE_HOUR
+          }
+
+          return acc + duration
+        }, 0)
+      : null
+
     return formatDuration(totalMilliseconds)
   }, [shifts])
 
@@ -116,15 +130,23 @@ function ShiftInformation({ shift }: { shift: Shift }) {
   const t = useTranslation()
 
   const total = useMemo(() => {
-    const totalMilliseconds = shift.end - shift.start
+    if (!shift.end) {
+      return
+    }
+
+    let totalMilliseconds = shift.end - shift.start
+    if (shift.end < shift.start) {
+      totalMilliseconds += 24 * ONE_HOUR
+    }
+
     return formatDuration(totalMilliseconds)
   }, [shift])
 
   return (
     <Stack className={classes.shiftContainer}>
       <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
-      <DataRow title={t('Worked')} content={total} />
-      <DataRow title={t('Total')} content={total} />
+      <DataRow title={t('Worked')} content={total ?? '-'} />
+      <DataRow title={t('Total')} content={total ?? '-'} />
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
       <DataRow title={t('Break')} content={''} />
