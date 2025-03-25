@@ -94,7 +94,7 @@ export default {
   'Retry': 'Thử lại',
   'Scan the QR code to go to the check-in/check-out page':
     'Quét mã QR để đi đến trang check-in/check-out',
-  'Or click ': 'Hoặc nhấn ',
+  'Or click': 'Hoặc nhấn',
   'to access the page': 'để truy cập trang',
   'here': 'tại đây',
 }

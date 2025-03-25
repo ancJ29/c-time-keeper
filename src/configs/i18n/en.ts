@@ -94,7 +94,7 @@ export default {
   'Retry': 'Retry',
   'Scan the QR code to go to the check-in/check-out page':
     'Scan the QR code to go to the check-in/check-out page',
-  'Or click ': 'Or click ',
+  'Or click': 'Or click',
   'to access the page': 'to access the page',
   'here': 'here',
 }
