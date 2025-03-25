@@ -15,11 +15,11 @@ export default function CheckInQrView({ qrValue }: CheckInQrViewProps) {
         value={qrValue}
         size={350}
         imageSettings={{
-          src: '/favicon.svg',
+          src: '/imgs/qr-code/clock.svg',
           x: undefined,
           y: undefined,
-          height: 100,
-          width: 100,
+          height: 120,
+          width: 120,
           excavate: false,
         }}
       />
