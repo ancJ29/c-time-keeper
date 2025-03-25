@@ -10,6 +10,7 @@ import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useUserStore from '@/stores/user.store'
 import useVenueStore from '@/stores/venue.store'
 import { MantineProvider } from '@mantine/core'
+import { DatesProvider } from '@mantine/dates'
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { Suspense, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
@@ -34,8 +35,10 @@ export default function App() {
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
       <Notifications position="top-right" zIndex={1000} w={300} />
       <ModalsProvider>
-        <LoadingOverlay visible={loadingGlobal} />
-        <Suspense fallback={<LoadingOverlay />}>{useRoutes(routes)}</Suspense>
+        <DatesProvider settings={{ locale: 'vi' }}>
+          <LoadingOverlay visible={loadingGlobal} />
+          <Suspense fallback={<LoadingOverlay />}>{useRoutes(routes)}</Suspense>
+        </DatesProvider>
       </ModalsProvider>
     </MantineProvider>
   )

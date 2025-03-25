@@ -92,4 +92,9 @@ export default {
   'Are you sure to save changes?': 'Bạn có chắc chắn muốn cập nhật thông tin?',
   'Save changes': 'Lưu thay đổi',
   'Retry': 'Thử lại',
+  'Scan the QR code to go to the check-in/check-out page':
+    'Quét mã QR để đi đến trang check-in/check-out',
+  'Or click ': 'Hoặc nhấn ',
+  'to access the page': 'để truy cập trang',
+  'here': 'tại đây',
 }

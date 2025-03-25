@@ -35,6 +35,11 @@ const routeConfigs: RouteConfig[] = [
     wrapper: ServiceWrapper,
   },
   {
+    path: '/check-in-qr',
+    element: lazy(() => import('@/pages/check-in-qr')),
+    wrapper: ServiceWrapper,
+  },
+  {
     path: '/work-entry',
     element: lazy(() => import('@/pages/work-entry')),
   },
