@@ -17,7 +17,6 @@ export default function Filter({
   reload,
   updateCondition,
   roleOptions,
-  salaryRuleOptions,
 }: FilterComponentProps) {
   const t = useTranslation()
 
@@ -37,13 +36,6 @@ export default function Filter({
         w={w}
         options={roleOptions}
         onChange={(value) => updateCondition('roleId', value)}
-      />
-      <Select
-        value={condition?.salaryRuleId}
-        label={t('Salary rule')}
-        w={w}
-        options={salaryRuleOptions}
-        onChange={(value) => updateCondition('salaryRuleId', value)}
       />
       <ClearButton onClick={reset} disabled={!filtered} />
     </FilterWrapper>

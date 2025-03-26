@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Flex,
+  NumberInput,
   PasswordInput,
   Stack,
   Text,
@@ -27,7 +28,7 @@ const initialValues: AddUserRequest = {
   email: '',
   password: '',
   roleId: '',
-  salaryRuleId: '',
+  baseSalary: 0,
 }
 
 type AddUserFormProps = {
@@ -35,7 +36,6 @@ type AddUserFormProps = {
   reOpen: (values: AddUserRequest) => void
   onConfirm: (values: AddUserRequest) => void
   roleOptions: OptionProps[]
-  salaryRuleOptions: OptionProps[]
 }
 
 export default function AddUserForm({
@@ -43,7 +43,6 @@ export default function AddUserForm({
   reOpen,
   onConfirm,
   roleOptions,
-  salaryRuleOptions,
 }: AddUserFormProps) {
   const t = useTranslation()
   const form = useForm<AddUserRequest>({
@@ -101,12 +100,14 @@ export default function AddUserForm({
           withAsterisk
           {...form.getInputProps('roleId')}
         />
-        <Select
+        <NumberInput
           w={w}
+          label={t('Base salary')}
           withAsterisk
-          label={t('Salary rule')}
-          options={salaryRuleOptions}
-          {...form.getInputProps('salaryRuleId')}
+          min={0}
+          thousandSeparator="."
+          decimalSeparator=","
+          {...form.getInputProps('baseSalary')}
         />
         <Box w={w}>
           <Flex w={w} align="end" justify="between" gap={5}>
@@ -144,7 +145,5 @@ function _validate(t: (s: string) => string) {
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
     password: (value: string) => (value === '' ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
-    salaryRuleId: (value: string | null) =>
-      value === '' || !value ? t('Field is required') : null,
   }
 }

@@ -2,7 +2,7 @@ import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { UpdateUserRequest, User } from '@/services/domain'
 import { OptionProps } from '@/types'
-import { Button, Stack, Text, TextInput } from '@mantine/core'
+import { Button, NumberInput, Stack, Text, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
 
@@ -16,6 +16,7 @@ const initialValues: UpdateUserRequest = {
   roleId: '',
   salaryRuleId: '',
   clientId: '',
+  baseSalary: 0,
 }
 
 type EditUserFormProps = {
@@ -23,16 +24,9 @@ type EditUserFormProps = {
   reOpen: (user: UpdateUserRequest) => void
   onConfirm: (user: UpdateUserRequest) => void
   roleOptions: OptionProps[]
-  salaryRuleOptions: OptionProps[]
 }
 
-export default function EditUserForm({
-  user,
-  reOpen,
-  onConfirm,
-  roleOptions,
-  salaryRuleOptions,
-}: EditUserFormProps) {
+export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: EditUserFormProps) {
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
     initialValues: user || initialValues,
@@ -79,12 +73,14 @@ export default function EditUserForm({
           withAsterisk
           {...form.getInputProps('roleId')}
         />
-        <Select
+        <NumberInput
           w={w}
+          label={t('Base salary')}
           withAsterisk
-          label={t('Salary rule')}
-          options={salaryRuleOptions}
-          {...form.getInputProps('salaryRuleId')}
+          min={0}
+          thousandSeparator="."
+          decimalSeparator=","
+          {...form.getInputProps('baseSalary')}
         />
         <Button type="submit" mt={10}>
           {t('Update')}
@@ -101,7 +97,5 @@ function _validate(t: (s: string) => string) {
     email: (value: string) =>
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
-    salaryRuleId: (value: string | null) =>
-      value === '' || !value ? t('Field is required') : null,
   }
 }

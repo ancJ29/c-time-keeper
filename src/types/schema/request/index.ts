@@ -41,4 +41,5 @@ export type HandlerContext = {
 export enum ClientRoles {
   OWNER = 'Owner',
   STAFF = 'Staff',
+  CASHIER = 'Cashier',
 }

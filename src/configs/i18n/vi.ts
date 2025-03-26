@@ -97,4 +97,6 @@ export default {
   'Or click': 'Hoặc nhấn',
   'to access the page': 'để truy cập trang',
   'here': 'tại đây',
+  'Base salary': 'Lương cứng',
+  'Cashier': 'Thu ngân',
 }

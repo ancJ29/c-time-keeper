@@ -97,4 +97,6 @@ export default {
   'Or click': 'Or click',
   'to access the page': 'to access the page',
   'here': 'here',
+  'Base salary': 'Base salary',
+  'Cashier': 'Cashier',
 }

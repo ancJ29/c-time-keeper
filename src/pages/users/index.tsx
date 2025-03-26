@@ -11,7 +11,6 @@ import {
   User,
 } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
-import useSalaryRuleStore from '@/stores/salaryRule.store'
 import { modals } from '@mantine/modals'
 import { useCallback, useMemo, useState } from 'react'
 import { configs, defaultCondition, filter, FilterType } from './_configs'
@@ -22,9 +21,8 @@ import UserView from './components/UserView'
 export default function Users() {
   const t = useTranslation()
   const { roles } = useRoleStore()
-  const { salaryRules } = useSalaryRuleStore()
   const [users, setUsers] = useState<User[]>([])
-  const dataGridConfigs = useMemo(() => configs(t, roles, salaryRules), [roles, salaryRules, t])
+  const dataGridConfigs = useMemo(() => configs(t, roles), [roles, t])
 
   const getData = async () => {
     const res = await getAllUsers()
@@ -63,15 +61,6 @@ export default function Users() {
     [roles, t],
   )
 
-  const salaryRuleOptions = useMemo(
-    () =>
-      Array.from(salaryRules.values()).map((el) => ({
-        label: el.name,
-        value: el.id,
-      })),
-    [salaryRules],
-  )
-
   const handleConfirmAddUser = useCallback(
     (values: AddUserRequest) => {
       addUser(values).then((res) => {
@@ -95,12 +84,11 @@ export default function Users() {
             reOpen={handleAddUser}
             onConfirm={handleConfirmAddUser}
             roleOptions={roleOptions}
-            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmAddUser, roleOptions, salaryRuleOptions, t],
+    [handleConfirmAddUser, roleOptions, t],
   )
 
   const handleConfirmUpdateUser = useCallback(
@@ -127,12 +115,11 @@ export default function Users() {
             reOpen={handleEditUser}
             onConfirm={handleConfirmUpdateUser}
             roleOptions={roleOptions}
-            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmUpdateUser, roleOptions, salaryRuleOptions, t],
+    [handleConfirmUpdateUser, roleOptions, t],
   )
 
   return (
@@ -153,7 +140,6 @@ export default function Users() {
       filtered={filtered}
       reset={reset}
       roleOptions={roleOptions}
-      salaryRuleOptions={salaryRuleOptions}
     />
   )
 }

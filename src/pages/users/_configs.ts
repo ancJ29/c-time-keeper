@@ -1,10 +1,10 @@
-import { Role, SalaryRule, User } from '@/services/domain'
+import { Role, User } from '@/services/domain'
 import { DataGridColumnProps, FilterProps, OptionProps } from '@/types'
+import { formatNumber } from '@/utils'
 
 export const configs = (
   t: (key: string) => string,
   roles: Map<string, Role>,
-  salaryRules: Map<string, SalaryRule>,
 ): DataGridColumnProps[] => {
   return [
     {
@@ -32,11 +32,11 @@ export const configs = (
       },
     },
     {
-      key: 'salaryRule',
-      header: t('Salary rule'),
+      key: 'baseSalary',
+      header: t('Base salary'),
       width: '15%',
       renderCell: (_, user: User) => {
-        return salaryRules.get(user.salaryRuleId)?.name || ''
+        return formatNumber(user.baseSalary || 0)
       },
     },
   ]
@@ -44,24 +44,18 @@ export const configs = (
 
 export type FilterComponentProps = FilterProps<FilterType> & {
   roleOptions: OptionProps[]
-  salaryRuleOptions: OptionProps[]
 }
 
 export type FilterType = {
   roleId: string | null
-  salaryRuleId: string | null
 }
 
 export const defaultCondition: FilterType = {
   roleId: null,
-  salaryRuleId: null,
 }
 
 export function filter(user: User, condition?: FilterType) {
   if (condition?.roleId && user.roleId !== condition.roleId) {
-    return false
-  }
-  if (condition?.salaryRuleId && user.salaryRuleId !== condition.salaryRuleId) {
     return false
   }
   return true

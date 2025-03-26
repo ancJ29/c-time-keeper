@@ -12,15 +12,9 @@ type ProfileFormProps = {
   form: UseFormReturnType<User>
   onSubmit: (values: User) => void
   roleOptions: OptionProps[]
-  salaryRuleOptions: OptionProps[]
 }
 
-export default function ProfileForm({
-  form,
-  onSubmit,
-  roleOptions,
-  salaryRuleOptions,
-}: ProfileFormProps) {
+export default function ProfileForm({ form, onSubmit, roleOptions }: ProfileFormProps) {
   const t = useTranslation()
 
   return (
@@ -44,13 +38,6 @@ export default function ProfileForm({
             options={roleOptions}
             disabled
             {...form.getInputProps('roleId')}
-          />
-          <Select
-            w={w}
-            withAsterisk
-            label={t('Salary rule')}
-            options={salaryRuleOptions}
-            {...form.getInputProps('salaryRuleId')}
           />
           <Button type="submit" mt={10}>
             {t('Save')}
