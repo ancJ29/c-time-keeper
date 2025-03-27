@@ -3,6 +3,7 @@ import {
   booleanSchema,
   getSchema,
   listResponse,
+  nullishBooleanSchema,
   nullishNumberSchema,
   nullishStringSchema,
   optionalStringSchema,
@@ -26,6 +27,7 @@ export const getUsersSchema = _typeBuilder({
       salaryRuleId: nullishStringSchema,
       clientId: stringSchema,
       baseSalary: nullishNumberSchema,
+      enabled: nullishBooleanSchema,
     }),
   ),
 })
@@ -65,6 +67,7 @@ export const updateUserSchema = _typeBuilder({
     salaryRuleId: nullishStringSchema,
     clientId: stringSchema,
     baseSalary: nullishNumberSchema,
+    enabled: booleanSchema,
   }),
   response: z.object({
     success: booleanSchema,

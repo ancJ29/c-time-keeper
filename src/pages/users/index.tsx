@@ -11,6 +11,7 @@ import {
   User,
 } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
+import useUserStore from '@/stores/user.store'
 import { modals } from '@mantine/modals'
 import { useCallback, useMemo, useState } from 'react'
 import { configs, defaultCondition, filter, FilterType } from './_configs'
@@ -21,6 +22,7 @@ import UserView from './components/UserView'
 export default function Users() {
   const t = useTranslation()
   const { roles } = useRoleStore()
+  const { load } = useUserStore()
   const [users, setUsers] = useState<User[]>([])
   const dataGridConfigs = useMemo(() => configs(t, roles), [roles, t])
 
@@ -66,10 +68,11 @@ export default function Users() {
       addUser(values).then((res) => {
         const success = res?.success
         showNotification({ t, success })
+        load(true)
         getData()
       })
     },
-    [t],
+    [load, t],
   )
 
   const handleAddUser = useCallback(
@@ -97,10 +100,11 @@ export default function Users() {
         const success = res?.success
         showNotification({ t, success })
         modals.closeAll()
+        load(true)
         getData()
       })
     },
-    [t],
+    [load, t],
   )
 
   const handleEditUser = useCallback(

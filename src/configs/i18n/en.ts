@@ -99,4 +99,7 @@ export default {
   'here': 'here',
   'Base salary': 'Base salary',
   'Cashier': 'Cashier',
+  'Status': 'Status',
+  'Active': 'Active',
+  'Disable': 'Disable',
 }

@@ -18,6 +18,7 @@ const initialValues: UpdateUserRequest = {
   salaryRuleId: '',
   clientId: '',
   baseSalary: 0,
+  enabled: true,
 }
 
 type EditUserFormProps = {
@@ -30,7 +31,7 @@ type EditUserFormProps = {
 export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: EditUserFormProps) {
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
-    initialValues: user || initialValues,
+    initialValues: { ...user, ...initialValues },
     validate: _validate(t),
   })
 

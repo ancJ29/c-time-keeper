@@ -4,7 +4,7 @@ import { create } from 'zustand'
 type UserStore = {
   users: Map<string, User>
   set: (users: User[]) => void
-  load: () => Promise<void>
+  load: (noCache?: boolean) => Promise<void>
 }
 
 export default create<UserStore>((set, get) => ({
@@ -13,8 +13,8 @@ export default create<UserStore>((set, get) => ({
     set(() => ({
       users: new Map(users.map((e) => [e.id, e])),
     })),
-  load: async () => {
-    if (localStorage.__USERS__) {
+  load: async (noCache = false) => {
+    if (localStorage.__USERS__ && !noCache) {
       const users = JSON.parse(localStorage.__USERS__)
       if (users.length > 0) {
         get().set(users)

@@ -99,4 +99,7 @@ export default {
   'here': 'tại đây',
   'Base salary': 'Lương cứng',
   'Cashier': 'Thu ngân',
+  'Status': 'Trạng thái',
+  'Active': 'Đang hoạt động',
+  'Disable': 'Ngưng hoạt động',
 }

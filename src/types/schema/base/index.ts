@@ -7,6 +7,7 @@ export const stringSchema = z.string()
 export const optionalStringSchema = stringSchema.optional()
 export const nullishStringSchema = stringSchema.nullish()
 export const booleanSchema = z.boolean()
+export const nullishBooleanSchema = booleanSchema.nullish()
 export const optionalBooleanSchema = booleanSchema.optional()
 
 export const getSchema = z.object({

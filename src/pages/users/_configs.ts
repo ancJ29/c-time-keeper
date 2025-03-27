@@ -11,7 +11,7 @@ export const configs = (
       key: 'name',
       sortable: true,
       header: t('Name'),
-      width: '25%',
+      width: '20%',
     },
     {
       key: 'username',
@@ -21,12 +21,13 @@ export const configs = (
     {
       key: 'email',
       header: t('Email'),
-      width: '25%',
+      width: '20%',
     },
     {
       key: 'role',
       header: t('Role'),
       width: '15%',
+
       renderCell: (_, user: User) => {
         return t(roles.get(user.roleId)?.name || '')
       },
@@ -34,9 +35,17 @@ export const configs = (
     {
       key: 'baseSalary',
       header: t('Base salary'),
-      width: '15%',
+      width: '12%',
       renderCell: (_, user: User) => {
         return formatNumber(user.baseSalary || 0)
+      },
+    },
+    {
+      key: 'active',
+      header: t('Status'),
+      width: '13%',
+      renderCell: (_, user: User) => {
+        return user.enabled ? t('Active') : t('Disabled')
       },
     },
   ]
