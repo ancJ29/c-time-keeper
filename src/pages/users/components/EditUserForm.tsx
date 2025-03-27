@@ -1,8 +1,9 @@
+import NumberInput from '@/components/common/NumberInput'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { UpdateUserRequest, User } from '@/services/domain'
 import { OptionProps } from '@/types'
-import { Button, NumberInput, Stack, Text, TextInput } from '@mantine/core'
+import { Button, Stack, Text, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
 
@@ -78,8 +79,6 @@ export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: E
           label={t('Base salary')}
           withAsterisk
           min={0}
-          thousandSeparator="."
-          decimalSeparator=","
           {...form.getInputProps('baseSalary')}
         />
         <Button type="submit" mt={10}>

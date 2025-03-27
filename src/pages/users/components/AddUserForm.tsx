@@ -1,3 +1,4 @@
+import NumberInput from '@/components/common/NumberInput'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { AddUserRequest } from '@/services/domain'
@@ -7,7 +8,6 @@ import {
   Box,
   Button,
   Flex,
-  NumberInput,
   PasswordInput,
   Stack,
   Text,
@@ -105,8 +105,6 @@ export default function AddUserForm({
           label={t('Base salary')}
           withAsterisk
           min={0}
-          thousandSeparator="."
-          decimalSeparator=","
           {...form.getInputProps('baseSalary')}
         />
         <Box w={w}>
