@@ -31,7 +31,7 @@ type EditUserFormProps = {
 export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: EditUserFormProps) {
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
-    initialValues: { ...user, ...initialValues },
+    initialValues: { ...initialValues, ...user, enabled: user.enabled || false },
     validate: _validate(t),
   })
 
