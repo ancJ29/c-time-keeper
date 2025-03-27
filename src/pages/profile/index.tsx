@@ -32,6 +32,7 @@ export default function Profile() {
         name: values.name.trim(),
         email: values.email.trim(),
         username: values.username.trim(),
+        enabled: true,
       }).then((res) => showNotification({ t, success: res?.success }))
     },
     [t],
