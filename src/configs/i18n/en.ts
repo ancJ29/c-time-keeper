@@ -102,4 +102,11 @@ export default {
   'Status': 'Status',
   'Active': 'Active',
   'Disable': 'Disable',
+  'Today': 'Today',
+  'Yesterday': 'Yesterday',
+  'This week': 'This week',
+  'Last week': 'Last week',
+  'This month': 'This month',
+  'Last month': 'Last month',
+  'Custom': 'Custom',
 }

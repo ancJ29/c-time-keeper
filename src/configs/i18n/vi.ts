@@ -102,4 +102,11 @@ export default {
   'Status': 'Trạng thái',
   'Active': 'Đang hoạt động',
   'Disable': 'Ngưng hoạt động',
+  'Today': 'Hôm nay',
+  'Yesterday': 'Hôm qua',
+  'This week': 'Tuần này',
+  'Last week': 'Tuần trước',
+  'This month': 'Tháng này',
+  'Last month': 'Tháng trước',
+  'Custom': 'Tùy chỉnh',
 }

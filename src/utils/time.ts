@@ -1,3 +1,4 @@
+import { DateValue } from '@/types'
 import dayjs from 'dayjs'
 
 export const ONE_SECOND = 1000
@@ -32,7 +33,7 @@ export function startOfMonth(timestamp: number): number {
 
 export function endOfMonth(timestamp: number): number {
   const date = new Date(timestamp)
-  date.setMonth(date.getUTCMonth() + 1)
+  date.setMonth(date.getMonth() + 1)
   date.setDate(0)
   date.setHours(23, 59, 59, 999)
   return date.getTime()
@@ -73,4 +74,47 @@ export function formatDuration(totalMilliseconds: number | null) {
   const minutes = Math.floor((totalMilliseconds % ONE_HOUR) / ONE_MINUTE)
 
   return `${hours}:${minutes.toString().padStart(2, '0')}`
+}
+
+export function isSameDate(a: Date | null, b?: Date | null) {
+  if (!b || !a) {
+    return false
+  }
+  return a.toLocaleDateString() === b.toLocaleDateString()
+}
+
+export function today(date: Date): [DateValue, DateValue] {
+  return [date, date]
+}
+
+export function yesterday(date: Date): [DateValue, DateValue] {
+  const yesterday = new Date(date)
+  yesterday.setDate(yesterday.getDate() - 1)
+  return [yesterday, yesterday]
+}
+
+export function ThisWeek(date: Date): [DateValue, DateValue] {
+  const _startOfWeek = new Date(startOfWeek(date.getTime()))
+  const _endOfWeek = new Date(endOfWeek(date.getTime()))
+  return [_startOfWeek, _endOfWeek]
+}
+
+export function lastWeek(date: Date): [DateValue, DateValue] {
+  const lastWeek = date.getTime() - ONE_WEEK
+  const startOfLastWeek = new Date(startOfWeek(lastWeek))
+  const endOfLastWeek = new Date(endOfWeek(lastWeek))
+  return [startOfLastWeek, endOfLastWeek]
+}
+
+export function thisMonth(date: Date): [DateValue, DateValue] {
+  const _startOfMonth = new Date(startOfMonth(date.getTime()))
+  const _endOfMonth = new Date(endOfMonth(date.getTime()))
+  return [_startOfMonth, _endOfMonth]
+}
+
+export function lastMonth(date: Date): [DateValue, DateValue] {
+  const lastMonthDate = new Date(date.getFullYear(), date.getMonth() - 1, 1)
+  const startOfLastMonth = new Date(startOfMonth(lastMonthDate.getTime()))
+  const endOfLastMonth = new Date(endOfMonth(lastMonthDate.getTime()))
+  return [startOfLastMonth, endOfLastMonth]
 }

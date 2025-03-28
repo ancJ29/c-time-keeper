@@ -1,7 +1,7 @@
 import AutocompleteForFilterData from '@/components/c-time-keeper/AutocompleteForFilterData'
 import FilterWrapper from '@/components/c-time-keeper/FilterWrapper'
 import SaveButton from '@/components/c-time-keeper/SaveButton'
-import DateRangePicker from '@/components/common/DateRangePicker'
+import DateSelect from '@/components/common/DateSelect'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import useUserStore from '@/stores/user.store'
@@ -53,11 +53,11 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
         options={venueOptions}
         onChange={store.changeVenueId}
       />
-      <DateRangePicker
+      <DateSelect
         label={t('Date')}
         w={w}
-        defaultValue={[startDate, endDate]}
-        onChange={onChangeDate}
+        dateValue={[startDate, endDate]}
+        onChangeDateValue={onChangeDate}
       />
       <SaveButton onClick={() => store.save(t)} />
     </FilterWrapper>

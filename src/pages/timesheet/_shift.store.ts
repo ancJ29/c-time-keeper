@@ -2,7 +2,7 @@ import { showNotification } from '@/configs/notifications'
 import { getAllShifts, Shift, updateShift } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, DateValue } from '@/types'
-import { cloneDeep, createStore, endOfDay, ONE_DAY, startOfDay } from '@/utils'
+import { cloneDeep, createStore, endOfDay, startOfDay } from '@/utils'
 
 type State = {
   currents: Record<string, Shift[]>
@@ -65,14 +65,15 @@ export default {
     dispatch({ type: ActionType.INIT_DATA, shifts })
   },
   async changeDate(value: DatesRangeValue) {
-    const startDate = value[0]
-    const endDate = value[1]
-    if (!startDate || !endDate) {
+    const [start, end] = value
+    if (!start || !end) {
       return
     }
+    const startDate = new Date(startOfDay(start.getTime()))
+    const endDate = new Date(endOfDay(end.getTime()))
     const shifts = await getAllShifts({
       start: startDate.getTime(),
-      end: endDate.getTime() + ONE_DAY,
+      end: endDate.getTime(),
     })
     dispatch({ type: ActionType.CHANGE_DATE, startDate, endDate, shifts })
   },

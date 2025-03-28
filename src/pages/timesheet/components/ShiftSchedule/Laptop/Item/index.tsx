@@ -176,7 +176,7 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         -
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.shiftItem}>
-        {venues.get(shift.venueId)?.name || '-'}
+        <Text className={classes.venueText}>{venues.get(shift.venueId)?.name || '-'}</Text>
       </Grid.Col>
     </Grid>
   )

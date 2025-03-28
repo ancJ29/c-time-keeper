@@ -1,0 +1,9 @@
+.container {
+  position: relative;
+}
+
+.card {
+  position: absolute;
+  top: 20px;
+  z-index: 100;
+}
