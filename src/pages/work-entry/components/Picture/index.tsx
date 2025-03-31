@@ -1,6 +1,7 @@
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { Button, Flex, Image, Stack, Text } from '@mantine/core'
+import classes from './Picture.module.scss'
 
 type PictureProps = {
   userId: string
@@ -21,7 +22,7 @@ export default function Picture({
 
   return (
     <Stack gap={10} align="center">
-      <Image src={imageSrc} />
+      <Image src={imageSrc} className={classes.image} />
 
       <Text fw="bold" fz={24}>
         {users[userId]?.name}

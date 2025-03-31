@@ -1,0 +1,9 @@
+.image {
+  flex: none;
+  height: 60vh;
+  object-fit: cover;
+
+  @media only screen and (max-width: 768px) {
+    height: 30vh;
+  }
+}
