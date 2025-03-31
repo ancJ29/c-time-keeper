@@ -3,7 +3,6 @@ import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { getSalaries, Salary } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
-import useRoleStore from '@/stores/role.store'
 import useUserStore from '@/stores/user.store'
 import { DateValue } from '@/types'
 import { exportToMonthlySalaryExcel, formatTime } from '@/utils'
@@ -13,7 +12,6 @@ import MonthlySalaryView from './components/MonthlySalaryView'
 
 export default function MonthlySalary() {
   const t = useTranslation()
-  const { roles } = useRoleStore()
   const { users } = useUserStore()
   const { user } = useAuthStore()
   const [salaries, setSalaries] = useState<Salary[]>([])
@@ -23,7 +21,7 @@ export default function MonthlySalary() {
     return now
   })
 
-  const dataGridConfigs = useMemo(() => configs(t, users, roles), [roles, t, users])
+  const dataGridConfigs = useMemo(() => configs(t, users), [t, users])
 
   const getData = useCallback(
     async (_date?: Date) => {
@@ -55,8 +53,8 @@ export default function MonthlySalary() {
   )
 
   const handleExportExcel = useCallback(() => {
-    exportToMonthlySalaryExcel(salaries, date, users, roles, t)
-  }, [date, roles, salaries, t, users])
+    exportToMonthlySalaryExcel(salaries, date, users)
+  }, [date, salaries, users])
 
   return (
     <MonthlySalaryView

@@ -1,11 +1,10 @@
-import { Role, Salary, User } from '@/services/domain'
+import { Salary, User } from '@/services/domain'
 import { DataGridColumnProps } from '@/types'
 import { formatDuration, formatNumber, ONE_HOUR } from '@/utils'
 
 export const configs = (
   t: (key: string) => string,
   users: Map<string, User>,
-  roles: Map<string, Role>,
 ): DataGridColumnProps[] => {
   return [
     {
@@ -14,15 +13,6 @@ export const configs = (
       width: '25%',
       renderCell: (_, salary: Salary) => {
         return users.get(salary.userId)?.name || ''
-      },
-    },
-    {
-      key: 'role',
-      header: t('Role'),
-      width: '15%',
-      renderCell: (_, salary: Salary) => {
-        const user = users.get(salary.userId)
-        return t(roles.get(user?.roleId || '')?.name || '')
       },
     },
     {

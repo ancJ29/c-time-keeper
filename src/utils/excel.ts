@@ -1,5 +1,5 @@
 // cspell:disable
-import { Role, Salary, User } from '@/services/domain'
+import { Salary, User } from '@/services/domain'
 import ExcelJS from 'exceljs'
 import { formatNumber } from './number'
 import { formatDuration, formatTime, ONE_HOUR } from './time'
@@ -8,8 +8,6 @@ export function exportToMonthlySalaryExcel(
   salaries: Salary[],
   date: Date,
   users: Map<string, User>,
-  roles: Map<string, Role>,
-  t: (key: string) => string,
 ) {
   const _date = formatTime(date, 'MM-YYYY')
   const workbook = new ExcelJS.Workbook()
@@ -25,7 +23,6 @@ export function exportToMonthlySalaryExcel(
   worksheet.columns = [
     { key: 'index', width: 7 },
     { key: 'name', width: 20 },
-    { key: 'role', width: 15 },
     { key: 'standardHours', width: 14 },
     { key: 'overtimeHours', width: 14 },
     { key: 'totalSalary', width: 17 },
@@ -34,7 +31,6 @@ export function exportToMonthlySalaryExcel(
   const headerRow = worksheet.addRow([
     'STT',
     'Tên',
-    'Vai trò',
     'Giờ chuẩn',
     'Giờ làm thêm',
     'Tổng lương (VND)',
@@ -63,7 +59,6 @@ export function exportToMonthlySalaryExcel(
     const row = worksheet.addRow([
       index + 1,
       user?.name,
-      t(roles.get(user?.roleId || '')?.name || ''),
       formatDuration(salary.standardHours * ONE_HOUR),
       formatDuration(salary.overtimeHours * ONE_HOUR),
       formatNumber(salary.totalSalary),

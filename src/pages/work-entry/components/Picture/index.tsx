@@ -20,7 +20,7 @@ export default function Picture({
   const t = useTranslation()
 
   return (
-    <Stack gap={20} align="center">
+    <Stack gap={10} align="center">
       <Image src={imageSrc} />
 
       <Text fw="bold" fz={24}>
