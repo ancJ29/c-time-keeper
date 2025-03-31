@@ -3,7 +3,7 @@ import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { UpdateUserRequest, User } from '@/services/domain'
 import { OptionProps } from '@/types'
-import { Button, Stack, Text, TextInput } from '@mantine/core'
+import { Button, Stack, Switch, Text, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
 
@@ -81,6 +81,14 @@ export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: E
           withAsterisk
           min={0}
           {...form.getInputProps('baseSalary')}
+        />
+        <Switch
+          checked={form.values.enabled}
+          w={w}
+          labelPosition="left"
+          label={t('Status')}
+          mt={4}
+          {...form.getInputProps('enabled')}
         />
         <Button type="submit" mt={10}>
           {t('Update')}

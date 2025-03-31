@@ -54,7 +54,7 @@ export const theme: MantineThemeOverride = createTheme({
       '#005dce',
       '#0050b7',
     ],
-    secondary: [
+    xOrange: [
       '#fff8e1',
       '#ffefcb',
       '#ffdd9a',
@@ -66,19 +66,19 @@ export const theme: MantineThemeOverride = createTheme({
       '#cb8400',
       '#b07100',
     ],
-    tertiary: [
-      '#e6ffee',
-      '#d3f9e0',
-      '#a8f2c0',
-      '#7aea9f',
-      '#54e382',
-      '#3bdf70',
-      '#2bdd66',
-      '#1bc455',
-      '#0bae4a',
-      '#00973c',
+    xGreen: [
+      '#e8fcf4',
+      '#d9f3e8',
+      '#b6e5d1',
+      '#8fd6b8',
+      '#6ec9a3',
+      '#59c295',
+      '#4cbe8e',
+      '#3ca77a',
+      '#30956c',
+      '#1d815b',
     ],
-    quaternary: [
+    xGray: [
       '#f3f5f7',
       '#e8e8e8',
       '#cccfd0',
@@ -90,6 +90,18 @@ export const theme: MantineThemeOverride = createTheme({
       '#586a74',
       '#465c67',
     ],
+    xRed: [
+      '#ffeaea',
+      '#fdd6d6',
+      '#f1abab',
+      '#e67d7e',
+      '#de5757',
+      '#d93e3e',
+      '#d73131',
+      '#bf2324',
+      '#ab1b1f',
+      '#961018',
+    ],
   },
 })
 
@@ -97,7 +109,7 @@ export const theme: MantineThemeOverride = createTheme({
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
     '--hover-background-color': theme.colors.primary[0],
-    '--border-color': theme.colors.quaternary[1],
+    '--border-color': theme.colors.xGray[1],
   },
   light: {},
   dark: {},

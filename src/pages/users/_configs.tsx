@@ -1,6 +1,7 @@
 import { Role, User } from '@/services/domain'
 import { DataGridColumnProps, FilterProps, OptionProps } from '@/types'
 import { formatNumber } from '@/utils'
+import Status from './components/Status'
 
 export const configs = (
   t: (key: string) => string,
@@ -45,7 +46,7 @@ export const configs = (
       header: t('Status'),
       width: '13%',
       renderCell: (_, user: User) => {
-        return user.enabled ? t('Active') : t('Disabled')
+        return <Status enabled={user.enabled} />
       },
     },
   ]

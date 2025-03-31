@@ -11,10 +11,22 @@ export default function WorkEntryView({ onCheckIn, onCheckOut }: WorkEntryViewPr
 
   return (
     <Stack gap={30} h="100dvh" align="center" justify="center">
-      <Button color="#51b68c" h={150} fz={50} w={{ base: '95%', sm: '80%' }} onClick={onCheckIn}>
+      <Button
+        color="var(--mantine-color-xGreen-7)"
+        h={150}
+        fz={50}
+        w={{ base: '95%', sm: '80%' }}
+        onClick={onCheckIn}
+      >
         {t('Check in')}
       </Button>
-      <Button color="#f34141" h={150} fz={50} w={{ base: '95%', sm: '80%' }} onClick={onCheckOut}>
+      <Button
+        color="var(--mantine-color-xRed-5)"
+        h={150}
+        fz={50}
+        w={{ base: '95%', sm: '80%' }}
+        onClick={onCheckOut}
+      >
         {t('Check out')}
       </Button>
     </Stack>
