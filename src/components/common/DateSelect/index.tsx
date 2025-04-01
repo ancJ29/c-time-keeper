@@ -6,7 +6,7 @@ import {
   lastMonth,
   lastWeek,
   thisMonth,
-  ThisWeek,
+  thisWeek,
   today,
   yesterday,
 } from '@/utils'
@@ -49,7 +49,7 @@ export default function DateSelect({
     return {
       [DateRangeOption.Today]: today(now),
       [DateRangeOption.Yesterday]: yesterday(now),
-      [DateRangeOption.ThisWeek]: ThisWeek(now),
+      [DateRangeOption.ThisWeek]: thisWeek(now),
       [DateRangeOption.LastWeek]: lastWeek(now),
       [DateRangeOption.ThisMonth]: thisMonth(now),
       [DateRangeOption.LastMonth]: lastMonth(now),

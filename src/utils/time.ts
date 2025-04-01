@@ -93,7 +93,7 @@ export function yesterday(date: Date): [DateValue, DateValue] {
   return [yesterday, yesterday]
 }
 
-export function ThisWeek(date: Date): [DateValue, DateValue] {
+export function thisWeek(date: Date): [DateValue, DateValue] {
   const _startOfWeek = new Date(startOfWeek(date.getTime()))
   const _endOfWeek = new Date(endOfWeek(date.getTime()))
   return [_startOfWeek, _endOfWeek]

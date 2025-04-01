@@ -17,7 +17,7 @@ export default function MonthlySalary() {
   const [salaries, setSalaries] = useState<Salary[]>([])
   const [date, setDate] = useState<Date>(() => {
     const now = new Date()
-    now.setUTCMonth(now.getUTCMonth() - 1)
+    now.setMonth(now.getMonth() - 1)
     return now
   })
 

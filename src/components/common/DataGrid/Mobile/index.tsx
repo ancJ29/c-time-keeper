@@ -194,7 +194,7 @@ function DataRow({
   columnStyle?: MantineStyleProp
 }) {
   return (
-    <Flex w="100%" justify="space-between" align="center" gap={5} py={4} px={12}>
+    <Flex w="100%" justify="space-between" align="start" gap={5} py={4} px={12}>
       <Text fw="bold" miw="40%" maw="50%">
         {title}
       </Text>

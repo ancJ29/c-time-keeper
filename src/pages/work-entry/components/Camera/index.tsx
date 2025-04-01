@@ -43,7 +43,7 @@ export default function Camera({ onCapture }: CameraProps) {
       <Webcam ref={webcamRef} screenshotFormat="image/jpeg" className={classes.webcam} />
       {isCapturing && (
         <div className={classes.loadingContainer}>
-          <div className={classes.spinner}></div>
+          <div className={classes.spinner} />
           <div className={classes.countdown}>{countdown}</div>
         </div>
       )}
