@@ -177,7 +177,7 @@ function PaginationBar({
           {t('Item per page')}:
         </Text>
         <Select
-          w={70}
+          w={76}
           value={limit.toString()}
           options={limitOptions}
           onChange={(value: string | null) => {

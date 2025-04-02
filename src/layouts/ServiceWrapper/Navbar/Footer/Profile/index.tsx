@@ -2,6 +2,7 @@ import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
 import useWindowResize from '@/hooks/useWindowResize'
 import useAuthStore from '@/stores/auth.store'
+import { showNotImplementedModal } from '@/utils'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
@@ -33,6 +34,11 @@ export default function Profile({
     setOpened(false)
   }, [])
 
+  const handleSettingClick = useCallback(() => {
+    showNotImplementedModal(t)
+    handleCloseMenu()
+  }, [handleCloseMenu, t])
+
   return (
     <Menu
       width={isMobile ? 200 : 250}
@@ -51,7 +57,6 @@ export default function Profile({
       </Menu.Target>
       <Menu.Dropdown p={10}>
         <MenuItem
-          // leftIcon={<IconUser size={20} strokeWidth={1.5} />}
           leftIcon={<Avatar size={20} src={user?.avatar} />}
           label={t('Profile')}
           onCloseMenu={handleCloseMenu}
@@ -68,7 +73,7 @@ export default function Profile({
         <MenuItem
           leftIcon={<IconSettings size={20} strokeWidth={1.5} />}
           label={t('Settings')}
-          onCloseMenu={handleCloseMenu}
+          onCloseMenu={handleSettingClick}
         />
 
         <Button fullWidth mt={15} variant="default" size="xs" onClick={onLogout}>

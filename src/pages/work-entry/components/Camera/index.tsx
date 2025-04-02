@@ -40,7 +40,7 @@ export default function Camera({ onCapture }: CameraProps) {
 
   return (
     <div className={classes.container}>
-      <Webcam ref={webcamRef} screenshotFormat="image/jpeg" className={classes.webcam} />
+      <Webcam ref={webcamRef} screenshotFormat="image/jpeg" mirrored className={classes.webcam} />
       {isCapturing && (
         <div className={classes.loadingContainer}>
           <div className={classes.spinner} />

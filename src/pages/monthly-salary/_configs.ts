@@ -18,7 +18,8 @@ export const configs = (
     {
       key: 'standardHours',
       header: t('Standard hours'),
-      width: '20%',
+      width: '10%',
+      textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatDuration(salary.standardHours * ONE_HOUR)
       },
@@ -26,7 +27,8 @@ export const configs = (
     {
       key: 'overtimeHours',
       header: t('Overtime hours'),
-      width: '20%',
+      width: '10%',
+      textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatDuration(salary.overtimeHours * ONE_HOUR)
       },
@@ -35,6 +37,7 @@ export const configs = (
       key: 'totalSalary',
       header: `${t('Total salary')} (VND)`,
       width: '20%',
+      textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatNumber(salary.totalSalary)
       },

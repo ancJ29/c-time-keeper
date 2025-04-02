@@ -36,7 +36,8 @@ export const configs = (
     {
       key: 'baseSalary',
       header: `${t('Base salary')} (VND)`,
-      width: '20%',
+      width: '15%',
+      textAlign: 'right',
       renderCell: (_, user: User) => {
         return formatNumber(user.baseSalary || 0)
       },
@@ -44,7 +45,8 @@ export const configs = (
     {
       key: 'active',
       header: t('Status'),
-      width: '15%',
+      width: '20%',
+      textAlign: 'center',
       renderCell: (_, user: User) => {
         return <Status enabled={user.enabled} />
       },

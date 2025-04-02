@@ -14,7 +14,7 @@ export function exportToMonthlySalaryExcel(
   const worksheet = workbook.addWorksheet(_date)
 
   const titleRow = worksheet.addRow([`BẢNG LƯƠNG THÁNG ${_date}`])
-  worksheet.mergeCells('A1:F1')
+  worksheet.mergeCells('A1:E1')
   titleRow.font = { bold: true, size: 14, name: 'Arial' }
   titleRow.alignment = { horizontal: 'center', vertical: 'middle' }
 
@@ -80,15 +80,12 @@ export function exportToMonthlySalaryExcel(
           cell.alignment = { horizontal: 'left', vertical: 'middle' }
           break
         case 3:
-          cell.alignment = { horizontal: 'left', vertical: 'middle' }
+          cell.alignment = { horizontal: 'right', vertical: 'middle' }
           break
         case 4:
           cell.alignment = { horizontal: 'right', vertical: 'middle' }
           break
         case 5:
-          cell.alignment = { horizontal: 'right', vertical: 'middle' }
-          break
-        case 6:
           cell.alignment = { horizontal: 'right', vertical: 'middle' }
           break
       }

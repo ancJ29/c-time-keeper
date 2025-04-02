@@ -14,7 +14,7 @@ export default function Message({ success = true, message }: MessageProps) {
       ) : (
         <IconCircleXFilled color="#f34141" size={80} />
       )}
-      <Text fw="bold" fz={40} ta="center">
+      <Text fw="bold" fz={{ base: 30, sm: 40 }} ta="center">
         {message}
       </Text>
     </Stack>

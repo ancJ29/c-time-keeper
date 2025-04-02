@@ -24,8 +24,10 @@ export default function CheckInQrView({ qrValue }: CheckInQrViewProps) {
         }}
       />
       <Stack gap={10} align="center">
-        <Text fz={20}>{t('Scan the QR code to go to the check-in/check-out page')}</Text>
-        <Text fz={20}>
+        <Text fz={20} ta="center">
+          {t('Scan the QR code to go to the check-in/check-out page')}
+        </Text>
+        <Text fz={20} ta="center">
           {`${t('Or click')} `}
           <Anchor href={qrValue} target="_blank" fz={20}>
             {t('here')}
